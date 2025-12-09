@@ -133,13 +133,12 @@
             font-weight: 300;
         }
         
-        /* БЛОК WAPI РАСПИСАНИЯ НАД МЕНЮ */
-        .wapi-schedule-container {
+        /* БЛОК WAPI НАД МЕНЮ */
+        .wapi-block {
             padding: 20px 30px;
             background: rgba(26, 31, 43, 0.8);
             border-bottom: 1px solid rgba(198, 161, 110, 0.2);
             position: relative;
-            min-height: 200px;
         }
         
         .wapi-title {
@@ -152,9 +151,9 @@
         }
         
         /* Контейнер для WAPI виджета */
-        #wapiScheduleWidget {
+        #listokWidgetContainer {
             width: 100%;
-            min-height: 150px;
+            min-height: 200px;
             border: 1px solid rgba(198, 161, 110, 0.3);
             border-radius: 10px;
             background: rgba(40, 47, 65, 0.6);
@@ -162,38 +161,12 @@
             position: relative;
         }
         
-        /* Стиль для iframe WAPI */
-        .wapi-iframe {
+        /* Стиль для WAPI iframe */
+        #listokWidgetContainer iframe {
             width: 100%;
-            height: 150px;
+            height: 200px;
             border: none;
             border-radius: 10px;
-        }
-        
-        /* Загрузчик для WAPI */
-        .wapi-loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 150px;
-            color: #E8D9C5;
-            font-size: 14px;
-        }
-        
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(198, 161, 110, 0.3);
-            border-top: 3px solid #C6A16E;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         
         /* Список кнопок */
@@ -296,7 +269,7 @@
             transform: translateX(5px);
         }
         
-        /* УДАЛЯЮ ВСЕ СКРЫТЫЕ БЛОКИ - ОСТАВЛЯЕМ ТОЛЬКО WAPI */
+        /* УДАЛЯЮ ВСЕ СКРЫТЫЕ БЛОКИ */
         .info-block {
             display: none !important;
         }
@@ -360,14 +333,25 @@
                 font-size: 16px;
             }
             
-            .wapi-schedule-container {
+            .wapi-block {
                 padding: 15px 20px;
+            }
+            
+            #listokWidgetContainer {
+                min-height: 180px;
+            }
+            
+            #listokWidgetContainer iframe {
+                height: 180px;
             }
         }
     </style>
     
     <!-- Подключаем шрифт Cormorant -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- WAPI СКРИПТ ДЛЯ РАСПИСАНИЯ НАД МЕНЮ -->
+    <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
 </head>
 <body>
     <!-- Звездный фон -->
@@ -382,21 +366,11 @@
                 <div class="subtitle">Элитная студия балета, фитнеса и танцев</div>
             </div>
             
-            <!-- УВЕДОМЛЕНИЕ -->
-            <div style="background:rgba(198, 161, 110, 0.1); padding:15px; margin:20px; border-radius:12px; border-left:4px solid #C6A16E;">
-                <strong style="color:#C6A16E; display:block; margin-bottom:3px;">✅ Авторизация активна</strong>
-                <span style="font-size:13px; color:#E8D9C5;">Все кнопки работают через WAPI</span>
-            </div>
-            
             <!-- WAPI РАСПИСАНИЕ НАД МЕНЮ -->
-            <div class="wapi-schedule-container">
-                <div class="wapi-title">Расписание на сегодня</div>
-                <div id="wapiScheduleWidget">
-                    <div class="wapi-loading">
-                        <div class="spinner"></div>
-                        Загружаем актуальное расписание...
-                    </div>
-                </div>
+            <div class="wapi-block">
+                <div class="wapi-title">Расписание занятий</div>
+                <!-- WAPI ВИДЖЕТ ЗДЕСЬ -->
+                <div id="listokWidgetContainer"></div>
             </div>
             
             <!-- Основное меню -->
@@ -506,48 +480,43 @@
             Telegram.WebApp.openLink(url);
         }
         
-        // Загрузка WAPI виджета расписания
-        function loadWapiSchedule() {
-            const wapiContainer = document.getElementById('wapiScheduleWidget');
+        // Инициализация WAPI виджета
+        function initWapiWidget() {
+            // WAPI автоматически загрузится в #listokWidgetContainer
+            // Можно настроить дополнительные параметры если нужно
+            console.log('WAPI виджет инициализирован');
             
-            // Создаем iframe с WAPI расписанием
-            const iframe = document.createElement('iframe');
-            iframe.className = 'wapi-iframe';
-            
-            // URL для WAPI расписания - нужно уточнить у WAPI
-            // Обычно WAPI предоставляет специальный виджет для расписания
-            iframe.src = 'https://an9655.listokcrm.ru/wapi/schedule/widget';
-            
-            // Альтернатива: если WAPI не дает виджет, покажем ссылку
-            iframe.onerror = function() {
-                wapiContainer.innerHTML = `
-                    <div style="padding:20px; text-align:center; color:#E8D9C5;">
-                        <div style="margin-bottom:10px; font-size:16px; color:#C6A16E;">📅 Расписание занятий</div>
-                        <div style="margin-bottom:15px; font-size:14px;">Актуальное расписание в личном кабинете</div>
-                        <button onclick="openLink('https://an9655.listokcrm.ru/wapi')" 
-                                style="background:rgba(198, 161, 110, 0.2); 
-                                       border:1px solid rgba(198, 161, 110, 0.4); 
-                                       color:#C6A16E; 
-                                       padding:10px 20px; 
-                                       border-radius:8px;
-                                       font-weight:500;
-                                       cursor:pointer;">
-                            Открыть расписание
-                        </button>
-                    </div>
-                `;
-            };
-            
-            wapiContainer.innerHTML = '';
-            wapiContainer.appendChild(iframe);
+            // Проверяем загрузку WAPI
+            setTimeout(function() {
+                const wapiContainer = document.getElementById('listokWidgetContainer');
+                if (wapiContainer && wapiContainer.innerHTML.trim() === '') {
+                    // Если WAPI не загрузился, покажем альтернативу
+                    wapiContainer.innerHTML = `
+                        <div style="padding:20px; text-align:center; color:#E8D9C5;">
+                            <div style="margin-bottom:10px; font-size:16px; color:#C6A16E;">📅 Актуальное расписание</div>
+                            <div style="margin-bottom:15px; font-size:14px;">Для просмотра расписания используйте личный кабинет</div>
+                            <button onclick="openLink('https://an9655.listokcrm.ru/wapi')" 
+                                    style="background:rgba(198, 161, 110, 0.2); 
+                                           border:1px solid rgba(198, 161, 110, 0.4); 
+                                           color:#C6A16E; 
+                                           padding:10px 20px; 
+                                           border-radius:8px;
+                                           font-weight:500;
+                                           cursor:pointer;">
+                                Открыть расписание
+                            </button>
+                        </div>
+                    `;
+                }
+            }, 2000); // Проверяем через 2 секунды
         }
         
         // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             
-            // Загружаем WAPI расписание
-            setTimeout(loadWapiSchedule, 500); // Даем время на загрузку страницы
+            // Инициализируем WAPI виджет
+            initWapiWidget();
             
             // Настраиваем высоту для Telegram WebApp
             if (Telegram.WebApp.platform !== 'unknown') {
