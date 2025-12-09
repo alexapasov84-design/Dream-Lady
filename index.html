@@ -38,11 +38,10 @@
             background: var(--deep-navy);
             color: var(--soft-white);
             min-height: 100vh;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 10px;
+            display: block;
             overflow-x: hidden;
+            position: relative;
         }
         
         /* МЕРЦАЮЩИЕ ЗВЕЗДОЧКИ */
@@ -87,19 +86,44 @@
             pointer-events: none;
         }
         
-        /* КОНТЕЙНЕР МЕНЮ */
+        /* КОНТЕЙНЕР МЕНЮ - ФИКСИРОВАННАЯ ШИРИНА */
         .menu-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             background: rgba(26, 31, 43, 0.95);
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 25px 60px rgba(198, 161, 110, 0.3);
             border: 2px solid var(--gold);
-            margin: 20px;
+            margin: 0 auto;
             backdrop-filter: blur(10px);
             position: relative;
             z-index: 10;
+        }
+        
+        /* БЛОК РАСПИСАНИЯ НАД МЕНЮ */
+        .schedule-notification {
+            background: rgba(198, 161, 110, 0.08);
+            padding: 15px 20px;
+            margin: 10px auto 20px;
+            border-radius: 12px;
+            border-left: 3px solid var(--gold);
+            font-size: 14px;
+            color: var(--light-gold);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .schedule-notification strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
         }
         
         /* ШАПКА С ЛОГО В СТИЛЕ САЙТА */
@@ -299,29 +323,6 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* ИКОНКИ ТРЕНЕРОВ */
-        .trainers-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .trainer-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--gold);
-            flex-shrink: 0;
-        }
-        
-        .trainer-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
         /* СТАТИСТИКА НАПРАВЛЕНИЙ */
         .directions-stats {
             display: flex;
@@ -385,6 +386,173 @@
             letter-spacing: 1px;
         }
         
+        /* МОДАЛЬНЫЕ ОКНА */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: rgba(26, 31, 43, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(198, 161, 110, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: 'Cormorant', serif;
+            z-index: 1001;
+        }
+        
+        .modal-title {
+            font-family: 'Cormorant', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            padding-right: 30px;
+        }
+        
+        /* ОКНО КОНТАКТОВ */
+        .contacts-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .contact-phone {
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Cormorant', serif;
+        }
+        
+        .contact-email {
+            color: var(--light-gold);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .contact-address {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .contact-details {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        /* ОКНО ТРЕНЕРОВ */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .trainer-card {
+            text-align: center;
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .trainer-card:hover {
+            background: rgba(198, 161, 110, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .trainer-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            margin: 0 auto 10px;
+            display: block;
+        }
+        
+        .trainer-name {
+            font-family: 'Cormorant', serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .trainer-title {
+            font-size: 11px;
+            color: var(--light-gold);
+            line-height: 1.3;
+            opacity: 0.9;
+        }
+        
         /* АНИМАЦИИ */
         @keyframes fadeInUp {
             from {
@@ -412,8 +580,11 @@
         @media (max-width: 400px) {
             .menu-container {
                 max-width: 95%;
-                margin: 10px;
                 border-radius: 20px;
+            }
+            
+            .schedule-notification {
+                max-width: 95%;
             }
             
             .header {
@@ -460,6 +631,16 @@
                 font-size: 15px;
                 margin: 15px;
             }
+            
+            .trainers-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .trainer-photo {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
@@ -467,6 +648,12 @@
     <!-- Мерцающие звездочки -->
     <div class="stars-background" id="stars"></div>
     <div class="gloss-overlay"></div>
+    
+    <!-- БЛОК РАСПИСАНИЯ НАД МЕНЮ -->
+    <div class="schedule-notification">
+        <strong>📅 Расписание занятий</strong>
+        <span>Актуальное расписание на сайте студии</span>
+    </div>
     
     <div class="menu-container">
         <!-- ШАПКА В СТИЛЕ САЙТА -->
@@ -516,25 +703,11 @@
         </div>
         
         <!-- КНОПКА ТРЕНЕРОВ -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com/company')">
+        <div class="menu-item" onclick="openTrainersModal()">
             <div class="icon">👩‍🏫</div>
             <div class="item-text">
                 <div class="item-title">Наши тренеры</div>
-                <div class="item-desc">Топовые специалисты с опытом от 5 лет</div>
-                <div class="trainers-preview">
-                    <div class="trainer-icon">
-                        <img src="https://static.craftum.com/6WjjbbQXSzCV9-QdJfwKZedW_Ss=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/fa8379ad-9065-4523-a9a4-8a24ef6ee0fe.webp" alt="Тренер">
-                    </div>
-                    <div class="trainer-icon">
-                        <img src="https://static.craftum.com/2EIA4q4Vn3rK5F48QJkjp81nWRo=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/8c3c1c38-1642-4e5d-875c-f7eb91c94850.webp" alt="Тренер">
-                    </div>
-                    <div class="trainer-icon">
-                        <img src="https://static.craftum.com/cqZcH6hFgNtSCh-xWWWOX8X3hLg=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/96d601c8-9b43-43b7-a0a6-9264fa0ff25e.webp" alt="Тренер">
-                    </div>
-                    <div class="trainer-icon">
-                        <img src="https://static.craftum.com/CxS6i2GfQ3zgeINB8mClHjQYpNo=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6666a1e6-0daa-4cef-8640-34874e7baa53.webp" alt="Тренер">
-                    </div>
-                </div>
+                <div class="item-desc">7 профессиональных тренеров с уникальным подходом</div>
             </div>
             <div class="arrow">›</div>
         </div>
@@ -549,22 +722,12 @@
             <div class="arrow">›</div>
         </div>
         
-        <!-- КНОПКА РАСПИСАНИЯ -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com/Workout')">
-            <div class="icon">📅</div>
-            <div class="item-text">
-                <div class="item-title">Расписание</div>
-                <div class="item-desc">График групповых и индивидуальных занятий</div>
-            </div>
-            <div class="arrow">›</div>
-        </div>
-        
         <!-- КНОПКА КОНТАКТОВ -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com/#contacts')">
+        <div class="menu-item" onclick="openContactsModal()">
             <div class="icon">🏢</div>
             <div class="item-text">
                 <div class="item-title">Контакты</div>
-                <div class="item-desc">Адрес студии, часы работы, как добраться</div>
+                <div class="item-desc">Адрес студии, телефоны, электронная почта</div>
             </div>
             <div class="arrow">›</div>
         </div>
@@ -595,8 +758,104 @@
         <!-- ПОДВАЛ -->
         <div class="footer">
             <strong>DREAM LADY</strong>
-            Элитная студия фитнеса и танцев © 2024<br>
+            Элитная студия фитнеса и танцев © 2025<br>
             <span style="font-size:11px; opacity:0.7; letter-spacing: 0.5px;">Самая роскошная студия города</span>
+        </div>
+    </div>
+    
+    <!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
+    <div id="contactsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeContactsModal()">×</div>
+            <h2 class="modal-title">Контакты</h2>
+            <div class="contacts-content">
+                <div class="contact-item">
+                    <span class="contact-phone">+7 916 994-73-68</span>
+                </div>
+                <div class="contact-item">
+                    <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email">DreamLadyStudio@yandex.ru</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-address">
+                        г. Жуковский,<br>
+                        ул. Королева, дом 6, строение 2<br>
+                        (2 этаж)
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-details">
+                        Индивидуальный предприниматель<br>
+                        Пинчук И.М.<br>
+                        ИНН 773721380132<br>
+                        ОГРНИП 325774600149528
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- МОДАЛЬНОЕ ОКНО ТРЕНЕРОВ -->
+    <div id="trainersModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeTrainersModal()">×</div>
+            <h2 class="modal-title">Наши тренеры</h2>
+            <div class="trainers-grid">
+                <!-- Даша -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/P5r-SC4Dhu1mY3Y-Kszy73SmCMw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4e93ca77-230d-4322-bafc-c4cef4288c53.jpg" 
+                         alt="Даша" class="trainer-photo">
+                    <div class="trainer-name">Даша</div>
+                    <div class="trainer-title">Профессиональный хореограф, опыт 8+ лет</div>
+                </div>
+                
+                <!-- Мария -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/AJV_AXz1u2xW2BdFD5DzipBSlpc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9faba137-73eb-42cf-8d6f-a47515f04e4a.jpg" 
+                         alt="Мария" class="trainer-photo">
+                    <div class="trainer-name">Мария</div>
+                    <div class="trainer-title">Мастер стретчинга, специалист по пилатесу</div>
+                </div>
+                
+                <!-- Юля -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/Fn36bbdvsd1qiUd6JEGEPD0y-BI=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d2946384-5456-4077-a117-463fd3016889.jpg" 
+                         alt="Юля" class="trainer-photo">
+                    <div class="trainer-name">Юля</div>
+                    <div class="trainer-title">Эксперт по фитнес-балету, стаж 6 лет</div>
+                </div>
+                
+                <!-- Дарья -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/Y_JR_8qLyqcYg6fzStwlmwZbfxE=/422x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/277986f7-1711-417a-ad51-120b225919d8.jpg" 
+                         alt="Дарья" class="trainer-photo">
+                    <div class="trainer-name">Дарья</div>
+                    <div class="trainer-title">Инструктор по современной хореографии</div>
+                </div>
+                
+                <!-- Василиса -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/S2lOgfb_E5mB7i-H0lca_NRW4Jc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/91b6dc07-495c-47da-a49d-1b5c9477be1e.jpg" 
+                         alt="Василиса" class="trainer-photo">
+                    <div class="trainer-name">Василиса</div>
+                    <div class="trainer-title">Специалист по силовой подготовке</div>
+                </div>
+                
+                <!-- Кристина -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/CRH9LDCCXQkVvjp3LbhMPQ1jeqw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/07fb5a0b-fdb9-476a-96fd-cc964a57a11e.jpg" 
+                         alt="Кристина" class="trainer-photo">
+                    <div class="trainer-name">Кристина</div>
+                    <div class="trainer-title">Мастер партерной гимнастики</div>
+                </div>
+                
+                <!-- Камилла -->
+                <div class="trainer-card">
+                    <img src="https://static.craftum.com/BdWEpHqi78nKZNahtSq3mP5cSRs=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d6527981-880a-4f37-96e0-2a466a7a6305.jpg" 
+                         alt="Камилла" class="trainer-photo">
+                    <div class="trainer-name">Камилла</div>
+                    <div class="trainer-title">Профессиональный балетмейстер</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -632,6 +891,40 @@
             }
         }
         
+        // ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН
+        function openContactsModal() {
+            document.getElementById('contactsModal').classList.add('active');
+            Telegram.WebApp.disableVerticalSwipes();
+        }
+        
+        function closeContactsModal() {
+            document.getElementById('contactsModal').classList.remove('active');
+            Telegram.WebApp.enableVerticalSwipes();
+        }
+        
+        function openTrainersModal() {
+            document.getElementById('trainersModal').classList.add('active');
+            Telegram.WebApp.disableVerticalSwipes();
+        }
+        
+        function closeTrainersModal() {
+            document.getElementById('trainersModal').classList.remove('active');
+            Telegram.WebApp.enableVerticalSwipes();
+        }
+        
+        // Закрытие модальных окон при клике на фон
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    if (this.id === 'contactsModal') {
+                        closeContactsModal();
+                    } else if (this.id === 'trainersModal') {
+                        closeTrainersModal();
+                    }
+                }
+            });
+        });
+        
         // ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК
         function openLink(url) {
             Telegram.WebApp.openLink(url);
@@ -654,15 +947,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             
-            // Адаптация высоты для разных устройств
-            const container = document.querySelector('.menu-container');
+            // Центрирование меню по вертикали
+            const menu = document.querySelector('.menu-container');
+            const schedule = document.querySelector('.schedule-notification');
             const windowHeight = window.innerHeight;
-            const containerHeight = container.scrollHeight;
+            const menuHeight = menu.offsetHeight;
+            const scheduleHeight = schedule.offsetHeight;
+            const totalHeight = menuHeight + scheduleHeight + 30; // 30px margin
             
-            if (containerHeight < windowHeight - 40) {
-                const margin = (windowHeight - containerHeight) / 2;
-                container.style.marginTop = Math.max(20, margin) + 'px';
-                container.style.marginBottom = Math.max(20, margin) + 'px';
+            if (totalHeight < windowHeight) {
+                const marginTop = (windowHeight - totalHeight) / 2;
+                schedule.style.marginTop = marginTop + 'px';
             }
         });
     </script>
