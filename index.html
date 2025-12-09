@@ -9,7 +9,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <style>
-        /* ВАШ СТИЛЬ БЕЗ ИЗМЕНЕНИЙ */
+        /* СБРОС СТИЛЕЙ */
         * {
             margin: 0;
             padding: 0;
@@ -17,6 +17,7 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        /* ЗВЕЗДНЫЙ ФОН как на сайте */
         body {
             background: #1A1F2B;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -26,6 +27,7 @@
             position: relative;
         }
         
+        /* Стили звезд с сайта */
         .stars-background {
             position: fixed;
             top: 0;
@@ -49,6 +51,7 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
+        /* Контейнер меню */
         .menu-container {
             position: relative;
             z-index: 3;
@@ -63,6 +66,7 @@
             align-items: center;
         }
         
+        /* Карточка меню с градиентом */
         .menu-card {
             background: linear-gradient(135deg, 
                 rgba(26, 31, 43, 0.95) 0%,
@@ -99,6 +103,7 @@
             left: 100%;
         }
         
+        /* Шапка */
         .header {
             text-align: center;
             padding: 40px 30px 30px;
@@ -128,10 +133,75 @@
             font-weight: 300;
         }
         
+        /* БЛОК WAPI РАСПИСАНИЯ НАД МЕНЮ */
+        .wapi-schedule-container {
+            padding: 20px 30px;
+            background: rgba(26, 31, 43, 0.8);
+            border-bottom: 1px solid rgba(198, 161, 110, 0.2);
+            position: relative;
+            min-height: 200px;
+        }
+        
+        .wapi-title {
+            font-family: 'Cormorant', serif;
+            font-size: 18px;
+            color: #C6A16E;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* Контейнер для WAPI виджета */
+        #wapiScheduleWidget {
+            width: 100%;
+            min-height: 150px;
+            border: 1px solid rgba(198, 161, 110, 0.3);
+            border-radius: 10px;
+            background: rgba(40, 47, 65, 0.6);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Стиль для iframe WAPI */
+        .wapi-iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        /* Загрузчик для WAPI */
+        .wapi-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            color: #E8D9C5;
+            font-size: 14px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(198, 161, 110, 0.3);
+            border-top: 3px solid #C6A16E;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Список кнопок */
         .menu-items {
             padding: 25px 0;
         }
         
+        /* Кнопки меню */
         .menu-item {
             display: flex;
             align-items: center;
@@ -226,11 +296,12 @@
             transform: translateX(5px);
         }
         
-        /* УДАЛЯЮ ВСЕ СКРЫТЫЕ БЛОКИ */
+        /* УДАЛЯЮ ВСЕ СКРЫТЫЕ БЛОКИ - ОСТАВЛЯЕМ ТОЛЬКО WAPI */
         .info-block {
             display: none !important;
         }
         
+        /* Подвал */
         .footer {
             text-align: center;
             padding: 25px 30px;
@@ -256,6 +327,7 @@
             line-height: 1.4;
         }
         
+        /* Адаптивность */
         @media (max-width: 480px) {
             .menu-container {
                 padding: 15px;
@@ -287,9 +359,14 @@
             .item-title {
                 font-size: 16px;
             }
+            
+            .wapi-schedule-container {
+                padding: 15px 20px;
+            }
         }
     </style>
     
+    <!-- Подключаем шрифт Cormorant -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -311,9 +388,20 @@
                 <span style="font-size:13px; color:#E8D9C5;">Все кнопки работают через WAPI</span>
             </div>
             
-            <!-- Основное меню БЕЗ РАСПИСАНИЯ -->
+            <!-- WAPI РАСПИСАНИЕ НАД МЕНЮ -->
+            <div class="wapi-schedule-container">
+                <div class="wapi-title">Расписание на сегодня</div>
+                <div id="wapiScheduleWidget">
+                    <div class="wapi-loading">
+                        <div class="spinner"></div>
+                        Загружаем актуальное расписание...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Основное меню -->
             <div class="menu-items">
-                <!-- ЛИЧНЫЙ КАБИНЕТ = WAPI (расписание внутри) -->
+                <!-- ЛИЧНЫЙ КАБИНЕТ = WAPI -->
                 <div class="menu-item" onclick="openLink('https://an9655.listokcrm.ru/wapi')">
                     <div class="icon">👑</div>
                     <div class="item-content">
@@ -383,12 +471,13 @@
     </div>
 
     <script>
+        // ИНИЦИАЛИЗАЦИЯ TELEGRAM WEB APP
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
         Telegram.WebApp.setHeaderColor('#1A1F2B');
         Telegram.WebApp.setBackgroundColor('#1A1F2B');
         
-        // Звездный фон
+        // Создание звездного фона
         function createStars() {
             const starsContainer = document.getElementById('stars');
             const starsCount = 150;
@@ -412,14 +501,55 @@
             }
         }
         
-        // Открытие ссылок
+        // Функция открытия ссылок
         function openLink(url) {
             Telegram.WebApp.openLink(url);
         }
         
+        // Загрузка WAPI виджета расписания
+        function loadWapiSchedule() {
+            const wapiContainer = document.getElementById('wapiScheduleWidget');
+            
+            // Создаем iframe с WAPI расписанием
+            const iframe = document.createElement('iframe');
+            iframe.className = 'wapi-iframe';
+            
+            // URL для WAPI расписания - нужно уточнить у WAPI
+            // Обычно WAPI предоставляет специальный виджет для расписания
+            iframe.src = 'https://an9655.listokcrm.ru/wapi/schedule/widget';
+            
+            // Альтернатива: если WAPI не дает виджет, покажем ссылку
+            iframe.onerror = function() {
+                wapiContainer.innerHTML = `
+                    <div style="padding:20px; text-align:center; color:#E8D9C5;">
+                        <div style="margin-bottom:10px; font-size:16px; color:#C6A16E;">📅 Расписание занятий</div>
+                        <div style="margin-bottom:15px; font-size:14px;">Актуальное расписание в личном кабинете</div>
+                        <button onclick="openLink('https://an9655.listokcrm.ru/wapi')" 
+                                style="background:rgba(198, 161, 110, 0.2); 
+                                       border:1px solid rgba(198, 161, 110, 0.4); 
+                                       color:#C6A16E; 
+                                       padding:10px 20px; 
+                                       border-radius:8px;
+                                       font-weight:500;
+                                       cursor:pointer;">
+                            Открыть расписание
+                        </button>
+                    </div>
+                `;
+            };
+            
+            wapiContainer.innerHTML = '';
+            wapiContainer.appendChild(iframe);
+        }
+        
+        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             
+            // Загружаем WAPI расписание
+            setTimeout(loadWapiSchedule, 500); // Даем время на загрузку страницы
+            
+            // Настраиваем высоту для Telegram WebApp
             if (Telegram.WebApp.platform !== 'unknown') {
                 document.documentElement.style.height = '100%';
                 document.body.style.height = '100%';
