@@ -12,184 +12,428 @@
     <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
     <div id="listokWidgetContainer"></div>
     
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
     <style>
-        /* СБРОС СТИЛЕЙ */
+        :root {
+            --gold: #C6A16E;
+            --deep-navy: #1A1F2B;
+            --soft-white: #F8F5F2;
+            --light-gold: #E8D9C5;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
         
-        /* ВАЖНО: Убираем флекс у body и центрирование */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            background: linear-gradient(135deg, #ffd6e7 0%, #ffb6c1 100%);
+            background: var(--deep-navy);
+            color: var(--soft-white);
             min-height: 100vh;
-            padding: 10px;
-            display: block; /* Убираем flex! */
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
         }
         
-        /* КОНТЕЙНЕР МЕНЮ - ОГРАНИЧИВАЕМ ШИРИНУ */
+        /* МЕРЦАЮЩИЕ ЗВЕЗДОЧКИ */
+        .stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background: #C6A16E;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Глянцевые переливы */
+        .gloss-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                125deg,
+                transparent 0%,
+                rgba(198, 161, 110, 0.1) 40%,
+                rgba(232, 216, 197, 0.2) 50%,
+                rgba(198, 161, 110, 0.1) 60%,
+                transparent 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* КОНТЕЙНЕР МЕНЮ */
         .menu-container {
             width: 100%;
-            max-width: 400px; /* Фиксированная максимальная ширина */
-            background: white;
+            max-width: 420px;
+            background: rgba(26, 31, 43, 0.95);
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 15px 50px rgba(255, 105, 180, 0.3);
-            border: 3px solid #ff69b4;
-            margin: 0 auto; /* Центрируем если экран шире */
+            box-shadow: 0 25px 60px rgba(198, 161, 110, 0.3);
+            border: 2px solid var(--gold);
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
         }
         
-        /* ШАПКА С ЛОГО */
+        /* ШАПКА С ЛОГО В СТИЛЕ САЙТА */
         .header {
-            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-            color: white;
-            padding: 30px 20px;
+            background: transparent;
+            color: var(--soft-white);
+            padding: 40px 20px 30px;
             text-align: center;
             position: relative;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.3);
         }
         
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
             border-radius: 50%;
-            border: 4px solid white;
+            border: 3px solid var(--gold);
             background: url('https://static.craftum.com/6WjjbbQXSzCV9-QdJfwKZedW_Ss=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/fa8379ad-9065-4523-a9a4-8a24ef6ee0fe.webp') center/cover;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(198, 161, 110, 0.1) 100%);
         }
         
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.5px;
+            font-family: 'Cormorant', serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.1;
         }
         
         .subtitle {
-            font-size: 14px;
-            opacity: 0.95;
+            font-size: 13px;
+            color: var(--light-gold);
             font-weight: 300;
             line-height: 1.4;
-            padding: 0 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            opacity: 0.9;
         }
         
-        /* УВЕДОМЛЕНИЕ */
+        /* УВЕДОМЛЕНИЕ В СТИЛЕ САЙТА */
         .notification {
-            background: linear-gradient(135deg, #e6f7ff 0%, #d0edff 100%);
-            padding: 15px 20px;
+            background: rgba(198, 161, 110, 0.08);
+            padding: 20px;
             margin: 20px;
             border-radius: 12px;
-            border-left: 4px solid #1890ff;
+            border-left: 3px solid var(--gold);
             font-size: 14px;
+            color: var(--light-gold);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(198, 161, 110, 0.2);
         }
         
         .notification strong {
-            color: #1890ff;
+            color: var(--gold);
             display: block;
-            margin-bottom: 3px;
-            font-size: 15px;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
         }
         
-        /* КНОПКИ МЕНЮ - ПРАВИЛЬНАЯ СТРУКТУРА */
+        /* КНОПКИ МЕНЮ В СТИЛЕ САЙТА */
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(255, 105, 180, 0.08);
+            padding: 22px 25px;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.1);
             cursor: pointer;
-            transition: all 0.2s ease;
-            background: white;
+            transition: all 0.3s ease;
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(198, 161, 110, 0.05), transparent);
+            transition: left 0.6s;
+        }
+        
+        .menu-item:hover::before,
+        .menu-item:active::before {
+            left: 100%;
         }
         
         .menu-item:active {
-            background: linear-gradient(90deg, #fff5f9 0%, #fff 50%);
+            background: rgba(198, 161, 110, 0.05);
         }
         
         .icon {
             font-size: 24px;
-            margin-right: 18px;
-            width: 48px;
-            height: 48px;
+            margin-right: 20px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff5f9;
+            background: rgba(198, 161, 110, 0.1);
             border-radius: 12px;
-            color: #ff69b4;
+            color: var(--gold);
             flex-shrink: 0;
+            border: 1px solid rgba(198, 161, 110, 0.3);
+            font-weight: 300;
+            font-family: 'Cormorant', serif;
         }
         
         .item-text {
             flex: 1;
-            min-width: 0; /* Для правильного переноса текста */
+            min-width: 0;
         }
         
         .item-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #222;
-            margin-bottom: 4px;
-            letter-spacing: 0.3px;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--soft-white);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            font-family: 'Cormorant', serif;
+            line-height: 1.2;
         }
         
         .item-desc {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.3;
+            font-size: 12px;
+            color: var(--light-gold);
+            line-height: 1.4;
+            font-weight: 300;
+            opacity: 0.9;
         }
         
         .arrow {
-            font-size: 22px;
-            color: #ff69b4;
-            font-weight: bold;
+            font-size: 24px;
+            color: var(--gold);
+            font-weight: 300;
             margin-left: 10px;
             flex-shrink: 0;
+            font-family: 'Cormorant', serif;
+        }
+        
+        /* 3D КНОПКА ЦЕН В СТИЛЕ САЙТА */
+        .price-button-3d {
+            position: relative;
+            display: block;
+            padding: 18px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--deep-navy);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: 'Cormorant', serif;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 20px;
+            box-shadow: 
+                0 8px 0 #8B6B3D,
+                0 15px 25px rgba(198, 161, 110, 0.3);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 25%, #F4D483 50%, #D4AF37 75%, #C6A16E 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .price-button-3d:active {
+            transform: translateY(4px);
+            box-shadow: 
+                0 4px 0 #8B6B3D,
+                0 8px 15px rgba(198, 161, 110, 0.3);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* ИКОНКИ ТРЕНЕРОВ */
+        .trainers-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .trainer-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            flex-shrink: 0;
+        }
+        
+        .trainer-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* СТАТИСТИКА НАПРАВЛЕНИЙ */
+        .directions-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 20px;
+            background: rgba(198, 161, 110, 0.05);
+            margin: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--gold);
+            display: block;
+            font-family: 'Cormorant', serif;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: var(--light-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-top: 5px;
         }
         
         /* РАЗДЕЛИТЕЛЬ */
         .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff69b4 30%, #ff69b4 70%, transparent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
             margin: 15px 25px;
+            opacity: 0.5;
         }
         
         /* ПОДВАЛ */
         .footer {
             text-align: center;
             padding: 25px 20px;
-            background: #f8f8f8;
-            color: #777;
-            font-size: 13px;
-            line-height: 1.5;
+            background: rgba(20, 25, 35, 0.8);
+            color: var(--light-gold);
+            font-size: 12px;
+            line-height: 1.6;
+            border-top: 1px solid rgba(198, 161, 110, 0.2);
         }
         
         .footer strong {
-            color: #ff69b4;
+            color: var(--gold);
             font-size: 14px;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
         }
         
-        /* МЕДИА-ЗАПРОСЫ ДЛЯ РАЗНЫХ ЭКРАНОВ */
+        /* АНИМАЦИИ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .menu-item {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+        
+        .menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .menu-item:nth-child(2) { animation-delay: 0.2s; }
+        .menu-item:nth-child(3) { animation-delay: 0.3s; }
+        .menu-item:nth-child(4) { animation-delay: 0.4s; }
+        .menu-item:nth-child(5) { animation-delay: 0.5s; }
+        .menu-item:nth-child(6) { animation-delay: 0.6s; }
+        
+        /* МЕДИА-ЗАПРОСЫ */
         @media (max-width: 400px) {
             .menu-container {
-                border-radius: 20px;
                 max-width: 95%;
+                margin: 10px;
+                border-radius: 20px;
             }
             
             .header {
-                padding: 25px 15px;
+                padding: 30px 15px 20px;
             }
             
-            .logo {
-                width: 85px;
-                height: 85px;
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 20px;
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+                letter-spacing: 2px;
             }
             
             .menu-item {
@@ -197,41 +441,136 @@
             }
             
             .icon {
-                width: 42px;
-                height: 42px;
-                font-size: 22px;
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
                 margin-right: 15px;
+            }
+            
+            .item-title {
+                font-size: 16px;
+            }
+            
+            .item-desc {
+                font-size: 11px;
+            }
+            
+            .price-button-3d {
+                padding: 16px 25px;
+                font-size: 15px;
+                margin: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Мерцающие звездочки -->
+    <div class="stars-background" id="stars"></div>
+    <div class="gloss-overlay"></div>
+    
     <div class="menu-container">
-        <!-- ШАПКА -->
+        <!-- ШАПКА В СТИЛЕ САЙТА -->
         <div class="header">
-            <div class="logo"></div>
-            <h1>🌸 Dream Lady</h1>
+            <div class="logo-container"></div>
+            <h1>Dream Lady</h1>
             <div class="subtitle">
-                Элитная студия фитнеса и танцев<br>
-                Искусство быть звездой
+                Элитная студия преображения
             </div>
         </div>
         
         <!-- УВЕДОМЛЕНИЕ -->
         <div class="notification">
-            <strong>✅ Авторизация активна</strong>
-            <span>Все кнопки работают через WAPI</span>
+            <strong>🌸 Искусство быть звездой</strong>
+            <span>Самая роскошная студия города, где рождаются уверенные и сияющие женщины</span>
         </div>
         
-        <!-- КНОПКА ЛИЧНОГО КАБИНЕТА -->
-        <div class="menu-item" onclick="openLink('https://an9655.listokcrm.ru/wapi')">
-            <div class="icon">👑</div>
+        <!-- КНОПКА ЦЕН -->
+        <a href="https://dream-lady.com/price" class="price-button-3d" onclick="openLink('https://dream-lady.com/price'); return false;">
+            Узнать стоимость
+        </a>
+        
+        <!-- СТАТИСТИКА НАПРАВЛЕНИЙ -->
+        <div class="directions-stats">
+            <div class="stat-item">
+                <span class="stat-number">12</span>
+                <span class="stat-label">Направлений</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1000+</span>
+                <span class="stat-label">Выпускниц</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5★</span>
+                <span class="stat-label">Рейтинг</span>
+            </div>
+        </div>
+        
+        <!-- КНОПКА НАПРАВЛЕНИЙ -->
+        <div class="menu-item" onclick="openLink('https://dream-lady.com/#directions')">
+            <div class="icon">💃</div>
             <div class="item-text">
-                <div class="item-title">Личный кабинет</div>
-                <div class="item-desc">Персональный доступ к расписанию и записи</div>
+                <div class="item-title">Направления студии</div>
+                <div class="item-desc">12 эксклюзивных программ фитнеса и танцев</div>
             </div>
             <div class="arrow">›</div>
         </div>
+        
+        <!-- КНОПКА ТРЕНЕРОВ -->
+        <div class="menu-item" onclick="openLink('https://dream-lady.com/company')">
+            <div class="icon">👩‍🏫</div>
+            <div class="item-text">
+                <div class="item-title">Наши тренеры</div>
+                <div class="item-desc">Топовые специалисты с опытом от 5 лет</div>
+                <div class="trainers-preview">
+                    <div class="trainer-icon">
+                        <img src="https://static.craftum.com/6WjjbbQXSzCV9-QdJfwKZedW_Ss=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/fa8379ad-9065-4523-a9a4-8a24ef6ee0fe.webp" alt="Тренер">
+                    </div>
+                    <div class="trainer-icon">
+                        <img src="https://static.craftum.com/2EIA4q4Vn3rK5F48QJkjp81nWRo=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/8c3c1c38-1642-4e5d-875c-f7eb91c94850.webp" alt="Тренер">
+                    </div>
+                    <div class="trainer-icon">
+                        <img src="https://static.craftum.com/cqZcH6hFgNtSCh-xWWWOX8X3hLg=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/96d601c8-9b43-43b7-a0a6-9264fa0ff25e.webp" alt="Тренер">
+                    </div>
+                    <div class="trainer-icon">
+                        <img src="https://static.craftum.com/CxS6i2GfQ3zgeINB8mClHjQYpNo=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6666a1e6-0daa-4cef-8640-34874e7baa53.webp" alt="Тренер">
+                    </div>
+                </div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        
+        <!-- КНОПКА ЗАПИСИ -->
+        <div class="menu-item" onclick="sendCommand('signup')">
+            <div class="icon">📞</div>
+            <div class="item-text">
+                <div class="item-title">Запись на занятие</div>
+                <div class="item-desc">Пробное занятие - 500₽ • Персональный подход</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        
+        <!-- КНОПКА РАСПИСАНИЯ -->
+        <div class="menu-item" onclick="openLink('https://dream-lady.com/Workout')">
+            <div class="icon">📅</div>
+            <div class="item-text">
+                <div class="item-title">Расписание</div>
+                <div class="item-desc">График групповых и индивидуальных занятий</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        
+        <!-- КНОПКА КОНТАКТОВ -->
+        <div class="menu-item" onclick="openLink('https://dream-lady.com/#contacts')">
+            <div class="icon">🏢</div>
+            <div class="item-text">
+                <div class="item-title">Контакты</div>
+                <div class="item-desc">Адрес студии, часы работы, как добраться</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        
+        <!-- РАЗДЕЛИТЕЛЬ -->
+        <div class="divider"></div>
         
         <!-- КНОПКА САЙТА -->
         <div class="menu-item" onclick="openLink('https://dream-lady.com')">
@@ -243,60 +582,21 @@
             <div class="arrow">›</div>
         </div>
         
-        <!-- РАЗДЕЛИТЕЛЬ -->
-        <div class="divider"></div>
-        
-        <!-- КНОПКИ КОМАНД -->
-        <div class="menu-item" onclick="sendCommand('directions')">
-            <div class="icon">💃</div>
+        <!-- КНОПКА ТЕСТА -->
+        <div class="menu-item" onclick="openLink('https://dream-lady.com/#quiz')">
+            <div class="icon">🎯</div>
             <div class="item-text">
-                <div class="item-title">Направления студии</div>
-                <div class="item-desc">15+ эксклюзивных программ фитнеса и танцев</div>
-            </div>
-            <div class="arrow">›</div>
-        </div>
-        
-        <div class="menu-item" onclick="sendCommand('trainers')">
-            <div class="icon">👩‍🏫</div>
-            <div class="item-text">
-                <div class="item-title">Наши тренеры</div>
-                <div class="item-desc">Топовые специалисты с опытом от 5 лет</div>
-            </div>
-            <div class="arrow">›</div>
-        </div>
-        
-        <div class="menu-item" onclick="sendCommand('signup')">
-            <div class="icon">📞</div>
-            <div class="item-text">
-                <div class="item-title">Запись на занятие</div>
-                <div class="item-desc">Пробное занятие - 500₽ • Персональный подход</div>
-            </div>
-            <div class="arrow">›</div>
-        </div>
-        
-        <div class="menu-item" onclick="sendCommand('schedule')">
-            <div class="icon">📅</div>
-            <div class="item-text">
-                <div class="item-title">Расписание</div>
-                <div class="item-desc">График групповых и индивидуальных занятий</div>
-            </div>
-            <div class="arrow">›</div>
-        </div>
-        
-        <div class="menu-item" onclick="sendCommand('contacts')">
-            <div class="icon">🏢</div>
-            <div class="item-text">
-                <div class="item-title">Контакты</div>
-                <div class="item-desc">Адрес студии, часы работы, как добраться</div>
+                <div class="item-title">Найти своё направление</div>
+                <div class="item-desc">Пройдите тест и узнайте, что подойдёт именно вам</div>
             </div>
             <div class="arrow">›</div>
         </div>
         
         <!-- ПОДВАЛ -->
         <div class="footer">
-            <strong>DREAM LADY</strong> © 2024<br>
-            Элитная студия фитнеса и танцев<br>
-            <span style="font-size:11px; opacity:0.7;">Самая роскошная студия города</span>
+            <strong>DREAM LADY</strong>
+            Элитная студия фитнеса и танцев © 2024<br>
+            <span style="font-size:11px; opacity:0.7; letter-spacing: 0.5px;">Самая роскошная студия города</span>
         </div>
     </div>
 
@@ -304,16 +604,40 @@
         // ИНИЦИАЛИЗАЦИЯ TELEGRAM WEB APP
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
-        Telegram.WebApp.setHeaderColor('#ff69b4');
-        Telegram.WebApp.setBackgroundColor('#ffd6e7');
+        Telegram.WebApp.setHeaderColor('#1A1F2B');
+        Telegram.WebApp.setBackgroundColor('#1A1F2B');
         Telegram.WebApp.enableClosingConfirmation();
+        
+        // СОЗДАНИЕ ЗВЕЗДНОГО ФОНА
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 80;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 3;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
         
         // ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК
         function openLink(url) {
             Telegram.WebApp.openLink(url);
         }
         
-        // ФУНКЦИЯ ОТПРАВКИ КОМАНД БОТУ
+        // ФУНКЦИЯ ОТПРАВКИ КОМАНД БОТУ (оставлена только для записи)
         function sendCommand(command) {
             Telegram.WebApp.sendData(JSON.stringify({
                 cmd: command,
@@ -321,22 +645,24 @@
                 timestamp: Date.now()
             }));
             
-            // Показываем уведомление перед закрытием
-            Telegram.WebApp.showAlert('Команда отправлена боту!', function() {
+            Telegram.WebApp.showAlert('Запрос на запись отправлен!', function() {
                 Telegram.WebApp.close();
             });
         }
         
-        // ФИКСИРУЕМ ВЫСОТУ КОНТЕЙНЕРА
+        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
-            // Устанавливаем фиксированную высоту контейнера
+            createStars();
+            
+            // Адаптация высоты для разных устройств
             const container = document.querySelector('.menu-container');
             const windowHeight = window.innerHeight;
             const containerHeight = container.scrollHeight;
             
-            // Если контент меньше высоты окна, центрируем его
-            if (containerHeight < windowHeight) {
-                container.style.marginTop = ((windowHeight - containerHeight) / 2) + 'px';
+            if (containerHeight < windowHeight - 40) {
+                const margin = (windowHeight - containerHeight) / 2;
+                container.style.marginTop = Math.max(20, margin) + 'px';
+                container.style.marginBottom = Math.max(20, margin) + 'px';
             }
         });
     </script>
