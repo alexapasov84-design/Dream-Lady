@@ -146,8 +146,8 @@
             box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
             position: relative;
             overflow: hidden;
-            background-color: white; /* Белый фон для прозрачного PNG */
-            background-size: 90%; /* Чтоб полностью влезало в круг */
+            background-color: white;
+            background-size: 130%; /* Увеличил картинку до 130% */
         }
         
         .logo-container::after {
@@ -295,15 +295,7 @@
             letter-spacing: 1px;
         }
         
-        .footer-motto {
-            color: var(--light-gold);
-            font-size: 14px;
-            font-family: 'Cormorant', serif;
-            font-weight: 300;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            line-height: 1.4;
-        }
+        /* Убраны блоки .footer-motto */
         
         /* МОДАЛЬНЫЕ ОКНА */
         .modal-overlay {
@@ -622,7 +614,7 @@
                 width: 100px;
                 height: 100px;
                 margin-bottom: 20px;
-                background-size: 85%;
+                background-size: 130%; /* Сохраняем увеличение на мобильных */
             }
             
             h1 {
@@ -665,7 +657,6 @@
     <!-- БЛОК РАСПИСАНИЯ НАД МЕНЮ -->
     <div class="schedule-notification">
         <strong>📅 Расписание занятий</strong>
-        <!-- Убрана подпись "Актуальное расписание на сайте студии" -->
     </div>
     
     <div class="menu-container">
@@ -685,7 +676,7 @@
                 <span class="stat-label">Направлений</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">1000+</span>
+                <span class="stat-number">500+</span>
                 <span class="stat-label">Выпускниц</span>
             </div>
             <div class="stat-item">
@@ -732,11 +723,8 @@
             <div class="button-title">Найди своё направление</div>
         </div>
         
-        <!-- ПОДВАЛ -->
+        <!-- ПОДВАЛ (без девиза) -->
         <div class="footer">
-            <div class="footer-motto">⭐️ Искусство быть звездой ⭐️</div>
-            <div class="footer-motto">Самая роскошная студия города, где рождаются уверенные и сияющие женщины</div>
-            <div class="divider" style="margin: 15px auto; width: 80%;"></div>
             <strong>DREAM LADY</strong>
             Элитная студия фитнеса и танцев © 2025<br>
             Самая роскошная студия города
@@ -750,27 +738,35 @@
             <h2 class="modal-title">Стоимость занятий</h2>
             <div class="price-content">
                 <div class="price-item">
-                    <span class="price-title">Пробное занятие</span>
+                    <span class="price-title">Пробное занятие (танцевальное)</span>
                     <span>500₽</span>
                 </div>
                 <div class="price-item">
-                    <span class="price-title">Разовое посещение</span>
+                    <span class="price-title">Пробное занятие (балетное)</span>
+                    <span>700₽</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">Разовое занятие</span>
                     <span>1,200₽</span>
                 </div>
                 <div class="price-item">
+                    <span class="price-title">Абонемент на 4 занятия</span>
+                    <span>4,000₽</span>
+                </div>
+                <div class="price-item">
                     <span class="price-title">Абонемент на 8 занятий</span>
-                    <span>7,500₽</span>
+                    <span>7,200₽</span>
                 </div>
                 <div class="price-item">
                     <span class="price-title">Абонемент на 12 занятий</span>
-                    <span>10,000₽</span>
+                    <span>9,600₽</span>
                 </div>
                 <div class="price-item">
                     <span class="price-title">Персональная тренировка</span>
                     <span>от 2,500₽</span>
                 </div>
-                <div style="margin-top: 20px; font-size: 13px; color: var(--gold);">
-                    <p>Подробный прайс-лист на официальном сайте</p>
+                <div style="margin-top: 20px; font-size: 13px; color: var(--light-gold);">
+                    <p>Полный прайс-лист на официальном сайте</p>
                     <button class="signup-button" onclick="openLink('https://dream-lady.com/price')">Перейти на сайт</button>
                 </div>
             </div>
@@ -784,32 +780,16 @@
             <h2 class="modal-title">Направления студии</h2>
             <div class="directions-content">
                 <div class="direction-item">
-                    <span class="direction-title">Fitness Ballet</span>
-                    <div class="direction-desc">Элегантное сочетание балета и фитнеса</div>
+                    <span class="direction-title">Фитнес-танцы</span>
+                    <div class="direction-desc">Современные танцевальные направления, сочетающие фитнес и хореографию</div>
                 </div>
                 <div class="direction-item">
-                    <span class="direction-title">Стретчинг</span>
-                    <div class="direction-desc">Растяжка для гибкости и грации</div>
-                </div>
-                <div class="direction-item">
-                    <span class="direction-title">Pole Dance</span>
-                    <div class="direction-desc">Танец на пилоне для силы и пластики</div>
-                </div>
-                <div class="direction-item">
-                    <span class="direction-title">Contemporary</span>
-                    <div class="direction-desc">Современная хореография</div>
-                </div>
-                <div class="direction-item">
-                    <span class="direction-title">Йога</span>
-                    <div class="direction-desc">Гармония тела и разума</div>
-                </div>
-                <div class="direction-item">
-                    <span class="direction-title">Зумба</span>
-                    <div class="direction-desc">Энергичные латиноамериканские ритмы</div>
+                    <span class="direction-title">Фитнес-балет</span>
+                    <div class="direction-desc">Элегантное сочетание классического балета и фитнес-упражнений</div>
                 </div>
                 <div style="margin-top: 20px; font-size: 13px; color: var(--gold);">
-                    <p>Всего 12 эксклюзивных программ</p>
-                    <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Подробнее на сайте</button>
+                    <p>Всего 12 эксклюзивных программ в студии</p>
+                    <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Все направления на сайте</button>
                 </div>
             </div>
         </div>
@@ -822,7 +802,7 @@
             <h2 class="modal-title">Запись на занятия</h2>
             <div class="signup-content">
                 <div class="signup-info">
-                    Пробное занятие - всего 500₽<br>
+                    Пробное занятие - от 500₽<br>
                     Персональный подход к каждой ученице
                 </div>
                 <p>Для записи на занятие перейдите на сайт студии:</p>
@@ -901,7 +881,7 @@
                     <img src="https://static.craftum.com/P5r-SC4Dhu1mY3Y-Kszy73SmCMw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4e93ca77-230d-4322-bafc-c4cef4288c53.jpg" 
                          alt="Даша" class="trainer-photo">
                     <div class="trainer-name">Даша</div>
-                    <div class="trainer-title">Профессиональный хореограф, опыт 8+ лет</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Мария -->
@@ -909,7 +889,7 @@
                     <img src="https://static.craftum.com/AJV_AXz1u2xW2BdFD5DzipBSlpc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9faba137-73eb-42cf-8d6f-a47515f04e4a.jpg" 
                          alt="Мария" class="trainer-photo">
                     <div class="trainer-name">Мария</div>
-                    <div class="trainer-title">Мастер стретчинга, специалист по пилатесу</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Юля -->
@@ -917,7 +897,7 @@
                     <img src="https://static.craftum.com/Fn36bbdvsd1qiUd6JEGEPD0y-BI=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d2946384-5456-4077-a117-463fd3016889.jpg" 
                          alt="Юля" class="trainer-photo">
                     <div class="trainer-name">Юля</div>
-                    <div class="trainer-title">Эксперт по фитнес-балету, стаж 6 лет</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Дарья -->
@@ -925,7 +905,7 @@
                     <img src="https://static.craftum.com/Y_JR_8qLyqcYg6fzStwlmwZbfxE=/422x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/277986f7-1711-417a-ad51-120b225919d8.jpg" 
                          alt="Дарья" class="trainer-photo">
                     <div class="trainer-name">Дарья</div>
-                    <div class="trainer-title">Инструктор по современной хореографии</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Василиса -->
@@ -933,7 +913,7 @@
                     <img src="https://static.craftum.com/S2lOgfb_E5mB7i-H0lca_NRW4Jc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/91b6dc07-495c-47da-a49d-1b5c9477be1e.jpg" 
                          alt="Василиса" class="trainer-photo">
                     <div class="trainer-name">Василиса</div>
-                    <div class="trainer-title">Специалист по силовой подготовке</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Кристина -->
@@ -941,7 +921,7 @@
                     <img src="https://static.craftum.com/CRH9LDCCXQkVvjp3LbhMPQ1jeqw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/07fb5a0b-fdb9-476a-96fd-cc964a57a11e.jpg" 
                          alt="Кристина" class="trainer-photo">
                     <div class="trainer-name">Кристина</div>
-                    <div class="trainer-title">Мастер партерной гимнастики</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
                 
                 <!-- Камилла -->
@@ -949,7 +929,7 @@
                     <img src="https://static.craftum.com/BdWEpHqi78nKZNahtSq3mP5cSRs=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d6527981-880a-4f37-96e0-2a466a7a6305.jpg" 
                          alt="Камилла" class="trainer-photo">
                     <div class="trainer-name">Камилла</div>
-                    <div class="trainer-title">Профессиональный балетмейстер</div>
+                    <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
             </div>
         </div>
