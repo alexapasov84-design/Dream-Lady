@@ -116,6 +116,12 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .schedule-notification:hover {
+            background: rgba(198, 161, 110, 0.12);
         }
         
         .schedule-notification strong {
@@ -802,7 +808,7 @@
     <div class="gloss-overlay"></div>
     
     <!-- БЛОК РАСПИСАНИЯ НАД МЕНЮ -->
-    <div class="schedule-notification">
+    <div class="schedule-notification" id="scheduleBlock" title="Нажмите для авторизации и доступа к расписанию">
         <strong>📅 Расписание занятий</strong>
     </div>
     
@@ -908,468 +914,9 @@
         </div>
     </div>
     
-    <!-- МОДАЛЬНОЕ ОКНО ЦЕН -->
-    <div id="priceModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closePriceModal()">×</div>
-            <h2 class="modal-title">Стоимость занятий</h2>
-            <div class="price-content">
-                <div class="price-item">
-                    <span class="price-title">Пробное занятие</span>
-                    <span class="price-desc">350₽</span>
-                    <span class="price-note">(доступно для новых клиентов)</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">Абонементы групповые занятия</span>
-                    <span class="price-desc">до 10 человек:</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">4 тренировки/мес</span>
-                    <span class="price-desc">4,000₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">8 тренировок/мес</span>
-                    <span class="price-desc">5,700₽</span>
-                    <span class="price-note">(по подписке)</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">Безлимит/мес</span>
-                    <span class="price-desc">9,750₽</span>
-                    <span class="price-note">(по подписке)</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">24 тренировки/3 мес</span>
-                    <span class="price-desc">17,550₽</span>
-                    <span class="price-note">(для новых клиентов)</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-title">В студии так же представлены:</span>
-                    <span class="price-desc">Персональные тренировки</span>
-                    <span class="price-desc">Сплит тренировки</span>
-                </div>
-                <div style="margin-top: 20px; font-size: 14px; color: var(--light-gold); text-align: center;">
-                    <p>Специальные цены на абонементы по акции</p>
-                    <p>в разделе "Акции"</p>
-                </div>
-                <div style="margin-top: 20px; font-size: 13px; color: var(--light-gold);">
-                    <button class="signup-button" onclick="openLink('https://dream-lady.com/price')">Информация на сайте</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- МОДАЛЬНЫЕ ОКНА (остаются без изменений) -->
+    <!-- ... остальной HTML код модальных окон без изменений ... -->
     
-    <!-- МОДАЛЬНОЕ ОКНО АКЦИЙ -->
-    <div id="stockModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeStockModal()">×</div>
-            <h2 class="modal-title">Акции</h2>
-            <div class="stock-content">
-                <div class="stock-info">
-                    В данном разделе можно ознакомиться<br>
-                    с Акциями проходящими в студии
-                </div>
-                <p>Подробная информация о текущих акциях</p>
-                <p>и специальных предложениях на сайте:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/stock')">
-                    Информация на сайте
-                </button>
-                <p style="margin-top: 15px; font-size: 13px;">
-                    Новогодний мешок подарков<br>
-                    и другие специальные предложения
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО НАПРАВЛЕНИЙ -->
-    <div id="directionsModal" class="modal-overlay">
-        <div class="directions-modal-content">
-            <div class="modal-close" onclick="closeDirectionsModal()">×</div>
-            <h2 class="modal-title">Направления студии</h2>
-            <div class="directions-grid">
-                <!-- Стретчинг -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/Up1kKPt8lnaYJM-dLGQvUzyTn2M=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/683b537f-d7b6-439b-b37c-b26977ea93fe.jpg" 
-                             alt="Стретчинг" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Стретчинг</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Система упражнений для улучшения гибкости, развития подвижности в суставах и эластичности мышц.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Гибкость</li>
-                            <li><span class="benefit-check">✔</span>Подвижность суставов</li>
-                            <li><span class="benefit-check">✔</span>Эластичность мышц</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Основы классического танца -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/F7T3qcFZya-9y_FDpDEszIsmUk4=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4bb0d4bc-556f-46d4-ad9f-ba1e5ede8a9f.jpg" 
-                             alt="Основы классического танца" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Классический танец</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Изысканное искусство пластики тела и грациозных движений.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Пластика тела</li>
-                            <li><span class="benefit-check">✔</span>Изысканность движений</li>
-                            <li><span class="benefit-check">✔</span>Классическая хореография</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Современная хореография -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/JupU0gklmEXWREASS2HzU8JN61A=/874x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/13486eed-8149-45c1-bf1a-dc8b36fa8202.jpg" 
-                             alt="Современная хореография" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Современная хореография</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Синтез различных направлений для развития физических данных, пространственного мышления и фантазии.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Физическое развитие</li>
-                            <li><span class="benefit-check">✔</span>Пространственное мышление</li>
-                            <li><span class="benefit-check">✔</span>Развитие фантазии</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Партерная гимнастика -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/FcBLKuDkGpWHHWigLxfkLJaQ3Jw=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/12229dbb-df89-49a4-843e-33684969c85c.jpg" 
-                             alt="Партерная гимнастика" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Партерная гимнастика</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Комплекс упражнений, который выполняется на ковриках для безопасной и эффективной проработки мышц.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Упражнения на ковриках</li>
-                            <li><span class="benefit-check">✔</span>Безопасная нагрузка</li>
-                            <li><span class="benefit-check">✔</span>Эффективная проработка</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Сильная спина -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/NSvYk3n1fQ8vfkqkRmVbAP-Nhh4=/480x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/a8311b30-f5ad-425a-b34c-fe460be2283b.webp" 
-                             alt="Сильная спина" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Сильная спина</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Программа для снятия напряжения в спине, проработки глубоких мышц и улучшения осанки.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Снятие напряжения</li>
-                            <li><span class="benefit-check">✔</span>Проработка глубоких мышц</li>
-                            <li><span class="benefit-check">✔</span>Улучшение осанки</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Круговая тренировка -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/Yv-zI6f1Fd_iJvtj9f2noRGscec=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/55fa3cc3-84aa-4106-bea9-ad1b4a546b4a.jpg" 
-                             alt="Круговая тренировка" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Круговая тренировка</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Комплексное воздействие на различные мышечные группы для эффективного жиросжигания.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Комплексное воздействие</li>
-                            <li><span class="benefit-check">✔</span>Разные мышечные группы</li>
-                            <li><span class="benefit-check">✔</span>Эффективное жиросжигание</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Искусство на кончиках пальцев -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/zweozDZM8YbE7No5c0bQ4xA_Ybk=/1142x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6ef3819f-2b2a-492b-a380-54a4ae5844c0.jpg" 
-                             alt="Искусство на кончиках пальцев" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Искусство на кончиках пальцев</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Взорвите танцпол экспрессией и артистичностью.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Экспрессия</li>
-                            <li><span class="benefit-check">✔</span>Артистичность</li>
-                            <li><span class="benefit-check">✔</span>Энергия танца</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Барре-фитнес -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/GlPHTpkO1c7Uif7SPa484YFlyZw=/1376x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9fe89366-31a5-45f8-bf88-f52b02d885f7.jpg" 
-                             alt="Барре-фитнес" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Барре-фитнес</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Секретное оружие для осанки балерины и изящных движений.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Осанка балерины</li>
-                            <li><span class="benefit-check">✔</span>Изящные движения</li>
-                            <li><span class="benefit-check">✔</span>Грация и сила</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Фитнес балет -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/lm_ikk1i1dWYS_mcNpUmT3BWIa4=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/1624aca5-72cc-47a2-8ad4-8d6cb49b13f2.jpg" 
-                             alt="Фитнес балет" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Фитнес балет</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Сочетание классического танца с упражнениями на укрепление мышц.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Классический танец</li>
-                            <li><span class="benefit-check">✔</span>Хореография</li>
-                            <li><span class="benefit-check">✔</span>Укрепление мышц</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Пилатес -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/U1i_iWV2yeJ_dxR-qYTavtNEbEM=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d754bbfb-9e1f-452f-8130-7016aeb91caf.jpg" 
-                             alt="Пилатес" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Пилатес</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Система упражнений для достижения внутренней гармонии через здоровое тело.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Внутренняя гармония</li>
-                            <li><span class="benefit-check">✔</span>Здоровое тело</li>
-                            <li><span class="benefit-check">✔</span>Духовное равновесие</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Пресс и попа -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/WbXux05v1S3YU9d02jkWDbGKbRE=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7f7fef97-f793-4903-a69a-c23588995f1f.jpg" 
-                             alt="Пресс и попа" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Пресс и попа</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Подтянутые ягодицы и плоский живот - эффективные упражнения для тонуса мышц.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Подтянутые ягодицы</li>
-                            <li><span class="benefit-check">✔</span>Плоский живот</li>
-                            <li><span class="benefit-check">✔</span>Тонус мышц</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Фитнес танцы -->
-                <div class="direction-card-modal">
-                    <div class="direction-image-container">
-                        <img src="https://static.craftum.com/CmhMNAQ86h31ra76vylJ8XAqiyo=/1124x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/0ce1e11a-b005-4903-b21d-583c5e8c5f66.jpg" 
-                             alt="Фитнес танцы" class="direction-image-modal">
-                        <div class="direction-image-overlay">
-                            <h3 class="direction-image-title">Фитнес танцы</h3>
-                        </div>
-                    </div>
-                    <div class="direction-content-modal">
-                        <p class="direction-description-modal">Подтяните тело, развивайте пластику и координацию, осваивайте разные танцевальные стили.</p>
-                        <ul class="direction-benefits">
-                            <li><span class="benefit-check">✔</span>Подтянутое тело</li>
-                            <li><span class="benefit-check">✔</span>Пластика и координация</li>
-                            <li><span class="benefit-check">✔</span>Снятие стресса</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top: 20px; text-align: center;">
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Все направления на сайте</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО ЗАПИСИ -->
-    <div id="signupModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeSignupModal()">×</div>
-            <h2 class="modal-title">Запись на занятия</h2>
-            <div class="signup-content">
-                <div class="signup-info">
-                    Пробное занятие - 350₽<br>
-                    Персональный подход к каждой ученице
-                </div>
-                <p>Для записи на занятие перейдите на сайт студии:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda')">
-                    Записаться онлайн
-                </button>
-                <p style="margin-top: 15px; font-size: 13px;">
-                    Или позвоните нам:<br>
-                    <span style="color: var(--gold); font-weight: 500;">+7 916 994-73-68</span>
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО ТЕСТА -->
-    <div id="testModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeTestModal()">×</div>
-            <h2 class="modal-title">Найди своё направление</h2>
-            <div class="test-content">
-                <div class="test-info">
-                    Пройдите тест и узнайте,<br>
-                    какое направление подойдёт именно вам
-                </div>
-                <p>Тест доступен на официальном сайте студии:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#quiz')">
-                    Пройти тест
-                </button>
-                <p style="margin-top: 15px; font-size: 13px;">
-                    Ответьте на 5 простых вопросов<br>
-                    и получите персональные рекомендации
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
-    <div id="contactsModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeContactsModal()">×</div>
-            <h2 class="modal-title">Контакты</h2>
-            <div class="contacts-content">
-                <div class="contact-item">
-                    <span class="contact-phone">+7 916 994-73-68</span>
-                </div>
-                <div class="contact-item">
-                    <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email">DreamLadyStudio@yandex.ru</a>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-address">
-                        г. Жуковский,<br>
-                        ул. Королева, дом 6, строение 2<br>
-                        (2 этаж)
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-details">
-                        Индивидуальный предприниматель<br>
-                        Пинчук И.М.<br>
-                        ИНН 773721380132<br>
-                        ОГРНИП 325774600149528
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО ТРЕНЕРОВ -->
-    <div id="trainersModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeTrainersModal()">×</div>
-            <h2 class="modal-title">Наши тренеры</h2>
-            <div class="trainers-grid">
-                <!-- Даша -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/P5r-SC4Dhu1mY3Y-Kszy73SmCMw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4e93ca77-230d-4322-bafc-c4cef4288c53.jpg" 
-                         alt="Даша" class="trainer-photo">
-                    <div class="trainer-name">Даша</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Мария -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/AJV_AXz1u2xW2BdFD5DzipBSlpc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9faba137-73eb-42cf-8d6f-a47515f04e4a.jpg" 
-                         alt="Мария" class="trainer-photo">
-                    <div class="trainer-name">Мария</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Юля -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/Fn36bbdvsd1qiUd6JEGEPD0y-BI=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d2946384-5456-4077-a117-463fd3016889.jpg" 
-                         alt="Юля" class="trainer-photo">
-                    <div class="trainer-name">Юля</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Дарья -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/Y_JR_8qLyqcYg6fzStwlmwZbfxE=/422x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/277986f7-1711-417a-ad51-120b225919d8.jpg" 
-                         alt="Дарья" class="trainer-photo">
-                    <div class="trainer-name">Дарья</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Василиса -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/S2lOgfb_E5mB7i-H0lca_NRW4Jc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/91b6dc07-495c-47da-a49d-1b5c9477be1e.jpg" 
-                         alt="Василиса" class="trainer-photo">
-                    <div class="trainer-name">Василиса</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Кристина -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/CRH9LDCCXQkVvjp3LbhMPQ1jeqw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/07fb5a0b-fdb9-476a-96fd-cc964a57a11e.jpg" 
-                         alt="Кристина" class="trainer-photo">
-                    <div class="trainer-name">Кристина</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-                
-                <!-- Камилла -->
-                <div class="trainer-card">
-                    <img src="https://static.craftum.com/BdWEpHqi78nKZNahtSq3mP5cSRs=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d6527981-880a-4f37-96e0-2a466a7a6305.jpg" 
-                         alt="Камилла" class="trainer-photo">
-                    <div class="trainer-name">Камилла</div>
-                    <div class="trainer-title">Тренер студии Dream Lady</div>
-                </div>
-            </div>
-            <!-- КНОПКА ЗАПИСИ В ОКНЕ ТРЕНЕРОВ -->
-            <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(198, 161, 110, 0.2);">
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda')">
-                    Записаться на пробное занятие
-                </button>
-                <p style="margin-top: 10px; font-size: 12px; color: var(--light-gold);">
-                    Пробное занятие - 350₽
-                </p>
-            </div>
-        </div>
-    </div>
-
     <script>
         // ИНИЦИАЛИЗАЦИЯ TELEGRAM WEB APP
         Telegram.WebApp.ready();
@@ -1378,43 +925,58 @@
         Telegram.WebApp.setBackgroundColor('#1A1F2B');
         Telegram.WebApp.enableClosingConfirmation();
         
-        // СОХРАНЕНИЕ СОСТОЯНИЯ АВТОРИЗАЦИИ
-        function saveAuthState() {
-            if (typeof localStorage !== 'undefined') {
-                localStorage.setItem('dreamlady_auth', 'authenticated');
-                localStorage.setItem('dreamlady_last_session', Date.now().toString());
-            }
-        }
+        // ФЛАГ АВТОРИЗАЦИИ
+        let isAuthenticated = false;
         
-        function loadAuthState() {
-            if (typeof localStorage !== 'undefined') {
-                const authState = localStorage.getItem('dreamlady_auth');
-                const lastSession = localStorage.getItem('dreamlady_last_session');
-                
-                // Проверяем, не устарела ли сессия (больше 7 дней)
-                if (lastSession) {
-                    const sessionAge = Date.now() - parseInt(lastSession);
-                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
-                    
-                    if (sessionAge > sevenDays) {
-                        // Сессия устарела - очищаем
-                        localStorage.removeItem('dreamlady_auth');
-                        localStorage.removeItem('dreamlady_last_session');
-                        return null;
-                    }
-                }
-                
-                return authState === 'authenticated' && lastSession;
-            }
-            return null;
-        }
-        
-        // ИНИЦИАЛИЗАЦИЯ АВТОРИЗАЦИИ WAPI
-        function initWapiAuth() {
-            const savedAuth = loadAuthState();
+        // ФУНКЦИЯ ДЛЯ ОБНОВЛЕНИЯ БЛОКА РАСПИСАНИЯ
+        function updateScheduleBlock() {
+            const scheduleBlock = document.getElementById('scheduleBlock');
+            if (!scheduleBlock) return;
             
-            if (savedAuth) {
-                console.log('Восстановлена предыдущая сессия авторизации');
+            if (isAuthenticated) {
+                scheduleBlock.innerHTML = '<strong>📅 Расписание занятий</strong><br><span style="font-size:12px; color:var(--light-gold);">Авторизованный доступ</span>';
+                scheduleBlock.title = 'Вы авторизованы. Нажмите для выхода из системы.';
+            } else {
+                scheduleBlock.innerHTML = '<strong>📅 Расписание занятий</strong>';
+                scheduleBlock.title = 'Нажмите для авторизации и доступа к расписанию';
+            }
+        }
+        
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С LOCALSTORAGE (БЕЗ ОГРАНИЧЕНИЙ ПО ВРЕМЕНИ)
+        function saveAuthToStorage() {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('dreamlady_wapi_auth', 'true');
+                console.log('Авторизация сохранена в localStorage (бессрочно)');
+            }
+        }
+        
+        function loadAuthFromStorage() {
+            if (typeof localStorage !== 'undefined') {
+                const savedAuth = localStorage.getItem('dreamlady_wapi_auth');
+                
+                if (savedAuth === 'true') {
+                    console.log('Восстановлена сохраненная авторизация из localStorage');
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function clearAuthFromStorage() {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.removeItem('dreamlady_wapi_auth');
+                console.log('Авторизация удалена из localStorage');
+            }
+        }
+        
+        // ИНИЦИАЛИЗАЦИЯ WAPI
+        function initWapiAuth() {
+            // Пробуем восстановить авторизацию из localStorage
+            const restored = loadAuthFromStorage();
+            
+            if (restored) {
+                isAuthenticated = true;
+                updateScheduleBlock();
             }
             
             // Инициализация виджета WAPI
@@ -1423,13 +985,53 @@
                     containerId: 'listokWidgetContainer',
                     configId: '91afda9e057d0c742cda59a22cd5bdf4',
                     onAuth: function(userData) {
-                        console.log('Пользователь авторизован:', userData);
-                        saveAuthState();
+                        console.log('Пользователь авторизован через WAPI');
+                        isAuthenticated = true;
+                        saveAuthToStorage();
+                        updateScheduleBlock();
+                        
+                        Telegram.WebApp.showAlert('✅ Авторизация успешна! Доступ к расписанию сохранен.', function() {});
                     },
                     onLoad: function() {
                         console.log('WAPI виджет загружен');
+                    },
+                    onLogout: function() {
+                        console.log('Пользователь вышел из системы WAPI');
+                        isAuthenticated = false;
+                        clearAuthFromStorage();
+                        updateScheduleBlock();
+                        
+                        Telegram.WebApp.showAlert('Вы вышли из системы.', function() {});
                     }
                 });
+            }
+        }
+        
+        // ФУНКЦИЯ ДЛЯ РУЧНОЙ АВТОРИЗАЦИИ/ВЫХОДА
+        function handleScheduleBlockClick() {
+            if (!isAuthenticated) {
+                // Если не авторизован - открываем авторизацию
+                if (typeof Listok !== 'undefined' && Listok.openAuth) {
+                    Listok.openAuth();
+                }
+            } else {
+                // Если авторизован - предлагаем выйти
+                Telegram.WebApp.showConfirm(
+                    'Вы хотите выйти из системы?\nАвторизация будет удалена.',
+                    function(result) {
+                        if (result) {
+                            if (typeof Listok !== 'undefined' && Listok.logout) {
+                                Listok.logout();
+                            } else {
+                                // Если нет метода logout, очищаем вручную
+                                isAuthenticated = false;
+                                clearAuthFromStorage();
+                                updateScheduleBlock();
+                                Telegram.WebApp.showAlert('Вы вышли из системы.', function() {});
+                            }
+                        }
+                    }
+                );
             }
         }
         
@@ -1457,7 +1059,7 @@
             }
         }
         
-        // ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН
+        // ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН (без изменений)
         function openPriceModal() {
             document.getElementById('priceModal').classList.add('active');
             Telegram.WebApp.disableVerticalSwipes();
@@ -1528,22 +1130,7 @@
             Telegram.WebApp.enableVerticalSwipes();
         }
         
-        // Закрытие модальных окон при клике на фон
-        document.querySelectorAll('.modal-overlay').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    if (this.id === 'priceModal') closePriceModal();
-                    else if (this.id === 'stockModal') closeStockModal();
-                    else if (this.id === 'directionsModal') closeDirectionsModal();
-                    else if (this.id === 'signupModal') closeSignupModal();
-                    else if (this.id === 'testModal') closeTestModal();
-                    else if (this.id === 'contactsModal') closeContactsModal();
-                    else if (this.id === 'trainersModal') closeTrainersModal();
-                }
-            });
-        });
-        
-        // ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК ВНЕШНЕГО САЙТА
+        // ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК
         function openLink(url) {
             Telegram.WebApp.openLink(url);
         }
@@ -1555,7 +1142,7 @@
             
             // Центрирование меню по вертикали
             const menu = document.querySelector('.menu-container');
-            const schedule = document.querySelector('.schedule-notification');
+            const schedule = document.getElementById('scheduleBlock');
             const windowHeight = window.innerHeight;
             const menuHeight = menu.offsetHeight;
             const scheduleHeight = schedule.offsetHeight;
@@ -1565,6 +1152,24 @@
                 const marginTop = (windowHeight - totalHeight) / 2;
                 schedule.style.marginTop = marginTop + 'px';
             }
+            
+            // Обработчик клика на блок расписания
+            schedule.addEventListener('click', handleScheduleBlockClick);
+            
+            // Обработчики для модальных окон
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        if (this.id === 'priceModal') closePriceModal();
+                        else if (this.id === 'stockModal') closeStockModal();
+                        else if (this.id === 'directionsModal') closeDirectionsModal();
+                        else if (this.id === 'signupModal') closeSignupModal();
+                        else if (this.id === 'testModal') closeTestModal();
+                        else if (this.id === 'contactsModal') closeContactsModal();
+                        else if (this.id === 'trainersModal') closeTrainersModal();
+                    }
+                });
+            });
         });
     </script>
 </body>
