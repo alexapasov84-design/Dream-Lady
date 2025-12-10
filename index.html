@@ -147,8 +147,8 @@
             box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
             position: relative;
             overflow: hidden;
-            background-color: var(--graphite); /* Графитовый фон */
-            background-size: 140%; /* Увеличено до 140% */
+            background-color: var(--graphite);
+            background-size: 140%;
         }
         
         .logo-container::after {
@@ -278,7 +278,7 @@
         /* ПОДВАЛ */
         .footer {
             text-align: center;
-            padding: 25px 20px;
+            padding: 20px 20px 15px;
             background: rgba(20, 25, 35, 0.8);
             color: var(--light-gold);
             font-size: 12px;
@@ -292,8 +292,42 @@
             font-family: 'Cormorant', serif;
             font-weight: 500;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: 1px;
+        }
+        
+        /* СОЦСЕТИ В ПОДВАЛЕ */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(198, 161, 110, 0.1);
+            border: 1px solid rgba(198, 161, 110, 0.3);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(198, 161, 110, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(198, 161, 110, 0.2);
+        }
+        
+        .social-link:active {
+            transform: translateY(0);
         }
         
         /* МОДАЛЬНЫЕ ОКНА */
@@ -545,8 +579,8 @@
             background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
             color: var(--deep-navy);
             border: none;
-            padding: 15px 30px;
-            font-size: 16px;
+            padding: 12px 25px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
@@ -554,6 +588,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 10px;
+            box-shadow: 0 4px 0 #8B6B3D;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #8B6B3D;
         }
         
         /* ОКНО ТЕСТА */
@@ -746,6 +787,12 @@
                 width: 70px;
                 height: 70px;
             }
+            
+            .social-link {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -828,11 +875,36 @@
             <div class="button-title">Найди своё направление</div>
         </div>
         
-        <!-- ПОДВАЛ -->
+        <!-- ПОДВАЛ С СОЦСЕТЯМИ -->
         <div class="footer">
             <strong>DREAM LADY</strong>
             Элитная студия фитнеса и танцев © 2025<br>
             Самая роскошная студия города
+            
+            <!-- СОЦСЕТИ -->
+            <div class="social-links">
+                <a href="https://t.me/DreamLady_Koroleva" class="social-link" onclick="openLink('https://t.me/DreamLady_Koroleva'); return false;" title="Telegram">
+                    <span>✈️</span>
+                </a>
+                <a href="https://api.whatsapp.com/send/?phone=79169947368" class="social-link" onclick="openLink('https://api.whatsapp.com/send/?phone=79169947368'); return false;" title="WhatsApp">
+                    <span>📱</span>
+                </a>
+                <a href="https://vk.com/dreamladystudio" class="social-link" onclick="openLink('https://vk.com/dreamladystudio'); return false;" title="ВКонтакте">
+                    <span>VK</span>
+                </a>
+                <a href="https://ok.ru/group/70000036908725" class="social-link" onclick="openLink('https://ok.ru/group/70000036908725'); return false;" title="Одноклассники">
+                    <span>OK</span>
+                </a>
+                <a href="https://dzen.ru/dream_lady" class="social-link" onclick="openLink('https://dzen.ru/dream_lady'); return false;" title="Дзен">
+                    <span>Д</span>
+                </a>
+                <a href="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865" class="social-link" onclick="openLink('https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865'); return false;" title="Яндекс Карты">
+                    <span>🗺️</span>
+                </a>
+                <a href="https://www.tiktok.com/@dream_lady_studio?_r=1" class="social-link" onclick="openLink('https://www.tiktok.com/@dream_lady_studio?_r=1'); return false;" title="TikTok">
+                    <span>🎵</span>
+                </a>
+            </div>
         </div>
     </div>
     
@@ -1286,6 +1358,15 @@
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
             </div>
+            <!-- КНОПКА ЗАПИСИ В ОКНЕ ТРЕНЕРОВ -->
+            <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(198, 161, 110, 0.2);">
+                <button class="signup-button" onclick="openLink('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda')">
+                    Записаться на пробное занятие
+                </button>
+                <p style="margin-top: 10px; font-size: 12px; color: var(--light-gold);">
+                    Пробное занятие - 350₽
+                </p>
+            </div>
         </div>
     </div>
 
@@ -1309,6 +1390,20 @@
             if (typeof localStorage !== 'undefined') {
                 const authState = localStorage.getItem('dreamlady_auth');
                 const lastSession = localStorage.getItem('dreamlady_last_session');
+                
+                // Проверяем, не устарела ли сессия (больше 7 дней)
+                if (lastSession) {
+                    const sessionAge = Date.now() - parseInt(lastSession);
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    
+                    if (sessionAge > sevenDays) {
+                        // Сессия устарела - очищаем
+                        localStorage.removeItem('dreamlady_auth');
+                        localStorage.removeItem('dreamlady_last_session');
+                        return null;
+                    }
+                }
+                
                 return authState === 'authenticated' && lastSession;
             }
             return null;
