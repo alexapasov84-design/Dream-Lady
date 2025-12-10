@@ -876,7 +876,7 @@
         </div>
         
         <!-- КНОПКА TELEGRAM-БОТА -->
-        <div class="button-3d" onclick="openTelegramBot()">
+        <div class="button-3d" onclick="openTelegramBotModal()">
             <div class="button-title">🤖 Telegram-бот</div>
         </div>
         
@@ -914,6 +914,58 @@
                 <a href="https://www.tiktok.com/@dream_lady_studio?_r=1" class="social-link" onclick="openLink('https://www.tiktok.com/@dream_lady_studio?_r=1'); return false;" title="TikTok">
                     <span>🎵</span>
                 </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- МОДАЛЬНОЕ ОКНО TELEGRAM-БОТА -->
+    <div id="telegramBotModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeTelegramBotModal()">×</div>
+            <h2 class="modal-title">🤖 Telegram-бот Dream Team Studio</h2>
+            <div style="padding: 20px; text-align: center;">
+                <p style="color: var(--light-gold); margin-bottom: 20px; font-size: 15px;">
+                    Этот бот поможет вам получать напоминания о занятиях<br>и связаться с администратором студии
+                </p>
+                
+                <div style="background: rgba(198, 161, 110, 0.1); border-radius: 10px; padding: 15px; margin: 15px 0; border: 1px solid rgba(198, 161, 110, 0.3);">
+                    <p style="color: var(--gold); font-weight: 500; margin-bottom: 15px; font-size: 16px;">📋 Что умеет бот:</p>
+                    <ul style="text-align: left; color: var(--light-gold); padding-left: 20px; font-size: 14px;">
+                        <li style="margin-bottom: 10px;">🔔 <strong>Напоминания о занятиях:</strong>
+                            <br><span style="font-size: 12px;">- За 3 часа до начала занятия</span>
+                            <br><span style="font-size: 12px;">- За день до занятия</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">💬 <strong>Связь с администратором:</strong>
+                            <br><span style="font-size: 12px;">- Задать вопрос администратору</span>
+                            <br><span style="font-size: 12px;">- Получить консультацию</span>
+                            <br><span style="font-size: 12px;">- Решить организационные вопросы</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">📅 <strong>Информация о расписании</strong></li>
+                        <li>ℹ️ <strong>Ответы на частые вопросы</strong></li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255, 100, 100, 0.1); border-radius: 10px; padding: 12px; margin: 15px 0; border: 1px solid rgba(255, 100, 100, 0.3);">
+                    <p style="color: #ff6b6b; font-weight: 500; margin-bottom: 8px; font-size: 14px;">⚠️ ВАЖНО ДЛЯ АВТОРИЗАЦИИ:</p>
+                    <p style="color: var(--light-gold); font-size: 13px; margin: 0;">
+                        1. Нажмите START / НАЧАТЬ в боте<br>
+                        2. Поделитесь своим контактом<br>
+                        3. <strong>Номер телефона должен совпадать</strong><br>с номером регистрации в студии
+                    </p>
+                </div>
+                
+                <p style="color: var(--light-gold); font-size: 13px; margin: 15px 0;">
+                    Если номер не совпадает, обратитесь к администратору<br>для обновления данных в системе
+                </p>
+                
+                <div style="margin-top: 25px;">
+                    <button class="signup-button" onclick="openTelegramBot()" style="margin-bottom: 10px; width: 100%;">
+                        📲 Перейти к боту @DreamTeamStudio_Bot
+                    </button>
+                    <p style="font-size: 12px; color: var(--light-gold); margin-top: 10px;">
+                        После авторизации закройте это окно
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -1388,10 +1440,23 @@
         Telegram.WebApp.setBackgroundColor('#1A1F2B');
         Telegram.WebApp.enableClosingConfirmation();
         
-        // ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ TELEGRAM-БОТА
+        // ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА TELEGRAM-БОТА
+        function openTelegramBotModal() {
+            document.getElementById('telegramBotModal').classList.add('active');
+            Telegram.WebApp.disableVerticalSwipes();
+        }
+        
+        // ФУНКЦИЯ ДЛЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА TELEGRAM-БОТА
+        function closeTelegramBotModal() {
+            document.getElementById('telegramBotModal').classList.remove('active');
+            Telegram.WebApp.enableVerticalSwipes();
+        }
+        
+        // ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ TELEGRAM-БОТА В TELEGRAM
         function openTelegramBot() {
             const botUrl = 'https://t.me/DreamTeamStudio_Bot';
             Telegram.WebApp.openLink(botUrl);
+            closeTelegramBotModal();
         }
         
         // СОХРАНЕНИЕ СОСТОЯНИЯ АВТОРИЗАЦИИ
@@ -1552,6 +1617,7 @@
                     else if (this.id === 'testModal') closeTestModal();
                     else if (this.id === 'contactsModal') closeContactsModal();
                     else if (this.id === 'trainersModal') closeTrainersModal();
+                    else if (this.id === 'telegramBotModal') closeTelegramBotModal();
                 }
             });
         });
