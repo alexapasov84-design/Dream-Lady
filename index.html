@@ -146,6 +146,7 @@
             box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
             position: relative;
             overflow: hidden;
+            background-size: 85%; /* Уменьшил картинку */
         }
         
         .logo-container::after {
@@ -180,115 +181,12 @@
             opacity: 0.9;
         }
         
-        /* УВЕДОМЛЕНИЕ В СТИЛЕ САЙТА */
-        .notification {
-            background: rgba(198, 161, 110, 0.08);
-            padding: 20px;
-            margin: 20px;
-            border-radius: 12px;
-            border-left: 3px solid var(--gold);
-            font-size: 14px;
-            color: var(--light-gold);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(198, 161, 110, 0.2);
-        }
-        
-        .notification strong {
-            color: var(--gold);
-            display: block;
-            margin-bottom: 5px;
-            font-size: 16px;
-            font-family: 'Cormorant', serif;
-            font-weight: 500;
-        }
-        
-        /* КНОПКИ МЕНЮ В СТИЛЕ САЙТА */
-        .menu-item {
+        /* 3D КНОПКИ - ОДИНАКОВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК */
+        .button-3d {
+            position: relative;
             display: flex;
             align-items: center;
-            padding: 22px 25px;
-            border-bottom: 1px solid rgba(198, 161, 110, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(198, 161, 110, 0.05), transparent);
-            transition: left 0.6s;
-        }
-        
-        .menu-item:hover::before,
-        .menu-item:active::before {
-            left: 100%;
-        }
-        
-        .menu-item:active {
-            background: rgba(198, 161, 110, 0.05);
-        }
-        
-        .icon {
-            font-size: 24px;
-            margin-right: 20px;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(198, 161, 110, 0.1);
-            border-radius: 12px;
-            color: var(--gold);
-            flex-shrink: 0;
-            border: 1px solid rgba(198, 161, 110, 0.3);
-            font-weight: 300;
-            font-family: 'Cormorant', serif;
-        }
-        
-        .item-text {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .item-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--soft-white);
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            font-family: 'Cormorant', serif;
-            line-height: 1.2;
-        }
-        
-        .item-desc {
-            font-size: 12px;
-            color: var(--light-gold);
-            line-height: 1.4;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-        
-        .arrow {
-            font-size: 24px;
-            color: var(--gold);
-            font-weight: 300;
-            margin-left: 10px;
-            flex-shrink: 0;
-            font-family: 'Cormorant', serif;
-        }
-        
-        /* 3D КНОПКА ЦЕН В СТИЛЕ САЙТА */
-        .price-button-3d {
-            position: relative;
-            display: block;
-            padding: 18px 30px;
+            padding: 18px 25px;
             font-size: 16px;
             font-weight: 600;
             color: var(--deep-navy);
@@ -300,8 +198,8 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
-            margin: 20px;
+            text-align: left;
+            margin: 15px 20px;
             box-shadow: 
                 0 8px 0 #8B6B3D,
                 0 15px 25px rgba(198, 161, 110, 0.3);
@@ -310,11 +208,65 @@
             animation: gradientShift 3s ease infinite;
         }
         
-        .price-button-3d:active {
+        .button-3d:active {
             transform: translateY(4px);
             box-shadow: 
                 0 4px 0 #8B6B3D,
                 0 8px 15px rgba(198, 161, 110, 0.3);
+        }
+        
+        .button-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .button-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 31, 43, 0.2);
+            border-radius: 8px;
+            color: var(--deep-navy);
+            flex-shrink: 0;
+            font-weight: 300;
+            font-family: 'Cormorant', serif;
+        }
+        
+        .button-text {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .button-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--deep-navy);
+            margin-bottom: 3px;
+            letter-spacing: 0.5px;
+            font-family: 'Cormorant', serif;
+            line-height: 1.2;
+        }
+        
+        .button-desc {
+            font-size: 12px;
+            color: var(--deep-navy);
+            line-height: 1.4;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .button-arrow {
+            font-size: 24px;
+            color: var(--deep-navy);
+            font-weight: 600;
+            margin-left: 10px;
+            flex-shrink: 0;
+            font-family: 'Cormorant', serif;
         }
         
         @keyframes gradientShift {
@@ -382,8 +334,18 @@
             font-family: 'Cormorant', serif;
             font-weight: 500;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
+        }
+        
+        .footer-motto {
+            color: var(--light-gold);
+            font-size: 14px;
+            font-family: 'Cormorant', serif;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            line-height: 1.4;
         }
         
         /* МОДАЛЬНЫЕ ОКНА */
@@ -565,16 +527,16 @@
             }
         }
         
-        .menu-item {
+        .button-3d {
             animation: fadeInUp 0.5s ease backwards;
         }
         
-        .menu-item:nth-child(1) { animation-delay: 0.1s; }
-        .menu-item:nth-child(2) { animation-delay: 0.2s; }
-        .menu-item:nth-child(3) { animation-delay: 0.3s; }
-        .menu-item:nth-child(4) { animation-delay: 0.4s; }
-        .menu-item:nth-child(5) { animation-delay: 0.5s; }
-        .menu-item:nth-child(6) { animation-delay: 0.6s; }
+        .button-3d:nth-child(1) { animation-delay: 0.1s; }
+        .button-3d:nth-child(2) { animation-delay: 0.2s; }
+        .button-3d:nth-child(3) { animation-delay: 0.3s; }
+        .button-3d:nth-child(4) { animation-delay: 0.4s; }
+        .button-3d:nth-child(5) { animation-delay: 0.5s; }
+        .button-3d:nth-child(6) { animation-delay: 0.6s; }
         
         /* МЕДИА-ЗАПРОСЫ */
         @media (max-width: 400px) {
@@ -595,6 +557,7 @@
                 width: 100px;
                 height: 100px;
                 margin-bottom: 20px;
+                background-size: 85%;
             }
             
             h1 {
@@ -607,29 +570,25 @@
                 letter-spacing: 2px;
             }
             
-            .menu-item {
-                padding: 18px 20px;
+            .button-3d {
+                padding: 16px 20px;
+                font-size: 15px;
+                margin: 12px 15px;
             }
             
-            .icon {
-                width: 44px;
-                height: 44px;
+            .button-icon {
+                width: 36px;
+                height: 36px;
                 font-size: 20px;
-                margin-right: 15px;
+                margin-right: 12px;
             }
             
-            .item-title {
+            .button-title {
                 font-size: 16px;
             }
             
-            .item-desc {
+            .button-desc {
                 font-size: 11px;
-            }
-            
-            .price-button-3d {
-                padding: 16px 25px;
-                font-size: 15px;
-                margin: 15px;
             }
             
             .trainers-grid {
@@ -652,7 +611,7 @@
     <!-- БЛОК РАСПИСАНИЯ НАД МЕНЮ -->
     <div class="schedule-notification">
         <strong>📅 Расписание занятий</strong>
-        <span>Актуальное расписание на сайте студии</span>
+        <!-- Убрана подпись "Актуальное расписание на сайте студии" -->
     </div>
     
     <div class="menu-container">
@@ -665,15 +624,16 @@
             </div>
         </div>
         
-        <!-- УВЕДОМЛЕНИЕ -->
-        <div class="notification">
-            <strong>🌸 Искусство быть звездой</strong>
-            <span>Самая роскошная студия города, где рождаются уверенные и сияющие женщины</span>
-        </div>
-        
-        <!-- КНОПКА ЦЕН -->
-        <a href="https://dream-lady.com/price" class="price-button-3d" onclick="openLink('https://dream-lady.com/price'); return false;">
-            Узнать стоимость
+        <!-- 3D КНОПКА ЦЕН -->
+        <a href="https://dream-lady.com/price" class="button-3d" onclick="openLink('https://dream-lady.com/price'); return false;">
+            <div class="button-content">
+                <div class="button-icon">💰</div>
+                <div class="button-text">
+                    <div class="button-title">Узнать стоимость</div>
+                    <div class="button-desc">Полный прайс-лист на все услуги студии</div>
+                </div>
+                <div class="button-arrow">›</div>
+            </div>
         </a>
         
         <!-- СТАТИСТИКА НАПРАВЛЕНИЙ -->
@@ -693,73 +653,88 @@
         </div>
         
         <!-- КНОПКА НАПРАВЛЕНИЙ -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com/#directions')">
-            <div class="icon">💃</div>
-            <div class="item-text">
-                <div class="item-title">Направления студии</div>
-                <div class="item-desc">12 эксклюзивных программ фитнеса и танцев</div>
+        <div class="button-3d" onclick="openLink('https://dream-lady.com/#directions')">
+            <div class="button-content">
+                <div class="button-icon">💃</div>
+                <div class="button-text">
+                    <div class="button-title">Направления студии</div>
+                    <div class="button-desc">12 эксклюзивных программ фитнеса и танцев</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- КНОПКА ТРЕНЕРОВ -->
-        <div class="menu-item" onclick="openTrainersModal()">
-            <div class="icon">👩‍🏫</div>
-            <div class="item-text">
-                <div class="item-title">Наши тренеры</div>
-                <div class="item-desc">7 профессиональных тренеров с уникальным подходом</div>
+        <div class="button-3d" onclick="openTrainersModal()">
+            <div class="button-content">
+                <div class="button-icon">👩‍🏫</div>
+                <div class="button-text">
+                    <div class="button-title">Наши тренеры</div>
+                    <div class="button-desc">7 профессиональных тренеров с уникальным подходом</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- КНОПКА ЗАПИСИ -->
-        <div class="menu-item" onclick="sendCommand('signup')">
-            <div class="icon">📞</div>
-            <div class="item-text">
-                <div class="item-title">Запись на занятие</div>
-                <div class="item-desc">Пробное занятие - 500₽ • Персональный подход</div>
+        <div class="button-3d" onclick="sendCommand('signup')">
+            <div class="button-content">
+                <div class="button-icon">📞</div>
+                <div class="button-text">
+                    <div class="button-title">Запись на занятие</div>
+                    <div class="button-desc">Пробное занятие - 500₽ • Персональный подход</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- КНОПКА КОНТАКТОВ -->
-        <div class="menu-item" onclick="openContactsModal()">
-            <div class="icon">🏢</div>
-            <div class="item-text">
-                <div class="item-title">Контакты</div>
-                <div class="item-desc">Адрес студии, телефоны, электронная почта</div>
+        <div class="button-3d" onclick="openContactsModal()">
+            <div class="button-content">
+                <div class="button-icon">🏢</div>
+                <div class="button-text">
+                    <div class="button-title">Контакты</div>
+                    <div class="button-desc">Адрес студии, телефоны, электронная почта</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- РАЗДЕЛИТЕЛЬ -->
         <div class="divider"></div>
         
         <!-- КНОПКА САЙТА -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com')">
-            <div class="icon">🌐</div>
-            <div class="item-text">
-                <div class="item-title">Официальный сайт</div>
-                <div class="item-desc">Главный сайт элитной студии преображения</div>
+        <div class="button-3d" onclick="openLink('https://dream-lady.com')">
+            <div class="button-content">
+                <div class="button-icon">🌐</div>
+                <div class="button-text">
+                    <div class="button-title">Официальный сайт</div>
+                    <div class="button-desc">Главный сайт элитной студии преображения</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- КНОПКА ТЕСТА -->
-        <div class="menu-item" onclick="openLink('https://dream-lady.com/#quiz')">
-            <div class="icon">🎯</div>
-            <div class="item-text">
-                <div class="item-title">Найти своё направление</div>
-                <div class="item-desc">Пройдите тест и узнайте, что подойдёт именно вам</div>
+        <div class="button-3d" onclick="openLink('https://dream-lady.com/#quiz')">
+            <div class="button-content">
+                <div class="button-icon">🎯</div>
+                <div class="button-text">
+                    <div class="button-title">Найти своё направление</div>
+                    <div class="button-desc">Пройдите тест и узнайте, что подойдёт именно вам</div>
+                </div>
+                <div class="button-arrow">›</div>
             </div>
-            <div class="arrow">›</div>
         </div>
         
         <!-- ПОДВАЛ -->
         <div class="footer">
+            <div class="footer-motto">⭐️ Искусство быть звездой ⭐️</div>
+            <div class="footer-motto">Самая роскошная студия города, где рождаются уверенные и сияющие женщины</div>
+            <div class="divider" style="margin: 15px auto; width: 80%;"></div>
             <strong>DREAM LADY</strong>
             Элитная студия фитнеса и танцев © 2025<br>
-            <span style="font-size:11px; opacity:0.7; letter-spacing: 0.5px;">Самая роскошная студия города</span>
+            Самая роскошная студия города
         </div>
     </div>
     
@@ -867,6 +842,47 @@
         Telegram.WebApp.setBackgroundColor('#1A1F2B');
         Telegram.WebApp.enableClosingConfirmation();
         
+        // СОХРАНЕНИЕ СОСТОЯНИЯ АВТОРИЗАЦИИ
+        function saveAuthState() {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('dreamlady_auth', 'authenticated');
+                localStorage.setItem('dreamlady_last_session', Date.now().toString());
+            }
+        }
+        
+        function loadAuthState() {
+            if (typeof localStorage !== 'undefined') {
+                const authState = localStorage.getItem('dreamlady_auth');
+                const lastSession = localStorage.getItem('dreamlady_last_session');
+                return authState === 'authenticated' && lastSession;
+            }
+            return null;
+        }
+        
+        // ИНИЦИАЛИЗАЦИЯ АВТОРИЗАЦИИ WAPI
+        function initWapiAuth() {
+            const savedAuth = loadAuthState();
+            
+            if (savedAuth) {
+                console.log('Восстановлена предыдущая сессия авторизации');
+            }
+            
+            // Инициализация виджета WAPI
+            if (typeof Listok !== 'undefined') {
+                Listok.init({
+                    containerId: 'listokWidgetContainer',
+                    configId: '91afda9e057d0c742cda59a22cd5bdf4',
+                    onAuth: function(userData) {
+                        console.log('Пользователь авторизован:', userData);
+                        saveAuthState();
+                    },
+                    onLoad: function() {
+                        console.log('WAPI виджет загружен');
+                    }
+                });
+            }
+        }
+        
         // СОЗДАНИЕ ЗВЕЗДНОГО ФОНА
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -930,7 +946,7 @@
             Telegram.WebApp.openLink(url);
         }
         
-        // ФУНКЦИЯ ОТПРАВКИ КОМАНД БОТУ (оставлена только для записи)
+        // ФУНКЦИЯ ОТПРАВКИ КОМАНД БОТУ
         function sendCommand(command) {
             Telegram.WebApp.sendData(JSON.stringify({
                 cmd: command,
@@ -946,6 +962,7 @@
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
+            initWapiAuth();
             
             // Центрирование меню по вертикали
             const menu = document.querySelector('.menu-container');
@@ -953,7 +970,7 @@
             const windowHeight = window.innerHeight;
             const menuHeight = menu.offsetHeight;
             const scheduleHeight = schedule.offsetHeight;
-            const totalHeight = menuHeight + scheduleHeight + 30; // 30px margin
+            const totalHeight = menuHeight + scheduleHeight + 30;
             
             if (totalHeight < windowHeight) {
                 const marginTop = (windowHeight - totalHeight) / 2;
