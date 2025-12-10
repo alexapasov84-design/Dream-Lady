@@ -20,6 +20,7 @@
             --deep-navy: #1A1F2B;
             --soft-white: #F8F5F2;
             --light-gold: #E8D9C5;
+            --graphite: #2A2F3B;
         }
         
         * {
@@ -146,8 +147,8 @@
             box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
             position: relative;
             overflow: hidden;
-            background-color: white;
-            background-size: 130%;
+            background-color: var(--graphite); /* Графитовый фон */
+            background-size: 140%; /* Увеличено до 140% */
         }
         
         .logo-container::after {
@@ -373,7 +374,6 @@
             font-size: 14px;
             line-height: 1.6;
             color: var(--light-gold);
-            text-align: center;
         }
         
         .price-item {
@@ -397,37 +397,133 @@
             font-family: 'Cormorant', serif;
         }
         
-        /* ОКНО НАПРАВЛЕНИЙ */
-        .directions-content {
+        .price-desc {
+            font-size: 13px;
+            color: var(--light-gold);
+            line-height: 1.4;
+        }
+        
+        .price-note {
+            font-size: 12px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 3px;
+        }
+        
+        /* ОКНО АКЦИЙ */
+        .stock-content {
             font-size: 14px;
             line-height: 1.6;
             color: var(--light-gold);
+            text-align: center;
         }
         
-        .direction-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(198, 161, 110, 0.2);
-        }
-        
-        .direction-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .direction-title {
-            font-size: 18px;
+        .stock-info {
+            margin-bottom: 20px;
+            font-size: 15px;
             color: var(--gold);
-            font-weight: 500;
-            display: block;
-            margin-bottom: 5px;
             font-family: 'Cormorant', serif;
         }
         
-        .direction-desc {
-            font-size: 13px;
-            line-height: 1.5;
+        /* ОКНО НАПРАВЛЕНИЙ */
+        .directions-modal-content {
+            background: rgba(26, 31, 43, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 420px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .direction-card-modal {
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .direction-card-modal:hover {
+            background: rgba(198, 161, 110, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .direction-image-container {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .direction-image-modal {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .direction-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 31, 43, 0.8);
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .direction-image-title {
+            font-family: 'Cormorant', serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gold);
+            margin: 0;
+        }
+        
+        .direction-content-modal {
+            padding: 12px;
+        }
+        
+        .direction-description-modal {
+            font-size: 11px;
+            color: var(--light-gold);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        
+        .direction-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .direction-benefits li {
+            font-size: 9px;
+            color: var(--light-gold);
+            background: rgba(198, 161, 110, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        .benefit-check {
+            color: var(--gold);
+            margin-right: 3px;
         }
         
         /* ОКНО ЗАПИСИ */
@@ -613,7 +709,7 @@
                 width: 100px;
                 height: 100px;
                 margin-bottom: 20px;
-                background-size: 130%;
+                background-size: 140%;
             }
             
             h1 {
@@ -634,6 +730,11 @@
             
             .button-title {
                 font-size: 16px;
+            }
+            
+            .directions-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
             
             .trainers-grid {
@@ -690,7 +791,7 @@
         </div>
         
         <!-- КНОПКА АКЦИЙ -->
-        <div class="button-3d" onclick="openLink('https://dream-lady.com/stock')">
+        <div class="button-3d" onclick="openStockModal()">
             <div class="button-title">Акции</div>
         </div>
         
@@ -743,19 +844,36 @@
             <div class="price-content">
                 <div class="price-item">
                     <span class="price-title">Пробное занятие</span>
-                    <span>Доступно для новых клиентов</span>
+                    <span class="price-desc">350₽</span>
+                    <span class="price-note">(доступно для новых клиентов)</span>
                 </div>
                 <div class="price-item">
-                    <span class="price-title">Разовое занятие</span>
-                    <span>Стоимость уточняйте</span>
+                    <span class="price-title">Абонементы групповые занятия</span>
+                    <span class="price-desc">до 10 человек:</span>
                 </div>
                 <div class="price-item">
-                    <span class="price-title">Абонементы</span>
-                    <span>Гибкие варианты посещения</span>
+                    <span class="price-title">4 тренировки/мес</span>
+                    <span class="price-desc">4,000₽</span>
                 </div>
                 <div class="price-item">
-                    <span class="price-title">Персональные тренировки</span>
-                    <span>Индивидуальный формат</span>
+                    <span class="price-title">8 тренировок/мес</span>
+                    <span class="price-desc">5,700₽</span>
+                    <span class="price-note">(по подписке)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">Безлимит/мес</span>
+                    <span class="price-desc">9,750₽</span>
+                    <span class="price-note">(по подписке)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">24 тренировки/3 мес</span>
+                    <span class="price-desc">17,550₽</span>
+                    <span class="price-note">(для новых клиентов)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">В студии так же представлены:</span>
+                    <span class="price-desc">Персональные тренировки</span>
+                    <span class="price-desc">Сплит тренировки</span>
                 </div>
                 <div style="margin-top: 20px; font-size: 14px; color: var(--light-gold); text-align: center;">
                     <p>Специальные цены на абонементы по акции</p>
@@ -768,24 +886,265 @@
         </div>
     </div>
     
+    <!-- МОДАЛЬНОЕ ОКНО АКЦИЙ -->
+    <div id="stockModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeStockModal()">×</div>
+            <h2 class="modal-title">Акции</h2>
+            <div class="stock-content">
+                <div class="stock-info">
+                    В данном разделе можно ознакомиться<br>
+                    с Акциями проходящими в студии
+                </div>
+                <p>Подробная информация о текущих акциях</p>
+                <p>и специальных предложениях на сайте:</p>
+                <button class="signup-button" onclick="openLink('https://dream-lady.com/stock')">
+                    Информация на сайте
+                </button>
+                <p style="margin-top: 15px; font-size: 13px;">
+                    Новогодний мешок подарков<br>
+                    и другие специальные предложения
+                </p>
+            </div>
+        </div>
+    </div>
+    
     <!-- МОДАЛЬНОЕ ОКНО НАПРАВЛЕНИЙ -->
     <div id="directionsModal" class="modal-overlay">
-        <div class="modal-content">
+        <div class="directions-modal-content">
             <div class="modal-close" onclick="closeDirectionsModal()">×</div>
             <h2 class="modal-title">Направления студии</h2>
-            <div class="directions-content">
-                <div class="direction-item">
-                    <span class="direction-title">Фитнес-танцы</span>
-                    <div class="direction-desc">Современные танцевальные направления, сочетающие фитнес и хореографию</div>
+            <div class="directions-grid">
+                <!-- Стретчинг -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/Up1kKPt8lnaYJM-dLGQvUzyTn2M=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/683b537f-d7b6-439b-b37c-b26977ea93fe.jpg" 
+                             alt="Стретчинг" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Стретчинг</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Система упражнений для улучшения гибкости, развития подвижности в суставах и эластичности мышц.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Гибкость</li>
+                            <li><span class="benefit-check">✔</span>Подвижность суставов</li>
+                            <li><span class="benefit-check">✔</span>Эластичность мышц</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="direction-item">
-                    <span class="direction-title">Фитнес-балет</span>
-                    <div class="direction-desc">Элегантное сочетание классического балета и фитнес-упражнений</div>
+
+                <!-- Основы классического танца -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/F7T3qcFZya-9y_FDpDEszIsmUk4=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4bb0d4bc-556f-46d4-ad9f-ba1e5ede8a9f.jpg" 
+                             alt="Основы классического танца" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Классический танец</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Изысканное искусство пластики тела и грациозных движений.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Пластика тела</li>
+                            <li><span class="benefit-check">✔</span>Изысканность движений</li>
+                            <li><span class="benefit-check">✔</span>Классическая хореография</li>
+                        </ul>
+                    </div>
                 </div>
-                <div style="margin-top: 20px; font-size: 13px; color: var(--gold);">
-                    <p>Всего 12 эксклюзивных программ в студии</p>
-                    <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Все направления на сайте</button>
+
+                <!-- Современная хореография -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/JupU0gklmEXWREASS2HzU8JN61A=/874x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/13486eed-8149-45c1-bf1a-dc8b36fa8202.jpg" 
+                             alt="Современная хореография" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Современная хореография</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Синтез различных направлений для развития физических данных, пространственного мышления и фантазии.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Физическое развитие</li>
+                            <li><span class="benefit-check">✔</span>Пространственное мышление</li>
+                            <li><span class="benefit-check">✔</span>Развитие фантазии</li>
+                        </ul>
+                    </div>
                 </div>
+
+                <!-- Партерная гимнастика -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/FcBLKuDkGpWHHWigLxfkLJaQ3Jw=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/12229dbb-df89-49a4-843e-33684969c85c.jpg" 
+                             alt="Партерная гимнастика" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Партерная гимнастика</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Комплекс упражнений, который выполняется на ковриках для безопасной и эффективной проработки мышц.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Упражнения на ковриках</li>
+                            <li><span class="benefit-check">✔</span>Безопасная нагрузка</li>
+                            <li><span class="benefit-check">✔</span>Эффективная проработка</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Сильная спина -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/NSvYk3n1fQ8vfkqkRmVbAP-Nhh4=/480x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/a8311b30-f5ad-425a-b34c-fe460be2283b.webp" 
+                             alt="Сильная спина" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Сильная спина</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Программа для снятия напряжения в спине, проработки глубоких мышц и улучшения осанки.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Снятие напряжения</li>
+                            <li><span class="benefit-check">✔</span>Проработка глубоких мышц</li>
+                            <li><span class="benefit-check">✔</span>Улучшение осанки</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Круговая тренировка -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/Yv-zI6f1Fd_iJvtj9f2noRGscec=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/55fa3cc3-84aa-4106-bea9-ad1b4a546b4a.jpg" 
+                             alt="Круговая тренировка" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Круговая тренировка</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Комплексное воздействие на различные мышечные группы для эффективного жиросжигания.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Комплексное воздействие</li>
+                            <li><span class="benefit-check">✔</span>Разные мышечные группы</li>
+                            <li><span class="benefit-check">✔</span>Эффективное жиросжигание</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Искусство на кончиках пальцев -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/zweozDZM8YbE7No5c0bQ4xA_Ybk=/1142x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6ef3819f-2b2a-492b-a380-54a4ae5844c0.jpg" 
+                             alt="Искусство на кончиках пальцев" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Искусство на кончиках пальцев</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Взорвите танцпол экспрессией и артистичностью.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Экспрессия</li>
+                            <li><span class="benefit-check">✔</span>Артистичность</li>
+                            <li><span class="benefit-check">✔</span>Энергия танца</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Барре-фитнес -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/GlPHTpkO1c7Uif7SPa484YFlyZw=/1376x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9fe89366-31a5-45f8-bf88-f52b02d885f7.jpg" 
+                             alt="Барре-фитнес" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Барре-фитнес</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Секретное оружие для осанки балерины и изящных движений.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Осанка балерины</li>
+                            <li><span class="benefit-check">✔</span>Изящные движения</li>
+                            <li><span class="benefit-check">✔</span>Грация и сила</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Фитнес балет -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/lm_ikk1i1dWYS_mcNpUmT3BWIa4=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/1624aca5-72cc-47a2-8ad4-8d6cb49b13f2.jpg" 
+                             alt="Фитнес балет" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Фитнес балет</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Сочетание классического танца с упражнениями на укрепление мышц.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Классический танец</li>
+                            <li><span class="benefit-check">✔</span>Хореография</li>
+                            <li><span class="benefit-check">✔</span>Укрепление мышц</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Пилатес -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/U1i_iWV2yeJ_dxR-qYTavtNEbEM=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d754bbfb-9e1f-452f-8130-7016aeb91caf.jpg" 
+                             alt="Пилатес" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Пилатес</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Система упражнений для достижения внутренней гармонии через здоровое тело.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Внутренняя гармония</li>
+                            <li><span class="benefit-check">✔</span>Здоровое тело</li>
+                            <li><span class="benefit-check">✔</span>Духовное равновесие</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Пресс и попа -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/WbXux05v1S3YU9d02jkWDbGKbRE=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7f7fef97-f793-4903-a69a-c23588995f1f.jpg" 
+                             alt="Пресс и попа" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Пресс и попа</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Подтянутые ягодицы и плоский живот - эффективные упражнения для тонуса мышц.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Подтянутые ягодицы</li>
+                            <li><span class="benefit-check">✔</span>Плоский живот</li>
+                            <li><span class="benefit-check">✔</span>Тонус мышц</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Фитнес танцы -->
+                <div class="direction-card-modal">
+                    <div class="direction-image-container">
+                        <img src="https://static.craftum.com/CmhMNAQ86h31ra76vylJ8XAqiyo=/1124x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/0ce1e11a-b005-4903-b21d-583c5e8c5f66.jpg" 
+                             alt="Фитнес танцы" class="direction-image-modal">
+                        <div class="direction-image-overlay">
+                            <h3 class="direction-image-title">Фитнес танцы</h3>
+                        </div>
+                    </div>
+                    <div class="direction-content-modal">
+                        <p class="direction-description-modal">Подтяните тело, развивайте пластику и координацию, осваивайте разные танцевальные стили.</p>
+                        <ul class="direction-benefits">
+                            <li><span class="benefit-check">✔</span>Подтянутое тело</li>
+                            <li><span class="benefit-check">✔</span>Пластика и координация</li>
+                            <li><span class="benefit-check">✔</span>Снятие стресса</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Все направления на сайте</button>
             </div>
         </div>
     </div>
@@ -797,7 +1156,7 @@
             <h2 class="modal-title">Запись на занятия</h2>
             <div class="signup-content">
                 <div class="signup-info">
-                    Пробное занятие для новых клиентов<br>
+                    Пробное занятие - 350₽<br>
                     Персональный подход к каждой ученице
                 </div>
                 <p>Для записи на занятие перейдите на сайт студии:</p>
@@ -1014,6 +1373,16 @@
             Telegram.WebApp.enableVerticalSwipes();
         }
         
+        function openStockModal() {
+            document.getElementById('stockModal').classList.add('active');
+            Telegram.WebApp.disableVerticalSwipes();
+        }
+        
+        function closeStockModal() {
+            document.getElementById('stockModal').classList.remove('active');
+            Telegram.WebApp.enableVerticalSwipes();
+        }
+        
         function openDirectionsModal() {
             document.getElementById('directionsModal').classList.add('active');
             Telegram.WebApp.disableVerticalSwipes();
@@ -1069,6 +1438,7 @@
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
                     if (this.id === 'priceModal') closePriceModal();
+                    else if (this.id === 'stockModal') closeStockModal();
                     else if (this.id === 'directionsModal') closeDirectionsModal();
                     else if (this.id === 'signupModal') closeSignupModal();
                     else if (this.id === 'testModal') closeTestModal();
