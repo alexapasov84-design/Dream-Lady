@@ -1,46 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { background: #1A1F2B; color: white; padding: 20px; margin: 0; }
-        .status { font-size: 20px; margin-top: 20px; }
-    </style>
 </head>
-<body>
-    <h1>🔴 TELEGRAM FULLSCREEN TEST</h1>
-    <p>Если видите эту страницу, Telegram загрузил НОВУЮ версию</p>
-    
-    <div class="status" id="status">Проверяем Telegram Web App...</div>
-    
+<body style="height: 100%; margin: 0; background: #1A1F2B;">
     <script>
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            // 1. Активируем
-            Telegram.WebApp.ready();
-            
-            // 2. РАЗВОРАЧИВАЕМ НА ВЕСЬ ЭКРАН
-            Telegram.WebApp.expand();
-            
-            // 3. Настраиваем
-            Telegram.WebApp.setHeaderColor('#1A1F2B');
-            Telegram.WebApp.setBackgroundColor('#1A1F2B');
-            
-            // 4. Показываем статус
-            document.getElementById('status').innerHTML = 
-                '✅ <strong>FULLSCREEN АКТИВИРОВАН!</strong><br>' +
-                '📱 Развернут: ' + Telegram.WebApp.isExpanded + '<br>' +
-                '📏 Высота: ' + Telegram.WebApp.viewportHeight + 'px<br>' +
-                '🕐 Время: ' + new Date().toLocaleTimeString();
-                
-            console.log('✅ Telegram Web App развернут на весь экран');
-            
-        } else {
-            document.getElementById('status').innerHTML = 
-                '❌ <strong>НЕ в Telegram Web App</strong><br>' +
-                'Откройте через кнопку в боте @Dream_LadyAppBot';
-            console.warn('⚠️ Не в Telegram Web App');
-        }
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+        
+        // Принудительно для iOS
+        document.body.style.height = Telegram.WebApp.viewportHeight + 'px';
+        
+        // Перезагружаем ваш основной интерфейс
+        fetch('https://alexapasov84-design.github.io/Dream-Lady/index.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.innerHTML = html;
+                // Инициализируем заново
+                if (typeof Telegram !== 'undefined') {
+                    Telegram.WebApp.ready();
+                    Telegram.WebApp.expand();
+                }
+            });
     </script>
 </body>
 </html>
