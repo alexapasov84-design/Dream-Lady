@@ -1659,10 +1659,42 @@
     </div>
     
 <script>
-    // ============================================
+        // ============================================
     // MINI APPS 2.0 ИНИЦИАЛИЗАЦИЯ
     // ============================================
+    // ============================================
+// ПОЛНОЭКРАННЫЙ РЕЖИМ БЕЗ ИНТЕРФЕЙСА TELEGRAM
+// ============================================
+
+console.log('🚀 Запуск полноэкранного режима...');
+
+// Проверяем Telegram SDK
+if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+    console.log('✅ Telegram Web App SDK загружен');
     
+    // 1. ИНИЦИАЛИЗАЦИЯ
+    Telegram.WebApp.ready();
+    
+    // 2. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ СРАЗУ
+    Telegram.WebApp.expand();
+    
+    // 3. СКРЫВАЕМ ВСЕ ЭЛЕМЕНТЫ TELEGRAM
+    Telegram.WebApp.setHeaderColor('secondary_bg');
+    Telegram.WebApp.setBackgroundColor('secondary_bg');
+    Telegram.WebApp.disableVerticalSwipes(); // Отключаем свайпы Telegram
+    
+    // 4. СКРЫВАЕМ КНОПКУ НАЗАД (она все равно работает по свайпу)
+    Telegram.WebApp.BackButton.hide();
+    
+    // 5. ВКЛЮЧАЕМ ПОДТВЕРЖДЕНИЕ ЗАКРЫТИЯ
+    Telegram.WebApp.enableClosingConfirmation();
+    
+    console.log('✅ Полноэкранный режим активирован');
+    console.log('📱 isExpanded:', Telegram.WebApp.isExpanded);
+    
+} else {
+    console.warn('⚠️ Запущено вне Telegram');
+}
     console.log('🚀 Запуск Mini Apps 2.0...');
     
     // Проверяем Telegram SDK
