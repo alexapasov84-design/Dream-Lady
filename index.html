@@ -280,7 +280,7 @@
             z-index: 10;
         }
         
-        /* БЛОК РАСПИСАНИЯ НАД МЕНЮ */
+        /* БЛОК РАСПИСАНИЯ НАД МЕНЮ -->
         .schedule-notification {
             background: rgba(198, 161, 110, 0.08);
             padding: 15px 20px;
@@ -305,7 +305,7 @@
             font-weight: 500;
         }
         
-        /* ШАПКА С ЛОГО В СТИЛЕ САЙТА */
+        /* ШАПКА С ЛОГО В СТИЛЕ САЙТА -->
         .header {
             background: transparent;
             color: var(--soft-white);
@@ -361,7 +361,7 @@
             opacity: 0.9;
         }
         
-        /* 3D КНОПКИ - ОДИНАКОВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК */
+        /* 3D КНОПКИ - ОДИНАКОВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК -->
         .button-3d {
             position: relative;
             display: flex;
@@ -411,7 +411,7 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* СТАТИСТИКА НАПРАВЛЕНИЙ */
+        <!-- СТАТИСТИКА НАПРАВЛЕНИЙ -->
         .directions-stats {
             display: flex;
             justify-content: space-around;
@@ -445,7 +445,7 @@
             margin-top: 5px;
         }
         
-        /* РАЗДЕЛИТЕЛЬ */
+        <!-- РАЗДЕЛИТЕЛЬ -->
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
@@ -453,7 +453,7 @@
             opacity: 0.5;
         }
         
-        /* ПОДВАЛ */
+        <!-- ПОДВАЛ -->
         .footer {
             text-align: center;
             padding: 20px 20px 15px;
@@ -474,7 +474,7 @@
             letter-spacing: 1px;
         }
         
-        /* СОЦСЕТИ В ПОДВАЛЕ */
+        <!-- СОЦСЕТИ В ПОДВАЛЕ -->
         .social-links {
             display: flex;
             justify-content: center;
@@ -508,7 +508,7 @@
             transform: translateY(0);
         }
         
-        /* МОДАЛЬНЫЕ ОКНА */
+        <!-- МОДАЛЬНЫЕ ОКНА -->
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -581,7 +581,7 @@
             padding-right: 30px;
         }
         
-        /* ОКНО ЦЕН */
+        <!-- ОКНО ЦЕН -->
         .price-content {
             font-size: 14px;
             line-height: 1.6;
@@ -622,7 +622,7 @@
             margin-top: 3px;
         }
         
-        /* ОКНО АКЦИЙ */
+        <!-- ОКНО АКЦИЙ -->
         .stock-content {
             font-size: 14px;
             line-height: 1.6;
@@ -637,7 +637,7 @@
             font-family: 'Cormorant', serif;
         }
         
-        /* ОКНО НАПРАВЛЕНИЙ */
+        <!-- ОКНО НАПРАВЛЕНИЙ -->
         .directions-modal-content {
             background: rgba(26, 31, 43, 0.95);
             border: 2px solid var(--gold);
@@ -738,7 +738,7 @@
             margin-right: 3px;
         }
         
-        /* ОКНО ЗАПИСИ */
+        <!-- ОКНО ЗАПИСИ -->
         .signup-content {
             font-size: 14px;
             line-height: 1.6;
@@ -775,7 +775,7 @@
             box-shadow: 0 2px 0 #8B6B3D;
         }
         
-        /* ОКНО ТЕСТА */
+        <!-- ОКНО ТЕСТА -->
         .test-content {
             font-size: 14px;
             line-height: 1.6;
@@ -790,7 +790,7 @@
             font-family: 'Cormorant', serif;
         }
         
-        /* ОКНО КОНТАКТОВ */
+        <!-- ОКНО КОНТАКТОВ -->
         .contacts-content {
             font-size: 14px;
             line-height: 1.6;
@@ -837,7 +837,7 @@
             line-height: 1.4;
         }
         
-        /* ОКНО ТРЕНЕРОВ */
+        <!-- ОКНО ТРЕНЕРОВ -->
         .trainers-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -884,7 +884,7 @@
             opacity: 0.9;
         }
         
-        /* АНИМАЦИИ */
+        <!-- АНИМАЦИИ -->
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -909,7 +909,7 @@
         .button-3d:nth-child(7) { animation-delay: 0.7s; }
         .button-3d:nth-child(8) { animation-delay: 0.8s; }
         
-        /* МЕДИА-ЗАПРОСЫ */
+        <!-- МЕДИА-ЗАПРОСЫ -->
         @media (max-width: 400px) {
             .menu-container {
                 max-width: 95%;
@@ -994,7 +994,7 @@
             }
         }
         
-        /* ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ MINI APPS 2.0 */
+        <!-- ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ MINI APPS 2.0 -->
         .telegram-miniapp-fix {
             min-height: 100vh;
             min-height: -webkit-fill-available;
@@ -1672,8 +1672,27 @@
             // 1. ИНИЦИАЛИЗАЦИЯ
             Telegram.WebApp.ready();
             
-            // 2. ПОЛНОЭКРАННЫЙ РЕЖИМ
-            Telegram.WebApp.expand();
+            // 2. ПОЛНОЭКРАННЫЙ РЕЖИМ (ТОЛЬКО ЕСЛИ ЕСТЬ ПАРАМЕТР ИЛИ ПО ТРЕБОВАНИЮ)
+            const urlParams = new URLSearchParams(window.location.search);
+            const startapp = urlParams.get('startapp');
+            const miniApp = urlParams.get('mini_app');
+            
+            // Проверяем параметры для открытия на полный экран
+            const shouldExpand = startapp === 'fullscreen' || miniApp === '1';
+            
+            if (shouldExpand) {
+                console.log('🖥  Параметр для полноэкранного режима найден:', { startapp, miniApp });
+                
+                // Вызываем expand с небольшой задержкой для гарантии
+                setTimeout(() => {
+                    if (Telegram.WebApp.isExpanded !== true) {
+                        Telegram.WebApp.expand();
+                        console.log('✅ Полноэкранный режим активирован');
+                    }
+                }, 100);
+            } else {
+                console.log('ℹ️  Полноэкранный режим не запрошен');
+            }
             
             // 3. НАСТРОЙКА ВНЕШНЕГО ВИДА
             Telegram.WebApp.setHeaderColor('#1A1F2B');
