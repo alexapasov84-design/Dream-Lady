@@ -1659,334 +1659,293 @@
     </div>
     
 <script>
-        // ============================================
-    // MINI APPS 2.0 ИНИЦИАЛИЗАЦИЯ
-    // ============================================
-    // ============================================
-// ПОЛНОЭКРАННЫЙ РЕЖИМ БЕЗ ИНТЕРФЕЙСА TELEGRAM
+// ============================================
+// MINI APPS 2.0: ПОЛНОЭКРАННЫЙ РЕЖИМ С БЛОКИРОВКОЙ СВАЙПОВ
 // ============================================
 
-console.log('🚀 Запуск полноэкранного режима...');
+console.log('🚀 Dream Lady Mini Apps 2.0 запускается...');
 
-// Проверяем Telegram SDK
+// ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ TELEGRAM
 if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-    console.log('✅ Telegram Web App SDK загружен');
+    const tg = Telegram.WebApp;
     
-    // 1. ИНИЦИАЛИЗАЦИЯ
-    Telegram.WebApp.ready();
+    // 1. АКТИВАЦИЯ
+    tg.ready();
     
-    // 2. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ СРАЗУ
-    Telegram.WebApp.expand();
+    // 2. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ
+    tg.expand();
     
-    // 3. СКРЫВАЕМ ВСЕ ЭЛЕМЕНТЫ TELEGRAM
-    Telegram.WebApp.setHeaderColor('secondary_bg');
-    Telegram.WebApp.setBackgroundColor('secondary_bg');
-    Telegram.WebApp.disableVerticalSwipes(); // Отключаем свайпы Telegram
+    // 3. ОТКЛЮЧАЕМ СВАЙПЫ ВНИЗ (чтобы не сворачивалось)
+    tg.disableVerticalSwipes();
     
-    // 4. СКРЫВАЕМ КНОПКУ НАЗАД (она все равно работает по свайпу)
-    Telegram.WebApp.BackButton.hide();
+    // 4. СКРЫВАЕМ КНОПКУ "НАЗАД"
+    tg.BackButton.hide();
     
-    // 5. ВКЛЮЧАЕМ ПОДТВЕРЖДЕНИЕ ЗАКРЫТИЯ
-    Telegram.WebApp.enableClosingConfirmation();
+    // 5. НАСТРАИВАЕМ ЦВЕТА
+    tg.setHeaderColor('#1A1F2B');
+    tg.setBackgroundColor('#1A1F2B');
     
     console.log('✅ Полноэкранный режим активирован');
-    console.log('📱 isExpanded:', Telegram.WebApp.isExpanded);
+    console.log('📱 Версия:', tg.version);
+    console.log('🖥 Платформа:', tg.platform);
+    console.log('🔒 Vertical swipes disabled');
     
 } else {
-    console.warn('⚠️ Запущено вне Telegram');
+    console.log('🌐 Режим браузера');
 }
-    console.log('🚀 Запуск Mini Apps 2.0...');
-    
-    // Проверяем Telegram SDK
+
+// ============================================
+// ВАШИ ФУНКЦИИ (БЕЗ ИЗМЕНЕНИЙ)
+// ============================================
+
+function openLink(url) {
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        console.log('✅ Telegram Web Apps 2.0 SDK загружен');
-        
-        // 1. ИНИЦИАЛИЗАЦИЯ
-        Telegram.WebApp.ready();
-        
-        // 2. ПРОВЕРЯЕМ ПАРАМЕТРЫ ДЛЯ ПОЛНОЭКРАННОГО РЕЖИМА
-        const urlParams = new URLSearchParams(window.location.search);
-        const startapp = urlParams.get('startapp');
-        const miniApp = urlParams.get('mini_app');
-        
-        console.log('🔍 Параметры URL:', { startapp, miniApp });
-        
-        // 3. АКТИВИРУЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ ЕСЛИ ЕСТЬ ПАРАМЕТРЫ
-        // НЕ ВЫЗЫВАЕМ expand() сразу - это ошибка!
-        // Полноэкранный режим активируется через параметры в ссылке бота
-        
-        // 4. НАСТРОЙКА ВНЕШНЕГО ВИДА
-        Telegram.WebApp.setHeaderColor('#1A1F2B');
-        Telegram.WebApp.setBackgroundColor('#1A1F2B');
-        
-        // 5. ИНФОРМАЦИЯ
-        console.log('📱 Версия:', Telegram.WebApp.version);
-        console.log('🖥  Платформа:', Telegram.WebApp.platform);
-        console.log('📏 Высота:', Telegram.WebApp.viewportHeight);
-        console.log('🔵 isExpanded:', Telegram.WebApp.isExpanded);
-        
-        // 6. КНОПКА "НАЗАД"
+        Telegram.WebApp.openLink(url);
+    } else {
+        window.open(url, '_blank');
+    }
+}
+
+function openTelegramBotFullscreen() {
+    document.getElementById('telegramBotFullscreen').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
         Telegram.WebApp.BackButton.onClick(function() {
-            Telegram.WebApp.close();
+            closeFullscreen();
         });
+    }
+}
+
+function closeFullscreen() {
+    document.getElementById('telegramBotFullscreen').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openPriceModal() {
+    document.getElementById('priceModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closePriceModal);
+    }
+}
+
+function closePriceModal() {
+    document.getElementById('priceModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openStockModal() {
+    document.getElementById('stockModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeStockModal);
+    }
+}
+
+function closeStockModal() {
+    document.getElementById('stockModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openDirectionsModal() {
+    document.getElementById('directionsModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeDirectionsModal);
+    }
+}
+
+function closeDirectionsModal() {
+    document.getElementById('directionsModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openSignupModal() {
+    document.getElementById('signupModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeSignupModal);
+    }
+}
+
+function closeSignupModal() {
+    document.getElementById('signupModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openTestModal() {
+    document.getElementById('testModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeTestModal);
+    }
+}
+
+function closeTestModal() {
+    document.getElementById('testModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openContactsModal() {
+    document.getElementById('contactsModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeContactsModal);
+    }
+}
+
+function closeContactsModal() {
+    document.getElementById('contactsModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+function openTrainersModal() {
+    document.getElementById('trainersModal').classList.add('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeTrainersModal);
+    }
+}
+
+function closeTrainersModal() {
+    document.getElementById('trainersModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+// Закрытие модальных окон при клике на фон
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+            if (this.id === 'priceModal') closePriceModal();
+            else if (this.id === 'stockModal') closeStockModal();
+            else if (this.id === 'directionsModal') closeDirectionsModal();
+            else if (this.id === 'signupModal') closeSignupModal();
+            else if (this.id === 'testModal') closeTestModal();
+            else if (this.id === 'contactsModal') closeContactsModal();
+            else if (this.id === 'trainersModal') closeTrainersModal();
+        }
+    });
+});
+
+// ============================================
+// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+// ============================================
+
+function createStars() {
+    const starsContainer = document.getElementById('stars');
+    const starsCount = 160;
+    
+    for (let i = 0; i < starsCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
         
-        console.log('✅ Mini Apps 2.0 активирован');
+        const size = Math.random() * 2 + 1;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 3;
         
-    } else {
-        console.warn('⚠️ Telegram WebApp SDK не загружен');
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${posX}%`;
+        star.style.top = `${posY}%`;
+        star.style.animationDelay = `${delay}s`;
+        
+        starsContainer.appendChild(star);
     }
-    
-    // ============================================
-    // ВАШИ ОРИГИНАЛЬНЫЕ ФУНКЦИИ (без изменений)
-    // ============================================
-    
-    function openLink(url) {
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.openLink(url);
-        } else {
-            window.open(url, '_blank');
-        }
-    }
-    
-    function openTelegramBotFullscreen() {
-        const overlay = document.getElementById('telegramBotFullscreen');
-        if (overlay) {
-            overlay.classList.add('active');
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.disableVerticalSwipes();
-                Telegram.WebApp.BackButton.show();
-                Telegram.WebApp.BackButton.onClick(function() {
-                    overlay.classList.remove('active');
-                    Telegram.WebApp.enableVerticalSwipes();
-                    Telegram.WebApp.BackButton.hide();
-                });
-            }
-        }
-    }
-    
-    function closeFullscreen() {
-        const overlay = document.getElementById('telegramBotFullscreen');
-        if (overlay) {
-            overlay.classList.remove('active');
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.enableVerticalSwipes();
-                Telegram.WebApp.BackButton.hide();
-            }
-        }
-    }
-    
-    function openPriceModal() {
-        document.getElementById('priceModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closePriceModal);
-        }
-    }
-    
-    function closePriceModal() {
-        document.getElementById('priceModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openStockModal() {
-        document.getElementById('stockModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeStockModal);
-        }
-    }
-    
-    function closeStockModal() {
-        document.getElementById('stockModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openDirectionsModal() {
-        document.getElementById('directionsModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeDirectionsModal);
-        }
-    }
-    
-    function closeDirectionsModal() {
-        document.getElementById('directionsModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openSignupModal() {
-        document.getElementById('signupModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeSignupModal);
-        }
-    }
-    
-    function closeSignupModal() {
-        document.getElementById('signupModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openTestModal() {
-        document.getElementById('testModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeTestModal);
-        }
-    }
-    
-    function closeTestModal() {
-        document.getElementById('testModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openContactsModal() {
-        document.getElementById('contactsModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeContactsModal);
-        }
-    }
-    
-    function closeContactsModal() {
-        document.getElementById('contactsModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    function openTrainersModal() {
-        document.getElementById('trainersModal').classList.add('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeTrainersModal);
-        }
-    }
-    
-    function closeTrainersModal() {
-        document.getElementById('trainersModal').classList.remove('active');
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.enableVerticalSwipes();
-            Telegram.WebApp.BackButton.hide();
-        }
-    }
-    
-    // Закрытие модальных окон при клике на фон
-    document.querySelectorAll('.modal-overlay').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                if (this.id === 'priceModal') closePriceModal();
-                else if (this.id === 'stockModal') closeStockModal();
-                else if (this.id === 'directionsModal') closeDirectionsModal();
-                else if (this.id === 'signupModal') closeSignupModal();
-                else if (this.id === 'testModal') closeTestModal();
-                else if (this.id === 'contactsModal') closeContactsModal();
-                else if (this.id === 'trainersModal') closeTrainersModal();
+}
+
+function initWapiAuth() {
+    if (typeof Listok !== 'undefined') {
+        Listok.init({
+            containerId: 'listokWidgetContainer',
+            configId: '91afda9e057d0c742cda59a22cd5bdf4',
+            onAuth: function(userData) {
+                console.log('✅ Пользователь авторизован');
+            },
+            onLoad: function() {
+                console.log('✅ WAPI загружен');
             }
         });
-    });
+    }
+}
+
+function openTelegramBot() {
+    openLink('https://t.me/DreamTeamStudio_Bot');
+}
+
+// ============================================
+// ЗАГРУЗКА СТРАНИЦЫ
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Страница загружена');
+    createStars();
+    initWapiAuth();
     
-    // ============================================
-    // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-    // ============================================
+    // Центрирование меню
+    const menu = document.querySelector('.menu-container');
+    const schedule = document.querySelector('.schedule-notification');
+    const windowHeight = window.innerHeight;
+    const menuHeight = menu.offsetHeight;
+    const scheduleHeight = schedule.offsetHeight;
+    const totalHeight = menuHeight + scheduleHeight + 30;
     
-    function createStars() {
-        const starsContainer = document.getElementById('stars');
-        const starsCount = 160;
-        
-        for (let i = 0; i < starsCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            
-            const size = Math.random() * 2 + 1;
-            const posX = Math.random() * 100;
-            const posY = Math.random() * 100;
-            const delay = Math.random() * 3;
-            
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.left = `${posX}%`;
-            star.style.top = `${posY}%`;
-            star.style.animationDelay = `${delay}s`;
-            
-            starsContainer.appendChild(star);
-        }
+    if (totalHeight < windowHeight) {
+        const marginTop = (windowHeight - totalHeight) / 2;
+        schedule.style.marginTop = marginTop + 'px';
     }
     
-    function initWapiAuth() {
-        if (typeof Listok !== 'undefined') {
-            Listok.init({
-                containerId: 'listokWidgetContainer',
-                configId: '91afda9e057d0c742cda59a22cd5bdf4',
-                onAuth: function(userData) {
-                    console.log('✅ Пользователь авторизован');
-                },
-                onLoad: function() {
-                    console.log('✅ WAPI загружен');
-                }
-            });
+    console.log('🚀 Mini App готов к работе');
+});
+
+// ДОПОЛНИТЕЛЬНАЯ БЛОКИРОВКА СВАЙПОВ
+document.addEventListener('touchmove', function(e) {
+    if (e.scale !== 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Автоматическое восстановление полноэкранного режима
+setInterval(function() {
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        if (!Telegram.WebApp.isExpanded) {
+            Telegram.WebApp.expand();
+            Telegram.WebApp.disableVerticalSwipes();
         }
     }
-    
-    function openTelegramBot() {
-        openLink('https://t.me/DreamTeamStudio_Bot');
-    }
-    
-    // ============================================
-    // ЗАГРУЗКА СТРАНИЦЫ
-    // ============================================
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('📄 Страница загружена');
-        createStars();
-        initWapiAuth();
-        
-        // Центрирование меню
-        const menu = document.querySelector('.menu-container');
-        const schedule = document.querySelector('.schedule-notification');
-        const windowHeight = window.innerHeight;
-        const menuHeight = menu.offsetHeight;
-        const scheduleHeight = schedule.offsetHeight;
-        const totalHeight = menuHeight + scheduleHeight + 30;
-        
-        if (totalHeight < windowHeight) {
-            const marginTop = (windowHeight - totalHeight) / 2;
-            schedule.style.marginTop = marginTop + 'px';
-        }
-        
-        console.log('🚀 Mini App готов к работе');
-    });
-    
-    // Адаптация под изменение размеров
-    window.addEventListener('resize', function() {
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            console.log('📏 Изменен размер:', Telegram.WebApp.viewportHeight);
-        }
-    });
+}, 1000);
 </script>
 </body>
 </html>
