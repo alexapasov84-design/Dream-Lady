@@ -1892,5 +1892,23 @@
             }
         });
     </script>
+    <script>
+    // Проверяем, что загрузились в Telegram Web App
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        // Инициализируем Web App
+        Telegram.WebApp.ready();
+        
+        // 🔥 ГЛАВНОЕ: Разворачиваем на весь экран!
+        Telegram.WebApp.expand();
+        
+        // Дополнительные настройки (опционально)
+        Telegram.WebApp.enableClosingConfirmation(); // Спросит при закрытии
+        Telegram.WebApp.setHeaderColor('#1A1F2B');   // Цвет шапки в стиле сайта
+        Telegram.WebApp.setBackgroundColor('#1A1F2B'); // Цвет фона
+    } else {
+        console.warn('Загружено вне Telegram Web App');
+        // Фолбэк для браузера
+    }
+</script>
 </body>
 </html>
