@@ -43,7 +43,7 @@
             position: relative;
         }
         
-        /* Ваш существующий CSS оставляем без изменений */
+        /* МЕРЦАЮЩИЕ ЗВЕЗДОЧКИ */
         .stars-background {
             position: fixed;
             top: 0;
@@ -66,6 +66,7 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
+        /* Глянцевые переливы */
         .gloss-overlay {
             position: absolute;
             top: 0;
@@ -84,7 +85,185 @@
             pointer-events: none;
         }
         
-        /* Ваш остальной CSS оставляем без изменений */
+        /* ПОЛНОЭКРАННОЕ ОКНО ДЛЯ ВСЕГО MINI APPS */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-navy);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+            padding: 20px;
+            padding-top: 70px;
+        }
+        
+        .fullscreen-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .fullscreen-close {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(198, 161, 110, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            font-family: 'Cormorant', serif;
+            z-index: 2001;
+            backdrop-filter: blur(10px);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .fullscreen-close:active {
+            opacity: 1;
+            background: rgba(198, 161, 110, 0.3);
+            transform: scale(0.95);
+        }
+        
+        .fullscreen-content {
+            max-width: 400px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+        
+        .fullscreen-title {
+            font-family: 'Cormorant', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .fullscreen-section {
+            margin-bottom: 30px;
+        }
+        
+        .fullscreen-section-title {
+            font-family: 'Cormorant', serif;
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .fullscreen-features {
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .fullscreen-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .fullscreen-feature:last-child {
+            margin-bottom: 0;
+        }
+        
+        .fullscreen-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--gold);
+            min-width: 30px;
+        }
+        
+        .fullscreen-text {
+            color: var(--light-gold);
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        
+        .fullscreen-text strong {
+            color: var(--gold);
+        }
+        
+        .fullscreen-warning {
+            background: rgba(255, 100, 100, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .fullscreen-warning-title {
+            font-family: 'Cormorant', serif;
+            font-size: 18px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .fullscreen-warning-text {
+            color: var(--light-gold);
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .fullscreen-action {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .fullscreen-button {
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            color: var(--deep-navy);
+            border: none;
+            padding: 16px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cormorant', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            box-shadow: 0 6px 0 #8B6B3D;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .fullscreen-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #8B6B3D;
+        }
+        
+        .fullscreen-note {
+            color: var(--light-gold);
+            font-size: 13px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* КОНТЕЙНЕР МЕНЮ - ФИКСИРОВАННАЯ ШИРИНА */
         .menu-container {
             width: 100%;
             max-width: 400px;
@@ -99,10 +278,736 @@
             z-index: 10;
         }
         
-        /* Остальные стили из вашего кода... */
+        /* БЛОК РАСПИСАНИЯ НАД МЕНЮ */
+        .schedule-notification {
+            background: rgba(198, 161, 110, 0.08);
+            padding: 15px 20px;
+            margin: 10px auto 20px;
+            border-radius: 12px;
+            border-left: 3px solid var(--gold);
+            font-size: 14px;
+            color: var(--light-gold);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .schedule-notification strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* ШАПКА С ЛОГО В СТИЛЕ САЙТА */
+        .header {
+            background: transparent;
+            color: var(--soft-white);
+            padding: 40px 20px 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.3);
+        }
+        
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7d01fc01-e9e6-4a45-96e7-1081144bfe47.png') center/contain;
+            box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
+            position: relative;
+            overflow: hidden;
+            background-color: var(--graphite);
+            background-size: 140%;
+        }
+        
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(198, 161, 110, 0.1) 100%);
+        }
+        
+        h1 {
+            font-family: 'Cormorant', serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 13px;
+            color: var(--light-gold);
+            font-weight: 300;
+            line-height: 1.4;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+        
+        /* 3D КНОПКИ - ОДИНАКОВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК */
+        .button-3d {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 25px;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--deep-navy);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: 'Cormorant', serif;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 15px 20px;
+            box-shadow: 
+                0 8px 0 #8B6B3D,
+                0 15px 25px rgba(198, 161, 110, 0.3);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 25%, #F4D483 50%, #D4AF37 75%, #C6A16E 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .button-3d:active {
+            transform: translateY(4px);
+            box-shadow: 
+                0 4px 0 #8B6B3D,
+                0 8px 15px rgba(198, 161, 110, 0.3);
+        }
+        
+        .button-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--deep-navy);
+            letter-spacing: 0.5px;
+            font-family: 'Cormorant', serif;
+            line-height: 1.2;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* СТАТИСТИКА НАПРАВЛЕНИЙ */
+        .directions-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 20px;
+            background: rgba(198, 161, 110, 0.05);
+            margin: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--gold);
+            display: block;
+            font-family: 'Cormorant', serif;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: var(--light-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+        
+        /* РАЗДЕЛИТЕЛЬ */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+            margin: 15px 25px;
+            opacity: 0.5;
+        }
+        
+        /* ПОДВАЛ */
+        .footer {
+            text-align: center;
+            padding: 20px 20px 15px;
+            background: rgba(20, 25, 35, 0.8);
+            color: var(--light-gold);
+            font-size: 12px;
+            line-height: 1.6;
+            border-top: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .footer strong {
+            color: var(--gold);
+            font-size: 14px;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        /* СОЦСЕТИ В ПОДВАЛЕ */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(198, 161, 110, 0.1);
+            border: 1px solid rgba(198, 161, 110, 0.3);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(198, 161, 110, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(198, 161, 110, 0.2);
+        }
+        
+        .social-link:active {
+            transform: translateY(0);
+        }
+        
+        /* МОДАЛЬНЫЕ ОКНА */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: rgba(26, 31, 43, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(198, 161, 110, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: 'Cormorant', serif;
+            z-index: 1001;
+        }
+        
+        .modal-title {
+            font-family: 'Cormorant', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            padding-right: 30px;
+        }
+        
+        /* ОКНО ЦЕН */
+        .price-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+        }
+        
+        .price-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .price-title {
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Cormorant', serif;
+        }
+        
+        .price-desc {
+            font-size: 13px;
+            color: var(--light-gold);
+            line-height: 1.4;
+        }
+        
+        .price-note {
+            font-size: 12px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 3px;
+        }
+        
+        /* ОКНО АКЦИЙ */
+        .stock-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+            text-align: center;
+        }
+        
+        .stock-info {
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: var(--gold);
+            font-family: 'Cormorant', serif;
+        }
+        
+        /* ОКНО НАПРАВЛЕНИЙ */
+        .directions-modal-content {
+            background: rgba(26, 31, 43, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 420px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .direction-card-modal {
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .direction-card-modal:hover {
+            background: rgba(198, 161, 110, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .direction-image-container {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .direction-image-modal {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .direction-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 31, 43, 0.8);
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .direction-image-title {
+            font-family: 'Cormorant', serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gold);
+            margin: 0;
+        }
+        
+        .direction-content-modal {
+            padding: 12px;
+        }
+        
+        .direction-description-modal {
+            font-size: 11px;
+            color: var(--light-gold);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        
+        .direction-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .direction-benefits li {
+            font-size: 9px;
+            color: var(--light-gold);
+            background: rgba(198, 161, 110, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        .benefit-check {
+            color: var(--gold);
+            margin-right: 3px;
+        }
+        
+        /* ОКНО ЗАПИСИ */
+        .signup-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+            text-align: center;
+        }
+        
+        .signup-info {
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: var(--gold);
+            font-family: 'Cormorant', serif;
+        }
+        
+        .signup-button {
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            color: var(--deep-navy);
+            border: none;
+            padding: 12px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cormorant', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            box-shadow: 0 4px 0 #8B6B3D;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #8B6B3D;
+        }
+        
+        /* ОКНО ТЕСТА */
+        .test-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+            text-align: center;
+        }
+        
+        .test-info {
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: var(--gold);
+            font-family: 'Cormorant', serif;
+        }
+        
+        /* ОКНО КОНТАКТОВ */
+        .contacts-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--light-gold);
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .contact-phone {
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Cormorant', serif;
+        }
+        
+        .contact-email {
+            color: var(--light-gold);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .contact-address {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .contact-details {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        /* ОКНО ТРЕНЕРОВ */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .trainer-card {
+            text-align: center;
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .trainer-card:hover {
+            background: rgba(198, 161, 110, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .trainer-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            margin: 0 auto 10px;
+            display: block;
+        }
+        
+        .trainer-name {
+            font-family: 'Cormorant', serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .trainer-title {
+            font-size: 11px;
+            color: var(--light-gold);
+            line-height: 1.3;
+            opacity: 0.9;
+        }
+        
+        /* АНИМАЦИИ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .button-3d {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+        
+        .button-3d:nth-child(1) { animation-delay: 0.1s; }
+        .button-3d:nth-child(2) { animation-delay: 0.2s; }
+        .button-3d:nth-child(3) { animation-delay: 0.3s; }
+        .button-3d:nth-child(4) { animation-delay: 0.4s; }
+        .button-3d:nth-child(5) { animation-delay: 0.5s; }
+        .button-3d:nth-child(6) { animation-delay: 0.6s; }
+        .button-3d:nth-child(7) { animation-delay: 0.7s; }
+        .button-3d:nth-child(8) { animation-delay: 0.8s; }
+        
+        /* МЕДИА-ЗАПРОСЫ */
+        @media (max-width: 400px) {
+            .menu-container {
+                max-width: 95%;
+                border-radius: 20px;
+            }
+            
+            .schedule-notification {
+                max-width: 95%;
+            }
+            
+            .header {
+                padding: 30px 15px 20px;
+            }
+            
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 20px;
+                background-size: 140%;
+            }
+            
+            h1 {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+            
+            .button-3d {
+                padding: 18px 20px;
+                font-size: 16px;
+                margin: 12px 15px;
+            }
+            
+            .button-title {
+                font-size: 16px;
+            }
+            
+            .directions-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .trainers-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .trainer-photo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .social-link {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            
+            .fullscreen-close {
+                top: 15px;
+                left: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 22px;
+            }
+            
+            .fullscreen-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+            
+            .fullscreen-section-title {
+                font-size: 18px;
+            }
+            
+            .fullscreen-text {
+                font-size: 14px;
+            }
+        }
+        
+        /* ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ MINI APPS 2.0 */
+        .telegram-miniapp-fix {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+        
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
+        }
         
         /* =========================================== */
-        /* СТИЛИ ДЛЯ ФИТНЕС-ТРЕКЕРА (ОБНОВЛЕННЫЕ) */
+        /* СТИЛИ ДЛЯ ФИТНЕС-ТРЕКЕРА (В ВАШЕМ СТИЛЕ) */
         /* =========================================== */
         
         .fitness-tracker-modal {
@@ -121,10 +1026,6 @@
             transition: transform 0.3s;
         }
         
-        .modal-overlay.active .fitness-tracker-modal {
-            transform: translateY(0);
-        }
-        
         .tracker-title {
             font-family: 'Cormorant', serif;
             font-size: 24px;
@@ -136,42 +1037,22 @@
         }
         
         .tracker-status-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 10px 15px;
             background: rgba(198, 161, 110, 0.08);
             border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
             border: 1px solid rgba(198, 161, 110, 0.2);
-        }
-        
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .status-active {
-            background: #4CAF50;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-        }
-        
-        .status-paused {
-            background: #FF9800;
-            box-shadow: 0 0 10px rgba(255, 152, 0, 0.5);
-        }
-        
-        .status-gps-active {
-            background: #2196F3;
-            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+            text-align: center;
         }
         
         .status-text {
-            flex: 1;
             font-size: 14px;
             color: var(--light-gold);
+            line-height: 1.4;
+        }
+        
+        .status-text strong {
+            color: var(--gold);
         }
         
         .step-counter-large {
@@ -283,6 +1164,8 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            color: var(--deep-navy);
         }
         
         .control-button:active {
@@ -290,19 +1173,9 @@
             box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
         }
         
-        .control-button.start {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-        }
-        
-        .control-button.pause {
-            background: linear-gradient(135deg, #FF9800, #F57C00);
-            color: white;
-        }
-        
-        .control-button.reset {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-            color: white;
+        .control-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         .timer-display {
@@ -315,11 +1188,11 @@
         }
         
         .tracker-info {
-            background: rgba(33, 150, 243, 0.1);
+            background: rgba(198, 161, 110, 0.08);
             border-radius: 12px;
             padding: 15px;
             margin: 20px 0;
-            border: 1px solid rgba(33, 150, 243, 0.3);
+            border: 1px solid rgba(198, 161, 110, 0.2);
             text-align: center;
         }
         
@@ -330,7 +1203,7 @@
         }
         
         .tracker-info-text strong {
-            color: #2196F3;
+            color: var(--gold);
         }
         
         .tracker-warning {
@@ -352,58 +1225,34 @@
             color: #ff6b6b;
         }
         
-        .gps-status {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        
-        .gps-icon {
-            font-size: 20px;
-        }
-        
-        .gps-text {
-            font-size: 12px;
-            color: var(--light-gold);
-        }
-        
         .permission-button {
-            background: linear-gradient(135deg, #2196F3, #1976D2);
-            color: white;
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            color: var(--deep-navy);
             border: none;
-            padding: 10px 15px;
-            font-size: 13px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            margin: 5px;
+            font-family: 'Cormorant', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0;
             width: 100%;
-            box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 0 #8B6B3D;
             transition: all 0.3s ease;
         }
         
         .permission-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #8B6B3D;
         }
         
-        .location-info {
-            font-size: 11px;
-            color: var(--light-gold);
+        .gps-status {
             text-align: center;
-            margin-top: 5px;
-            opacity: 0.8;
-        }
-        
-        .accuracy-info {
-            font-size: 10px;
+            margin: 10px 0;
+            font-size: 13px;
             color: var(--light-gold);
-            text-align: center;
-            margin-top: 3px;
-            opacity: 0.6;
         }
         
         .daily-stats {
@@ -448,43 +1297,12 @@
             margin-top: 2px;
         }
         
-        .map-preview {
-            height: 150px;
-            background: rgba(26, 31, 43, 0.8);
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(198, 161, 110, 0.2);
-        }
-        
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        .accuracy-info {
+            font-size: 11px;
             color: var(--light-gold);
-            font-size: 14px;
-        }
-        
-        .map-placeholder-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            opacity: 0.5;
-        }
-        
-        .route-distance {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(26, 31, 43, 0.9);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            color: var(--gold);
-            border: 1px solid var(--gold);
+            text-align: center;
+            margin-top: 5px;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -519,7 +1337,7 @@
             </div>
         </div>
         
-        <!-- КНОПКИ В НОВОМ ПОРЯДКЕ -->
+        <!-- КНОПКИ В НОВОМ ПОРЯДКЕ (ВАШ ОРИГИНАЛЬНЫЙ ПОРЯДОК) -->
         <div class="button-3d" onclick="openLink('https://an9655.listokcrm.ru/wapi')">
             <div class="button-title">🩰 Личный кабинет</div>
         </div>
@@ -548,7 +1366,7 @@
             <div class="button-title">Узнать стоимость</div>
         </div>
         
-        <!-- КНОПКА ФИТНЕС-ТРЕКЕРА (ДОБАВЛЕНА ПОСЛЕ РЕЙТИНГА) -->
+        <!-- КНОПКА ФИТНЕС-ТРЕКЕРА (ДОБАВЛЕНА ПОСЛЕ 5★ РЕЙТИНГА) -->
         <div class="button-3d" onclick="openFitnessTracker()">
             <div class="button-title">🏃 Фитнес-трекер</div>
         </div>
@@ -601,12 +1419,12 @@
     <div class="schedule-notification">
         <strong>📅 Расписание занятий</strong>
     </div>
-    <!-- WAPI СКРИПТ ПОД МЕНЮ (как вы просили) -->
+    <!-- WAPI СКРИПТ ПОД МЕНЮ -->
     <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
     <div id="listokWidgetContainer"></div>
     
     <!-- =========================================== -->
-    <!-- ОКНО ФИТНЕС-ТРЕКЕРА (ОБНОВЛЕННОЕ) -->
+    <!-- ОКНО ФИТНЕС-ТРЕКЕРА (НОВОЕ) -->
     <!-- =========================================== -->
     <div id="fitnessTrackerModal" class="modal-overlay">
         <div class="fitness-tracker-modal">
@@ -615,21 +1433,20 @@
             
             <!-- СТАТУС -->
             <div class="tracker-status-container">
-                <div class="status-indicator" id="statusIndicator"></div>
                 <div class="status-text" id="statusText">
-                    Ожидание разрешений на геолокацию
+                    <strong>Готов к работе!</strong><br>
+                    Для точного подсчета включите GPS
                 </div>
             </div>
             
-            <!-- GPS СТАТУС -->
-            <div class="gps-status">
-                <div class="gps-icon">📍</div>
-                <div class="gps-text" id="gpsStatusText">GPS: Ожидание разрешения</div>
-            </div>
-            
             <!-- СЧЕТЧИК ШАГОВ -->
-            <div class="step-label">Шаги сеанса</div>
+            <div class="step-label">ШАГИ СЕАНСА</div>
             <div class="step-counter-large" id="stepCounter">0</div>
+            
+            <!-- GPS СТАТУС -->
+            <div class="gps-status" id="gpsStatus">
+                📍 GPS: ожидание разрешения
+            </div>
             
             <!-- ТАЙМЕР -->
             <div class="timer-display" id="timerDisplay">00:00:00</div>
@@ -650,31 +1467,24 @@
                 </div>
             </div>
             
-            <!-- КНОПКИ РАЗРЕШЕНИЙ -->
-            <div id="permissionButtons" style="display: none;">
-                <button class="permission-button" onclick="requestGeolocationPermission()">
-                    📍 Разрешить геолокацию
+            <!-- КНОПКА РАЗРЕШЕНИЯ -->
+            <div id="permissionSection" style="text-align: center; margin: 20px 0;">
+                <button class="permission-button" onclick="requestGeolocationPermission()" id="permissionButton">
+                    📍 Включить GPS-трекинг
                 </button>
-                <p class="location-info">Для точного подсчета расстояния нужен доступ к GPS</p>
+                <div class="accuracy-info" id="accuracyInfo">
+                    Точность: ожидание данных
+                </div>
             </div>
             
-            <!-- ИНФОРМАЦИЯ О ГЕОЛОКАЦИИ -->
+            <!-- ИНФОРМАЦИЯ -->
             <div class="tracker-info">
                 <div class="tracker-info-text">
-                    <strong>📍 Режим GPS-трекинга:</strong><br>
+                    <strong>Режим GPS-трекинга:</strong><br>
                     • Дистанция считается по реальному перемещению<br>
-                    • Акселерометр используется только для фиксации активности<br>
-                    • Минимальная погрешность GPS: <span id="gpsAccuracy">-</span> метров
+                    • Шаги конвертируются из пройденного расстояния<br>
+                    • Калории рассчитываются на основе дистанции
                 </div>
-            </div>
-            
-            <!-- ПРЕДПРОСМОТР КАРТЫ -->
-            <div class="map-preview" id="mapPreview">
-                <div class="map-placeholder">
-                    <div class="map-placeholder-icon">🗺️</div>
-                    <div>Карта маршрута появится здесь</div>
-                </div>
-                <div class="route-distance" id="routeDistance" style="display: none;">0.00 км</div>
             </div>
             
             <!-- ЦЕЛЬ -->
@@ -695,11 +1505,11 @@
             
             <!-- ДНЕВНАЯ СТАТИСТИКА -->
             <div class="daily-stats">
-                <div class="daily-stats-title">Общая статистика</div>
+                <div class="daily-stats-title">Сегодняшняя статистика</div>
                 <div class="daily-stats-grid">
                     <div class="daily-stat-item">
                         <span class="daily-stat-value" id="totalDistance">0.00</span>
-                        <span class="daily-stat-label">Всего км</span>
+                        <span class="daily-stat-label">Км</span>
                     </div>
                     <div class="daily-stat-item">
                         <span class="daily-stat-value" id="totalTime">0:00</span>
@@ -715,17 +1525,141 @@
             <!-- ПРЕДУПРЕЖДЕНИЕ -->
             <div class="tracker-warning">
                 <div class="tracker-warning-text">
-                    <strong>⚠️ ТЕХНИЧЕСКИЕ ОГРАНИЧЕНИЯ:</strong><br>
-                    1. Работает только при открытом приложении<br>
-                    2. GPS требует разрешения и открытого неба<br>
-                    3. В помещении точность снижается<br>
-                    4. Сохраняйте приложение активным
+                    <strong>⚠️ ВАЖНО:</strong> Трекер работает только при открытом приложении!<br>
+                    Для работы GPS выйдите на улицу или откройте окно.<br>
+                    Данные сохраняются автоматически.
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Все остальные ваши модальные окна остаются без изменений -->
+    <!-- ПОЛНОЭКРАННОЕ ОКНО ДЛЯ TELEGRAM-БОТА (ВАШЕ ОРИГИНАЛЬНОЕ) -->
+    <div id="telegramBotFullscreen" class="fullscreen-overlay">
+        <div class="fullscreen-close" onclick="closeFullscreen()">×</div>
+        
+        <div class="fullscreen-content">
+            <h2 class="fullscreen-title">🤖 Telegram-бот Dream Team Studio</h2>
+            
+            <div class="fullscreen-section">
+                <div class="fullscreen-features">
+                    <div class="fullscreen-feature">
+                        <div class="fullscreen-icon">🔔</div>
+                        <div class="fullscreen-text">
+                            <strong>Напоминания о занятиях:</strong><br>
+                            • За 3 часа до начала занятия<br>
+                            • За день до занятия
+                        </div>
+                    </div>
+                    
+                    <div class="fullscreen-feature">
+                        <div class="fullscreen-icon">💬</div>
+                        <div class="fullscreen-text">
+                            <strong>Связь с администратором:</strong><br>
+                            • Задать вопрос администратору<br>
+                            • Получить консультацию<br>
+                            • Решить организационные вопросы
+                        </div>
+                    </div>
+                    
+                    <div class="fullscreen-feature">
+                        <div class="fullscreen-icon">📅</div>
+                        <div class="fullscreen-text">
+                            <strong>Информация о расписании</strong><br>
+                            • Актуальное расписание занятий<br>
+                            • Изменения в расписании
+                        </div>
+                    </div>
+                    
+                    <div class="fullscreen-feature">
+                        <div class="fullscreen-icon">ℹ️</div>
+                        <div class="fullscreen-text">
+                            <strong>Ответы на частые вопросы</strong><br>
+                            • Информация о занятиях<br>
+                            • Правила студии
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fullscreen-section">
+                <div class="fullscreen-warning">
+                    <h3 class="fullscreen-warning-title">⚠️ ВАЖНО ДЛЯ АВТОРИЗАЦИИ</h3>
+                    <div class="fullscreen-warning-text">
+                        1. Нажмите <strong>START / НАЧАТЬ</strong> в боте<br>
+                        2. Поделитесь своим контактом<br>
+                        3. <strong>Номер телефона должен совпадать</strong><br>
+                           с номером регистрации в студии
+                    </div>
+                </div>
+                
+                <p style="color: var(--light-gold); font-size: 14px; text-align: center; margin-bottom: 20px;">
+                    Если номер не совпадает, обратитесь к администратору<br>
+                    для обновления данных в системе
+                </p>
+            </div>
+            
+            <div class="fullscreen-action">
+                <button class="fullscreen-button" onclick="openTelegramBot()">
+                    📲 Перейти к боту @DreamTeamStudio_Bot
+                </button>
+                <p class="fullscreen-note">
+                    После авторизации вернитесь в приложение
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- МОДАЛЬНОЕ ОКНО ЦЕН (ВАШЕ ОРИГИНАЛЬНОЕ) -->
+    <div id="priceModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closePriceModal()">×</div>
+            <h2 class="modal-title">Стоимость занятий</h2>
+            <div class="price-content">
+                <div class="price-item">
+                    <span class="price-title">Пробное занятие</span>
+                    <span class="price-desc">350₽</span>
+                    <span class="price-note">(доступно для новых клиентов)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">Абонементы групповые занятия</span>
+                    <span class="price-desc">до 10 человек:</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">4 тренировки/мес</span>
+                    <span class="price-desc">4,000₽</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">8 тренировок/мес</span>
+                    <span class="price-desc">5,700₽</span>
+                    <span class="price-note">(по подписке)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">Безлимит/мес</span>
+                    <span class="price-desc">9,750₽</span>
+                    <span class="price-note">(по подписке)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">24 тренировки/3 мес</span>
+                    <span class="price-desc">17,550₽</span>
+                    <span class="price-note">(для новых клиентов)</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-title">В студии так же представлены:</span>
+                    <span class="price-desc">Персональные тренировки</span>
+                    <span class="price-desc">Сплит тренировки</span>
+                </div>
+                <div style="margin-top: 20px; font-size: 14px; color: var(--light-gold); text-align: center;">
+                    <p>Специальные цены на абонементы по акции</p>
+                    <p>в разделе "Акции"</p>
+                </div>
+                <div style="margin-top: 20px; font-size: 13px; color: var(--light-gold);">
+                    <button class="signup-button" onclick="openLink('https://dream-lady.com/price')">Информация на сайте</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ВАШИ ОСТАЛЬНЫЕ МОДАЛЬНЫЕ ОКНА ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
     
 <script>
 // ============================================
@@ -762,14 +1696,14 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
 }
 
 // ============================================
-// ФУНКЦИИ ФИТНЕС-ТРЕКЕРА (ИСПРАВЛЕННЫЕ)
+// ФУНКЦИИ ФИТНЕС-ТРЕКЕРА (GPS-версия)
 // ============================================
 
 let trackerState = {
     isTracking: false,
     hasGeolocation: false,
     sessionSteps: 0,
-    sessionDistance: 0, // В метрах
+    sessionDistance: 0, // в метрах
     sessionCalories: 0,
     startTime: null,
     currentTime: 0,
@@ -777,24 +1711,22 @@ let trackerState = {
     watchId: null,
     routePoints: [],
     lastPosition: null,
-    isHighAccuracy: false,
-    activityDetected: false,
-    lastActivityTime: 0
+    totalSteps: 0,
+    totalDistance: 0,
+    totalCalories: 0,
+    sessionGoal: 5000 // 5 км в метрах
 };
 
-// Константы для расчетов
+// Константы
 const CALCULATIONS = {
-    stepLength: 0.67, // средняя длина шага женщины (метры)
+    stepLength: 0.67, // средняя длина шага женщины
     caloriesPerKm: 60, // ккал на км при ходьбе
-    minDistanceForStep: 0.5, // минимальное перемещение для зачета шага (метры)
-    sessionGoal: 5000, // цель сеанса в метрах (5 км)
-    activityThreshold: 1.2, // порог акселерометра для активности
-    inactivityTimeout: 3000 // время неактивности в мс
+    minDistanceForStep: 0.8 // минимальное перемещение для шага (метры)
 };
 
 // Загрузка данных
 function loadTrackerData() {
-    const saved = localStorage.getItem('dreamLadyFitnessTrackerV2');
+    const saved = localStorage.getItem('dreamLadyFitnessTrackerGPS');
     if (saved) {
         try {
             const data = JSON.parse(saved);
@@ -804,14 +1736,16 @@ function loadTrackerData() {
                 trackerState.sessionSteps = data.sessionSteps || 0;
                 trackerState.sessionDistance = data.sessionDistance || 0;
                 trackerState.sessionCalories = data.sessionCalories || 0;
+                trackerState.totalSteps = data.totalSteps || 0;
+                trackerState.totalDistance = data.totalDistance || 0;
+                trackerState.totalCalories = data.totalCalories || 0;
                 trackerState.routePoints = data.routePoints || [];
-                if (data.lastPosition) trackerState.lastPosition = data.lastPosition;
+                trackerState.lastPosition = data.lastPosition || null;
                 
-                // Рассчитываем общее время из сохраненных точек
-                if (trackerState.routePoints.length > 0) {
-                    const firstPoint = trackerState.routePoints[0];
-                    const lastPoint = trackerState.routePoints[trackerState.routePoints.length - 1];
-                    trackerState.currentTime = Math.floor((lastPoint.timestamp - firstPoint.timestamp) / 1000);
+                // Восстанавливаем время если была активная сессия
+                if (data.startTime) {
+                    const elapsed = Date.now() - data.startTime;
+                    trackerState.currentTime = Math.floor(elapsed / 1000);
                 }
             }
         } catch (e) {
@@ -828,38 +1762,43 @@ function saveTrackerData() {
         sessionSteps: trackerState.sessionSteps,
         sessionDistance: trackerState.sessionDistance,
         sessionCalories: trackerState.sessionCalories,
+        totalSteps: trackerState.totalSteps,
+        totalDistance: trackerState.totalDistance,
+        totalCalories: trackerState.totalCalories,
         routePoints: trackerState.routePoints,
-        lastPosition: trackerState.lastPosition
+        lastPosition: trackerState.lastPosition,
+        startTime: trackerState.isTracking ? trackerState.startTime : null
     };
-    localStorage.setItem('dreamLadyFitnessTrackerV2', JSON.stringify(data));
+    localStorage.setItem('dreamLadyFitnessTrackerGPS', JSON.stringify(data));
 }
 
-// Запрос разрешения на геолокацию
+// Запрос геолокации
 function requestGeolocationPermission() {
+    const button = document.getElementById('permissionButton');
+    button.textContent = '⌛ Запрашиваю разрешение...';
+    button.disabled = true;
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.requestLocation().then(granted => {
             if (granted) {
                 initGeolocation();
             } else {
-                updateGPSStatus('Геолокация отклонена', false);
-                showPermissionButtons();
+                showPermissionDenied();
             }
         }).catch(error => {
             console.error('Ошибка запроса геолокации:', error);
-            updateGPSStatus('Ошибка запроса', false);
-            showPermissionButtons();
+            showPermissionDenied();
         });
     } else {
         // Для браузера
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 () => initGeolocation(),
-                () => {
-                    updateGPSStatus('Геолокация отклонена', false);
-                    showPermissionButtons();
-                },
-                { enableHighAccuracy: true }
+                () => showPermissionDenied(),
+                { enableHighAccuracy: true, timeout: 5000 }
             );
+        } else {
+            showPermissionDenied();
         }
     }
 }
@@ -867,58 +1806,66 @@ function requestGeolocationPermission() {
 // Инициализация геолокации
 function initGeolocation() {
     trackerState.hasGeolocation = true;
-    updateGPSStatus('GPS активен', true);
-    document.getElementById('permissionButtons').style.display = 'none';
+    document.getElementById('gpsStatus').textContent = '📍 GPS: активен';
+    document.getElementById('permissionButton').style.display = 'none';
+    document.getElementById('accuracyInfo').textContent = 'Точность: высокая';
     
     if (trackerState.isTracking) {
         startGeoTracking();
     }
 }
 
+// Показ ошибки разрешения
+function showPermissionDenied() {
+    document.getElementById('gpsStatus').textContent = '📍 GPS: доступ запрещен';
+    document.getElementById('permissionButton').textContent = '📍 Повторить запрос';
+    document.getElementById('permissionButton').disabled = false;
+    document.getElementById('accuracyInfo').textContent = 'Для точного трекинга нужен GPS';
+}
+
 // Запуск GPS-трекинга
 function startGeoTracking() {
-    if (!trackerState.hasGeolocation) return;
+    if (!trackerState.hasGeolocation || !navigator.geolocation) return;
     
     const options = {
         enableHighAccuracy: true,
         maximumAge: 3000,
-        timeout: 5000
+        timeout: 10000
     };
     
-    if (navigator.geolocation) {
-        trackerState.watchId = navigator.geolocation.watchPosition(
-            handlePositionUpdate,
-            handlePositionError,
-            options
-        );
-    }
-    
-    // Дополнительно: детектор активности через акселерометр
-    startActivityDetection();
+    trackerState.watchId = navigator.geolocation.watchPosition(
+        handlePositionUpdate,
+        handlePositionError,
+        options
+    );
 }
 
 // Обработка обновления позиции
 function handlePositionUpdate(position) {
     const accuracy = position.coords.accuracy;
-    const isGoodAccuracy = accuracy < 50; // Хорошая точность - менее 50 метров
-    
-    trackerState.isHighAccuracy = isGoodAccuracy;
+    const isGoodAccuracy = accuracy < 25; // Хорошая точность
     
     // Обновляем информацию о точности
-    document.getElementById('gpsAccuracy').textContent = Math.round(accuracy);
+    let accuracyText = 'Точность: ';
+    if (accuracy < 10) accuracyText += 'отличная';
+    else if (accuracy < 25) accuracyText += 'хорошая';
+    else if (accuracy < 50) accuracyText += 'средняя';
+    else accuracyText += 'низкая';
+    accuracyText += ` (${Math.round(accuracy)}м)`;
+    
+    document.getElementById('accuracyInfo').textContent = accuracyText;
     
     const newPoint = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
         accuracy: accuracy,
-        timestamp: Date.now(),
-        speed: position.coords.speed || 0
+        timestamp: Date.now()
     };
     
     // Добавляем точку в маршрут
     trackerState.routePoints.push(newPoint);
     
-    // Рассчитываем дистанцию если есть предыдущая точка
+    // Рассчитываем дистанцию если есть предыдущая точка и хорошая точность
     if (trackerState.lastPosition && isGoodAccuracy) {
         const distance = calculateDistance(
             trackerState.lastPosition.lat,
@@ -930,19 +1877,20 @@ function handlePositionUpdate(position) {
         // Фильтруем шум GPS - учитываем только значительные перемещения
         if (distance > CALCULATIONS.minDistanceForStep) {
             trackerState.sessionDistance += distance;
+            trackerState.totalDistance += distance;
             
-            // Конвертируем метры в шаги (примерно)
+            // Конвертируем метры в шаги
             const steps = Math.round(distance / CALCULATIONS.stepLength);
             trackerState.sessionSteps += steps;
+            trackerState.totalSteps += steps;
             
             // Рассчитываем калории
-            trackerState.sessionCalories = Math.round(
-                (trackerState.sessionDistance / 1000) * CALCULATIONS.caloriesPerKm
-            );
+            const newCalories = Math.round((distance / 1000) * CALCULATIONS.caloriesPerKm);
+            trackerState.sessionCalories += newCalories;
+            trackerState.totalCalories += newCalories;
             
             updateTrackerDisplay();
             saveTrackerData();
-            updateMapPreview();
         }
     }
     
@@ -954,79 +1902,27 @@ function handlePositionUpdate(position) {
 
 // Обработка ошибок GPS
 function handlePositionError(error) {
-    let message = 'Ошибка GPS: ';
+    let message = '📍 GPS: ';
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            message += 'Доступ запрещен';
+            message += 'доступ запрещен';
             trackerState.hasGeolocation = false;
-            showPermissionButtons();
+            document.getElementById('permissionButton').style.display = 'block';
             break;
         case error.POSITION_UNAVAILABLE:
-            message += 'Данные недоступны';
+            message += 'данные недоступны';
             break;
         case error.TIMEOUT:
-            message += 'Таймаут';
+            message += 'таймаут запроса';
             break;
         default:
-            message += 'Неизвестная ошибка';
+            message += 'ошибка';
             break;
     }
-    updateGPSStatus(message, false);
+    document.getElementById('gpsStatus').textContent = message;
 }
 
-// Детекция активности через акселерометр (только для подтверждения ходьбы)
-function startActivityDetection() {
-    if (typeof DeviceMotionEvent !== 'undefined') {
-        let lastAcceleration = null;
-        let activityCount = 0;
-        
-        const motionHandler = (event) => {
-            if (!trackerState.isTracking) return;
-            
-            const accel = event.accelerationIncludingGravity || 
-                         event.acceleration || 
-                         { x: 0, y: 0, z: 0 };
-            
-            const totalAccel = Math.sqrt(
-                accel.x * accel.x + 
-                accel.y * accel.y + 
-                accel.z * accel.z
-            );
-            
-            if (lastAcceleration !== null) {
-                const delta = Math.abs(totalAccel - lastAcceleration);
-                
-                // Фиксируем активность только если есть значительное изменение
-                if (delta > CALCULATIONS.activityThreshold) {
-                    trackerState.activityDetected = true;
-                    trackerState.lastActivityTime = Date.now();
-                    activityCount++;
-                    
-                    // Обновляем статус каждые 10 активностей
-                    if (activityCount % 10 === 0) {
-                        updateStatus('Активность обнаружена', 'status-active');
-                    }
-                }
-            }
-            
-            lastAcceleration = totalAccel;
-        };
-        
-        window.addEventListener('devicemotion', motionHandler);
-        
-        // Проверяем неактивность
-        setInterval(() => {
-            if (trackerState.isTracking && 
-                trackerState.activityDetected && 
-                Date.now() - trackerState.lastActivityTime > CALCULATIONS.inactivityTimeout) {
-                trackerState.activityDetected = false;
-                updateStatus('Ожидание активности', 'status-paused');
-            }
-        }, 1000);
-    }
-}
-
-// Расчет расстояния между двумя точками (формула гаверсинусов)
+// Расчет расстояния между точками (формула гаверсинусов)
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371000; // Радиус Земли в метрах
     const dLat = toRad(lat2 - lat1);
@@ -1044,48 +1940,10 @@ function toRad(degrees) {
     return degrees * (Math.PI/180);
 }
 
-// Обновление предпросмотра карты
-function updateMapPreview() {
-    if (trackerState.routePoints.length > 1) {
-        const distanceKm = (trackerState.sessionDistance / 1000).toFixed(2);
-        document.getElementById('routeDistance').textContent = distanceKm + ' км';
-        document.getElementById('routeDistance').style.display = 'block';
-        
-        // Здесь можно добавить отображение карты через Leaflet или Яндекс.Карты
-        // Для простоты показываем только расстояние
-    }
-}
-
-// Обновление статуса GPS
-function updateGPSStatus(text, isActive) {
-    const statusEl = document.getElementById('gpsStatusText');
-    statusEl.textContent = 'GPS: ' + text;
-    statusEl.style.color = isActive ? '#4CAF50' : '#FF9800';
-}
-
-// Обновление общего статуса
-function updateStatus(text, statusClass) {
-    const indicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    
-    indicator.className = 'status-indicator ' + statusClass;
-    statusText.textContent = text;
-}
-
-// Показать кнопки разрешений
-function showPermissionButtons() {
-    document.getElementById('permissionButtons').style.display = 'block';
-}
-
 // Основные функции трекера
 function openFitnessTracker() {
     document.getElementById('fitnessTrackerModal').classList.add('active');
     loadTrackerData();
-    
-    // Проверяем доступность геолокации
-    if (!trackerState.hasGeolocation) {
-        showPermissionButtons();
-    }
     
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
@@ -1114,17 +1972,16 @@ function startTracker() {
     // Запускаем GPS если есть разрешение
     if (trackerState.hasGeolocation) {
         startGeoTracking();
-        updateStatus('GPS-трекинг активен', 'status-gps-active');
+        document.getElementById('statusText').innerHTML = '<strong>Трекинг активен!</strong><br>GPS отслеживает ваш маршрут';
     } else {
-        updateStatus('Ожидание геолокации', 'status-paused');
-        showPermissionButtons();
+        document.getElementById('statusText').innerHTML = '<strong>Трекинг активен!</strong><br>Включите GPS для точного отслеживания';
     }
     
     // Обновляем UI
     document.getElementById('startButton').disabled = true;
     document.getElementById('pauseButton').disabled = false;
     
-    console.log('🏃 Трекер запущен (GPS режим)');
+    console.log('🏃 Трекер запущен');
 }
 
 function pauseTracker() {
@@ -1145,7 +2002,7 @@ function pauseTracker() {
     saveTrackerData();
     
     // Обновляем UI
-    updateStatus('Трекер на паузе', 'status-paused');
+    document.getElementById('statusText').innerHTML = '<strong>Трекинг на паузе</strong><br>Нажмите Старт для продолжения';
     document.getElementById('startButton').disabled = false;
     document.getElementById('pauseButton').disabled = true;
     
@@ -1153,7 +2010,7 @@ function pauseTracker() {
 }
 
 function resetTracker() {
-    if (confirm('Сбросить текущую тренировку? Весь маршрут будет удален.')) {
+    if (confirm('Сбросить текущую тренировку?')) {
         trackerState.isTracking = false;
         trackerState.sessionSteps = 0;
         trackerState.sessionDistance = 0;
@@ -1175,10 +2032,9 @@ function resetTracker() {
         
         // Обновляем UI
         updateTrackerDisplay();
-        updateStatus('Трекер сброшен', '');
+        document.getElementById('statusText').innerHTML = '<strong>Готов к работе!</strong><br>Для точного подсчета включите GPS';
         document.getElementById('startButton').disabled = false;
         document.getElementById('pauseButton').disabled = true;
-        document.getElementById('routeDistance').style.display = 'none';
         
         console.log('🔄 Трекер сброшен');
     }
@@ -1225,15 +2081,15 @@ function updateTrackerDisplay() {
     document.getElementById('caloriesValue').textContent = trackerState.sessionCalories;
     
     // Цель сеанса
-    document.getElementById('sessionGoal').textContent = (CALCULATIONS.sessionGoal / 1000).toFixed(2);
-    const progress = Math.min((trackerState.sessionDistance / CALCULATIONS.sessionGoal) * 100, 100);
+    document.getElementById('sessionGoal').textContent = (trackerState.sessionGoal / 1000).toFixed(2);
+    const progress = Math.min((trackerState.sessionDistance / trackerState.sessionGoal) * 100, 100);
     document.getElementById('progressFill').style.width = progress + '%';
     document.getElementById('goalPercentage').textContent = Math.round(progress) + '%';
     
     // Общая статистика
-    document.getElementById('totalDistance').textContent = distanceKm;
+    document.getElementById('totalDistance').textContent = (trackerState.totalDistance / 1000).toFixed(2);
     document.getElementById('totalTime').textContent = formatTime(trackerState.currentTime);
-    document.getElementById('totalCalories').textContent = trackerState.sessionCalories;
+    document.getElementById('totalCalories').textContent = trackerState.totalCalories;
 }
 
 function updateTimerDisplay() {
@@ -1286,7 +2142,6 @@ function closeFullscreen() {
     }
 }
 
-// Ваши остальные функции модальных окон...
 function openPriceModal() {
     document.getElementById('priceModal').classList.add('active');
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
@@ -1474,17 +2329,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация трекера
     loadTrackerData();
     
-    // Проверяем доступность геолокации при загрузке
+    // Проверяем доступность геолокации
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             () => {
                 trackerState.hasGeolocation = true;
-                updateGPSStatus('Доступен', true);
+                document.getElementById('gpsStatus').textContent = '📍 GPS: доступен';
+                document.getElementById('permissionButton').style.display = 'none';
             },
             () => {
-                updateGPSStatus('Требуется разрешение', false);
+                // GPS не доступен, показываем кнопку
+                document.getElementById('permissionButton').style.display = 'block';
             },
-            { timeout: 2000 }
+            { timeout: 2000, maximumAge: 0 }
         );
     }
     
