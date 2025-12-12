@@ -303,6 +303,7 @@
             font-size: 16px;
             font-family: 'Cormorant', serif;
             font-weight: 500;
+            letter-spacing: 1px;
         }
         
         /* ШАПКА С ЛОГО В СТИЛЕ САЙТА */
@@ -1006,6 +1007,261 @@
                 min-height: -webkit-fill-available;
             }
         }
+        
+        /* =========================================== */
+        /* СТИЛИ ДЛЯ ФИТНЕС-ТРЕКЕРА */
+        /* =========================================== */
+        
+        .fitness-tracker-modal {
+            max-width: 420px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            background: rgba(26, 31, 43, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .fitness-tracker-modal {
+            transform: translateY(0);
+        }
+        
+        .tracker-title {
+            font-family: 'Cormorant', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        
+        .step-counter-large {
+            font-size: 72px;
+            font-family: 'Cormorant', serif;
+            font-weight: 300;
+            color: var(--gold);
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 5px 15px rgba(198, 161, 110, 0.5);
+            line-height: 1;
+        }
+        
+        .step-label {
+            font-size: 16px;
+            color: var(--light-gold);
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .stat-box {
+            background: rgba(198, 161, 110, 0.05);
+            border: 1px solid rgba(198, 161, 110, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-family: 'Cormorant', serif;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label-small {
+            font-size: 11px;
+            color: var(--light-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .goal-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(198, 161, 110, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .goal-text {
+            font-size: 14px;
+            color: var(--light-gold);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(198, 161, 110, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #C6A16E, #D4AF37);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        
+        .goal-percentage {
+            font-size: 12px;
+            color: var(--gold);
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .controls-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .control-button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cormorant', serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .control-button.start {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+        
+        .control-button.pause {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+        
+        .control-button.reset {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+        
+        .timer-display {
+            font-size: 20px;
+            color: var(--gold);
+            text-align: center;
+            margin: 15px 0;
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+        }
+        
+        .tracker-warning {
+            background: rgba(255, 100, 100, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            text-align: center;
+        }
+        
+        .tracker-warning-text {
+            font-size: 13px;
+            color: var(--light-gold);
+            line-height: 1.5;
+        }
+        
+        .tracker-warning-text strong {
+            color: #ff6b6b;
+        }
+        
+        .daily-stats {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(198, 161, 110, 0.2);
+        }
+        
+        .daily-stats-title {
+            font-family: 'Cormorant', serif;
+            font-size: 18px;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .daily-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .daily-stat-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(198, 161, 110, 0.05);
+            border-radius: 8px;
+        }
+        
+        .daily-stat-value {
+            font-size: 16px;
+            color: var(--gold);
+            font-weight: 500;
+            display: block;
+        }
+        
+        .daily-stat-label {
+            font-size: 10px;
+            color: var(--light-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+        
+        .tracker-status {
+            font-size: 14px;
+            color: var(--light-gold);
+            text-align: center;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(198, 161, 110, 0.05);
+        }
+        
+        .status-active {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .status-paused {
+            color: #FF9800;
+            background: rgba(255, 152, 0, 0.1);
+        }
     </style>
 </head>
 <body class="telegram-miniapp-fix">
@@ -1068,6 +1324,11 @@
             <div class="button-title">Узнать стоимость</div>
         </div>
         
+        <!-- КНОПКА ФИТНЕС-ТРЕКЕРА (ДОБАВЛЕНА ПОСЛЕ РЕЙТИНГА) -->
+        <div class="button-3d" onclick="openFitnessTracker()">
+            <div class="button-title">🏃 Фитнес-трекер</div>
+        </div>
+        
         <div class="button-3d" onclick="openSignupModal()">
             <div class="button-title">Записаться на занятия</div>
         </div>
@@ -1119,6 +1380,83 @@
     <!-- WAPI СКРИПТ ПОД МЕНЮ (как вы просили) -->
     <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
     <div id="listokWidgetContainer"></div>
+    
+    <!-- =========================================== -->
+    <!-- ОКНО ФИТНЕС-ТРЕКЕРА -->
+    <!-- =========================================== -->
+    <div id="fitnessTrackerModal" class="modal-overlay">
+        <div class="fitness-tracker-modal">
+            <div class="modal-close" onclick="closeFitnessTracker()">×</div>
+            <h2 class="tracker-title">🏃 Фитнес-трекер Dream Lady</h2>
+            
+            <!-- СЧЕТЧИК ШАГОВ -->
+            <div class="step-label">ШАГИ СЕГОДНЯ</div>
+            <div class="step-counter-large" id="stepCounter">0</div>
+            
+            <!-- СТАТУС -->
+            <div class="tracker-status" id="trackerStatus">
+                Трекер остановлен
+            </div>
+            
+            <!-- ТАЙМЕР -->
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            
+            <!-- СТАТИСТИКА -->
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-value" id="distanceValue">0.0</span>
+                    <span class="stat-label-small">Километры</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="caloriesValue">0</span>
+                    <span class="stat-label-small">Калории</span>
+                </div>
+            </div>
+            
+            <!-- ЦЕЛЬ -->
+            <div class="goal-container">
+                <div class="goal-text">Цель на сегодня: <strong id="dailyGoal">10 000</strong> шагов</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="goal-percentage" id="goalPercentage">0%</div>
+            </div>
+            
+            <!-- УПРАВЛЕНИЕ -->
+            <div class="controls-container">
+                <button class="control-button start" onclick="startTracker()" id="startButton">Старт</button>
+                <button class="control-button pause" onclick="pauseTracker()" id="pauseButton" disabled>Пауза</button>
+                <button class="control-button reset" onclick="resetTracker()">Сброс</button>
+            </div>
+            
+            <!-- ДНЕВНАЯ СТАТИСТИКА -->
+            <div class="daily-stats">
+                <div class="daily-stats-title">Дневная статистика</div>
+                <div class="daily-stats-grid">
+                    <div class="daily-stat-item">
+                        <span class="daily-stat-value" id="dailySteps">0</span>
+                        <span class="daily-stat-label">Шаги</span>
+                    </div>
+                    <div class="daily-stat-item">
+                        <span class="daily-stat-value" id="dailyDistance">0.0</span>
+                        <span class="daily-stat-label">Км</span>
+                    </div>
+                    <div class="daily-stat-item">
+                        <span class="daily-stat-value" id="dailyCalories">0</span>
+                        <span class="daily-stat-label">Ккал</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ПРЕДУПРЕЖДЕНИЕ -->
+            <div class="tracker-warning">
+                <div class="tracker-warning-text">
+                    <strong>⚠️ ВАЖНО:</strong> Трекер работает только когда приложение открыто! 
+                    Не закрывайте его во время тренировки. Данные сохраняются автоматически.
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- ПОЛНОЭКРАННОЕ ОКНО ДЛЯ TELEGRAM-БОТА -->
     <div id="telegramBotFullscreen" class="fullscreen-overlay">
@@ -1855,9 +2193,279 @@ document.querySelectorAll('.modal-overlay').forEach(modal => {
             else if (this.id === 'testModal') closeTestModal();
             else if (this.id === 'contactsModal') closeContactsModal();
             else if (this.id === 'trainersModal') closeTrainersModal();
+            else if (this.id === 'fitnessTrackerModal') closeFitnessTracker();
         }
     });
 });
+
+// ============================================
+// ФУНКЦИИ ФИТНЕС-ТРЕКЕРА
+// ============================================
+
+let trackerState = {
+    isTracking: false,
+    steps: 0,
+    startTime: null,
+    currentTime: 0,
+    lastAcceleration: null,
+    stepThreshold: 1.5,
+    dailyGoal: 10000,
+    timerInterval: null,
+    motionListener: null
+};
+
+// Расчеты (средние значения для женщины)
+const CALCULATIONS = {
+    stepLength: 0.67, // метры
+    caloriesPerStep: 0.04, // ккал
+    stepsPerKm: Math.round(1000 / 0.67) // ~1493 шагов на км
+};
+
+// Загрузка сохраненных данных
+function loadTrackerData() {
+    const saved = localStorage.getItem('dreamLadyFitnessTracker');
+    if (saved) {
+        const data = JSON.parse(saved);
+        const today = new Date().toDateString();
+        
+        if (data.date === today) {
+            trackerState.steps = data.steps || 0;
+            trackerState.dailyGoal = data.dailyGoal || 10000;
+            trackerState.currentTime = data.currentTime || 0;
+        } else {
+            // Новый день - сброс счетчиков
+            trackerState.steps = 0;
+            trackerState.currentTime = 0;
+            saveTrackerData();
+        }
+    }
+    updateTrackerDisplay();
+}
+
+// Сохранение данных
+function saveTrackerData() {
+    const data = {
+        date: new Date().toDateString(),
+        steps: trackerState.steps,
+        dailyGoal: trackerState.dailyGoal,
+        currentTime: trackerState.currentTime
+    };
+    localStorage.setItem('dreamLadyFitnessTracker', JSON.stringify(data));
+}
+
+// Открытие трекера
+function openFitnessTracker() {
+    document.getElementById('fitnessTrackerModal').classList.add('active');
+    loadTrackerData();
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeFitnessTracker);
+    }
+}
+
+// Закрытие трекера
+function closeFitnessTracker() {
+    document.getElementById('fitnessTrackerModal').classList.remove('active');
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+// Запуск трекера
+function startTracker() {
+    if (trackerState.isTracking) return;
+    
+    trackerState.isTracking = true;
+    trackerState.startTime = Date.now() - (trackerState.currentTime * 1000);
+    
+    // Запуск таймера
+    startTimer();
+    
+    // Запуск отслеживания движения
+    startMotionTracking();
+    
+    // Обновление UI
+    updateTrackerStatus('Трекер активен', 'status-active');
+    document.getElementById('startButton').disabled = true;
+    document.getElementById('pauseButton').disabled = false;
+    
+    console.log('🏃 Трекер запущен');
+}
+
+// Пауза трекера
+function pauseTracker() {
+    if (!trackerState.isTracking) return;
+    
+    trackerState.isTracking = false;
+    
+    // Остановка таймера
+    stopTimer();
+    
+    // Остановка отслеживания движения
+    stopMotionTracking();
+    
+    // Сохранение данных
+    saveTrackerData();
+    
+    // Обновление UI
+    updateTrackerStatus('Трекер на паузе', 'status-paused');
+    document.getElementById('startButton').disabled = false;
+    document.getElementById('pauseButton').disabled = true;
+    
+    console.log('⏸ Трекер на паузе');
+}
+
+// Сброс трекера
+function resetTracker() {
+    if (confirm('Сбросить текущую тренировку? Это обнулит шаги, дистанцию и калории.')) {
+        trackerState.isTracking = false;
+        trackerState.steps = 0;
+        trackerState.startTime = null;
+        trackerState.currentTime = 0;
+        
+        // Остановка всего
+        stopTimer();
+        stopMotionTracking();
+        
+        // Сохранение
+        saveTrackerData();
+        
+        // Обновление UI
+        updateTrackerDisplay();
+        updateTrackerStatus('Трекер остановлен', '');
+        document.getElementById('startButton').disabled = false;
+        document.getElementById('pauseButton').disabled = true;
+        
+        console.log('🔄 Трекер сброшен');
+    }
+}
+
+// Таймер
+function startTimer() {
+    if (trackerState.timerInterval) clearInterval(trackerState.timerInterval);
+    
+    trackerState.timerInterval = setInterval(() => {
+        trackerState.currentTime = Math.floor((Date.now() - trackerState.startTime) / 1000);
+        updateTimerDisplay();
+        saveTrackerData();
+    }, 1000);
+}
+
+function stopTimer() {
+    if (trackerState.timerInterval) {
+        clearInterval(trackerState.timerInterval);
+        trackerState.timerInterval = null;
+    }
+}
+
+// Отслеживание движения
+function startMotionTracking() {
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+        // iOS 13+
+        DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === 'granted') {
+                    startMotionListener();
+                }
+            })
+            .catch(console.error);
+    } else {
+        // Android и другие
+        startMotionListener();
+    }
+}
+
+function startMotionListener() {
+    trackerState.motionListener = function(event) {
+        if (!trackerState.isTracking) return;
+        
+        const acceleration = event.accelerationIncludingGravity;
+        if (!acceleration) return;
+        
+        const totalAcceleration = Math.sqrt(
+            Math.pow(acceleration.x, 2) + 
+            Math.pow(acceleration.y, 2) + 
+            Math.pow(acceleration.z, 2)
+        );
+        
+        if (trackerState.lastAcceleration !== null) {
+            const delta = Math.abs(totalAcceleration - trackerState.lastAcceleration);
+            
+            // Простой алгоритм детекции шага
+            if (delta > trackerState.stepThreshold) {
+                trackerState.steps++;
+                updateTrackerDisplay();
+                saveTrackerData();
+            }
+        }
+        
+        trackerState.lastAcceleration = totalAcceleration;
+    };
+    
+    window.addEventListener('devicemotion', trackerState.motionListener);
+}
+
+function stopMotionTracking() {
+    if (trackerState.motionListener) {
+        window.removeEventListener('devicemotion', trackerState.motionListener);
+        trackerState.motionListener = null;
+        trackerState.lastAcceleration = null;
+    }
+}
+
+// Расчеты
+function calculateDistance(steps) {
+    return (steps * CALCULATIONS.stepLength / 1000).toFixed(2);
+}
+
+function calculateCalories(steps) {
+    return Math.round(steps * CALCULATIONS.caloriesPerStep);
+}
+
+function calculateProgress(steps, goal) {
+    return Math.min((steps / goal) * 100, 100);
+}
+
+// Обновление интерфейса
+function updateTrackerDisplay() {
+    // Шаги
+    document.getElementById('stepCounter').textContent = trackerState.steps.toLocaleString();
+    
+    // Дистанция и калории
+    document.getElementById('distanceValue').textContent = calculateDistance(trackerState.steps);
+    document.getElementById('caloriesValue').textContent = calculateCalories(trackerState.steps);
+    
+    // Цель
+    document.getElementById('dailyGoal').textContent = trackerState.dailyGoal.toLocaleString();
+    const progress = calculateProgress(trackerState.steps, trackerState.dailyGoal);
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('goalPercentage').textContent = Math.round(progress) + '%';
+    
+    // Дневная статистика
+    document.getElementById('dailySteps').textContent = trackerState.steps.toLocaleString();
+    document.getElementById('dailyDistance').textContent = calculateDistance(trackerState.steps);
+    document.getElementById('dailyCalories').textContent = calculateCalories(trackerState.steps);
+}
+
+function updateTimerDisplay() {
+    const hours = Math.floor(trackerState.currentTime / 3600);
+    const minutes = Math.floor((trackerState.currentTime % 3600) / 60);
+    const seconds = trackerState.currentTime % 60;
+    
+    document.getElementById('timerDisplay').textContent = 
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function updateTrackerStatus(text, className) {
+    const statusEl = document.getElementById('trackerStatus');
+    statusEl.textContent = text;
+    statusEl.className = 'tracker-status';
+    if (className) {
+        statusEl.classList.add(className);
+    }
+}
 
 // ============================================
 // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
@@ -1913,6 +2521,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Страница загружена');
     createStars();
     initWapiAuth();
+    
+    // Инициализация трекера
+    loadTrackerData();
     
     // Центрирование меню
     const menu = document.querySelector('.menu-container');
