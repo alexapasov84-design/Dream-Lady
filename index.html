@@ -1669,24 +1669,43 @@ console.log('🚀 Dream Lady Mini Apps 2.0 запускается...');
 if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
     const tg = Telegram.WebApp;
     
-    // 1. АКТИВАЦИЯ
+    // === ДОБАВЛЕНО 3 КРИТИЧЕСКИХ ПУНКТА ===
+    
+    // 1. ПРОВЕРКА ВЕРСИИ TELEGRAM (как в вашей игре)
+    const version = parseFloat(tg.version) || 6.0;
+    console.log('📱 Версия Telegram:', version);
+    
+    // 2. АКТИВАЦИЯ
     tg.ready();
     
-    // 2. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ
+    // 3. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ (как в вашей игре)
     tg.expand();
     
-    // 3. ОТКЛЮЧАЕМ СВАЙПЫ ВНИЗ (чтобы не сворачивалось)
+    // 4. КРИТИЧЕСКИ ВАЖНО: requestFullscreen() (как в вашей игре)
+    if (version >= 6.1) {
+        tg.requestFullscreen();
+        console.log('✅ Полноэкранный режим активирован (requestFullscreen)');
+    } else {
+        console.log('ℹ️ requestFullscreen доступен с версии 6.1');
+    }
+    
+    // 5. ОТКЛЮЧАЕМ СВАЙПЫ ВНИЗ (чтобы не сворачивалось)
     tg.disableVerticalSwipes();
     
-    // 4. СКРЫВАЕМ КНОПКУ "НАЗАД"
+    // 6. СКРЫВАЕМ КНОПКУ "НАЗАД"
     tg.BackButton.hide();
     
-    // 5. НАСТРАИВАЕМ ЦВЕТА
+    // 7. НАСТРАИВАЕМ ЦВЕТА
     tg.setHeaderColor('#1A1F2B');
     tg.setBackgroundColor('#1A1F2B');
     
-    console.log('✅ Полноэкранный режим активирован');
-    console.log('📱 Версия:', tg.version);
+    // 8. ОБРАБОТКА START_PARAM ДЛЯ АВТОМАТИЧЕСКОГО ЗАПУСКА (как в вашей игре)
+    if (tg.initDataUnsafe?.start_param === 'fullscreen') {
+        console.log('🚀 Автоматический запуск из бота');
+        // Можете добавить автоматическое открытие чего-то
+    }
+    
+    console.log('✅ Mini Apps 2.0 инициализирован');
     console.log('🖥 Платформа:', tg.platform);
     console.log('🔒 Vertical swipes disabled');
     
@@ -1940,9 +1959,19 @@ document.addEventListener('touchmove', function(e) {
 // Автоматическое восстановление полноэкранного режима
 setInterval(function() {
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        if (!Telegram.WebApp.isExpanded) {
-            Telegram.WebApp.expand();
-            Telegram.WebApp.disableVerticalSwipes();
+        const tg = Telegram.WebApp;
+        const version = parseFloat(tg.version) || 6.0;
+        
+        if (!tg.isExpanded) {
+            console.log('🔄 Восстановление полноэкранного режима...');
+            tg.expand();
+            
+            // Для версий 6.1+ добавляем requestFullscreen
+            if (version >= 6.1) {
+                tg.requestFullscreen();
+            }
+            
+            tg.disableVerticalSwipes();
         }
     }
 }, 1000);
