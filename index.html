@@ -12,6 +12,8 @@
     <script src="https://telegram.org/js/telegram-web-app.js?2"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* ВАШ ОРИГИНАЛЬНЫЙ CSS БЕЗ ИЗМЕНЕНИЙ */
@@ -1598,7 +1600,7 @@
                     </button>
                     
                     <!-- КНОПКА WHATSAPP -->
-                    <button onclick="openWhatsApp('79169947368')" 
+                    <button onclick="openWhatsApp('+79169947368')" 
                             style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
                                    color: white; 
                                    border: none; 
@@ -2017,6 +2019,45 @@ function initWapiAuth() {
 
 function openTelegramBot() {
     openLink('https://t.me/DreamTeamStudio_Bot');
+}
+
+// ============================================
+// ИСПРАВЛЕННЫЕ ФУНКЦИИ ДЛЯ КОНТАКТОВ
+// ============================================
+
+function makePhoneCall(phoneNumber) {
+    // Убираем все символы, кроме цифр и плюса
+    const cleanNumber = phoneNumber.replace(/[^\d+]/g, '');
+    // Создаем ссылку для звонка
+    const telLink = 'tel:' + cleanNumber;
+    
+    console.log('📞 Пытаемся позвонить на номер:', cleanNumber);
+    
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        // В Telegram Mini Apps используем openLink
+        Telegram.WebApp.openLink(telLink);
+    } else {
+        // В браузере пробуем открыть ссылку
+        window.location.href = telLink;
+    }
+}
+
+function openWhatsApp(phoneNumber) {
+    // Убираем все символы, кроме цифр
+    const cleanNumber = phoneNumber.replace(/[^\d]/g, '');
+    // Формируем ссылку для WhatsApp с номером
+    const whatsappLink = 'https://wa.me/' + cleanNumber;
+    
+    console.log('📱 Открываем WhatsApp для номера:', cleanNumber);
+    console.log('🔗 Ссылка:', whatsappLink);
+    
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        // В Telegram Mini Apps используем openLink
+        Telegram.WebApp.openLink(whatsappLink);
+    } else {
+        // В браузере открываем в новом окне
+        window.open(whatsappLink, '_blank');
+    }
 }
 
 // ============================================
