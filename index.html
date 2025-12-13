@@ -1552,37 +1552,79 @@
             </div>
         </div>
     </div>
-    
-    <!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
-    <div id="contactsModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeContactsModal()">×</div>
-            <h2 class="modal-title">Контакты</h2>
-            <div class="contacts-content">
-                <div class="contact-item">
-                    <span class="contact-phone">+7 916 994-73-68</span>
-                </div>
-                <div class="contact-item">
-                    <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email">DreamLadyStudio@yandex.ru</a>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-address">
-                        г. Жуковский,<br>
-                        ул. Королева, дом 6, строение 2<br>
-                        (2 этаж)
+<!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
+<div id="contactsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeContactsModal()">×</div>
+        <h2 class="modal-title">Контакты</h2>
+        <div class="contacts-content">
+            <div class="contact-item">
+                <!-- ТЕЛЕФОН С ССЫЛКОЙ ДЛЯ ЗВОНКА -->
+                <a href="tel:+79169947368" class="contact-phone-link" style="text-decoration: none; display: block;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                        <div style="width: 40px; height: 40px; background: rgba(198, 161, 110, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-phone-alt" style="color: var(--gold); font-size: 18px;"></i>
+                        </div>
+                        <div>
+                            <span style="color: var(--gold); font-weight: 500; font-size: 20px; font-family: 'Cormorant', serif; display: block;">
+                                +7 916 994-73-68
+                            </span>
+                            <span style="color: var(--light-gold); font-size: 12px;">
+                                Нажмите для звонка
+                            </span>
+                        </div>
                     </div>
+                </a>
+                
+                <!-- КНОПКИ БЫСТРОГО ДИАЛА -->
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <a href="tel:+79169947368" 
+                       style="flex: 1; background: rgba(198, 161, 110, 0.1); border: 1px solid var(--gold); border-radius: 10px; padding: 10px; text-align: center; text-decoration: none; color: var(--gold); font-family: 'Cormorant', serif; font-weight: 500; transition: all 0.3s;">
+                       <i class="fas fa-phone" style="margin-right: 5px;"></i> Позвонить
+                    </a>
+                    <a href="https://api.whatsapp.com/send/?phone=79169947368" 
+                       onclick="openLink('https://api.whatsapp.com/send/?phone=79169947368'); return false;"
+                       style="flex: 1; background: rgba(76, 175, 80, 0.1); border: 1px solid #4CAF50; border-radius: 10px; padding: 10px; text-align: center; text-decoration: none; color: #4CAF50; font-family: 'Cormorant', serif; font-weight: 500; transition: all 0.3s;">
+                       <i class="fab fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp
+                    </a>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-details">
-                        Индивидуальный предприниматель<br>
-                        Пинчук И.М.<br>
-                        ИНН 773721380132<br>
-                        ОГРНИП 325774600149528
-                    </div>
+            </div>
+            
+            <div class="contact-item">
+                <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email" style="text-decoration: none; color: var(--light-gold); display: block;">
+                    <i class="fas fa-envelope" style="margin-right: 10px; color: var(--gold);"></i>DreamLadyStudio@yandex.ru
+                </a>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-address">
+                    <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--gold);"></i>
+                    г. Жуковский,<br>
+                    ул. Королева, дом 6, строение 2<br>
+                    (2 этаж)
                 </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-details">
+                    Индивидуальный предприниматель<br>
+                    Пинчук И.М.<br>
+                    ИНН 773721380132<br>
+                    ОГРНИП 325774600149528
+                </div>
+            </div>
+            
+            <!-- КНОПКА НА КАРТЫ -->
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2" 
+                   onclick="openLink('https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2'); return false;"
+                   style="display: inline-block; background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%); color: var(--deep-navy); border: none; padding: 12px 25px; font-size: 15px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: 'Cormorant', serif; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">
+                    <i class="fas fa-map-marked-alt"></i> Открыть на карте
+                </a>
             </div>
         </div>
     </div>
+</div>
     
     <!-- МОДАЛЬНОЕ ОКНО ТРЕНЕРОВ -->
     <div id="trainersModal" class="modal-overlay">
