@@ -1559,31 +1559,6 @@
         <h2 class="modal-title">Контакты</h2>
         <div class="contacts-content">
             <div class="contact-item">
-                <!-- ТЕЛЕФОН С ССЫЛКОЙ ДЛЯ ЗВОНКА -->
-                <a href="tel:+79169947368" class="contact-phone-link" style="text-decoration: none; display: block;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                        <div style="width: 40px; height: 40px; background: rgba(198, 161, 110, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-phone-alt" style="color: var(--gold); font-size: 18px;"></i>
-                        </div>
-                        <div>
-                            <span style="color: var(--gold); font-weight: 500; font-size: 20px; font-family: 'Cormorant', serif; display: block;">
-                                +7 916 994-73-68
-                            </span>
-                            <span style="color: var(--light-gold); font-size: 12px;">
-                                Нажмите для звонка
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- КНОПКИ БЫСТРОГО ДИАЛА -->
-<!-- В окне контактов замените телефонный блок на этот: -->
-<div id="contactsModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-close" onclick="closeContactsModal()">×</div>
-        <h2 class="modal-title">Контакты</h2>
-        <div class="contacts-content">
-            <div class="contact-item">
                 <!-- ТЕЛЕФОН С КНОПКОЙ ЗВОНКА -->
                 <div style="text-align: center; margin-bottom: 15px;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
@@ -1643,8 +1618,30 @@
                                    transition: all 0.3s;">
                         <i class="fab fa-whatsapp"></i> Написать в WhatsApp
                     </button>
+                    
+                    <!-- КНОПКА TELEGRAM -->
+                    <button onclick="openLink('https://t.me/DreamLady_Koroleva')" 
+                            style="background: linear-gradient(135deg, #0088cc 0%, #005580 100%); 
+                                   color: white; 
+                                   border: none; 
+                                   padding: 12px 25px; 
+                                   font-size: 15px; 
+                                   font-weight: 600; 
+                                   border-radius: 10px; 
+                                   cursor: pointer; 
+                                   font-family: 'Cormorant', serif;
+                                   display: flex; 
+                                   align-items: center; 
+                                   justify-content: center; 
+                                   gap: 10px;
+                                   width: 100%;
+                                   margin: 10px 0;
+                                   box-shadow: 0 4px 0 #00334d;
+                                   transition: all 0.3s;">
+                        <i class="fab fa-telegram"></i> Написать в Telegram
+                    </button>
                 </div>
-            </div></div>
+            </div>
             
             <div class="contact-item">
                 <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email" style="text-decoration: none; color: var(--light-gold); display: block;">
