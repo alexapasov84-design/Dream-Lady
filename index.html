@@ -89,6 +89,84 @@
             pointer-events: none;
         }
         
+        /* ИКОНКА ЧАТА С АДМИНИСТРАТОРОМ */
+        .chat-admin-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--deep-navy);
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 8px 25px rgba(198, 161, 110, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .chat-admin-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(198, 161, 110, 0.6);
+        }
+        
+        .chat-admin-float:active {
+            transform: scale(0.95);
+        }
+        
+        .chat-admin-float span {
+            font-size: 24px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chat-admin-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--deep-navy);
+            z-index: 3;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 25px rgba(198, 161, 110, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(198, 161, 110, 0.6), 0 0 20px rgba(198, 161, 110, 0.3);
+            }
+            100% {
+                box-shadow: 0 8px 25px rgba(198, 161, 110, 0.4);
+            }
+        }
+        
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-5px);
+            }
+        }
+        
         /* ПОЛНОЭКРАННОЕ ОКНО ДЛЯ ВСЕГО MINI APPS */
         .fullscreen-overlay {
             position: fixed;
@@ -994,6 +1072,20 @@
             .fullscreen-text {
                 font-size: 14px;
             }
+            
+            .chat-admin-float {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .chat-admin-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
         }
         
         /* ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ MINI APPS 2.0 */
@@ -1011,6 +1103,12 @@
     </style>
 </head>
 <body class="telegram-miniapp-fix">
+    <!-- ИКОНКА ЧАТА С АДМИНИСТРАТОРОМ (плавающая) -->
+    <a href="https://t.me/DreamLady_Koroleva" class="chat-admin-float" onclick="openAdminChat(); return false;" title="Чат с администратором">
+        <div class="chat-admin-badge" id="chatBadge">1</div>
+        <span>💬</span>
+    </a>
+    
     <!-- Мерцающие звездочки -->
     <div class="stars-background" id="stars"></div>
     <div class="gloss-overlay"></div>
@@ -1090,10 +1188,10 @@
             
             <!-- СОЦСЕТИ -->
             <div class="social-links">
-                <a href="https://t.me/DreamLady_Koroleva" class="social-link" onclick="openLink('https://t.me/DreamLady_Koroleva'); return false;" title="Telegram">
-                    <span>✈️</span>
+                <a href="https://t.me/DreamLady_Koroleva" class="social-link" onclick="openAdminChat(); return false;" title="Telegram администратора">
+                    <span>💬</span>
                 </a>
-                <a href="https://api.whatsapp.com/send/?phone=79169947368" class="social-link" onclick="openLink('https://api.whatsapp.com/send/?phone=79169947368'); return false;" title="WhatsApp">
+                <a href="https://api.whatsapp.com/send/?phone=79169947368" class="social-link" onclick="openWhatsApp('+79169947368'); return false;" title="WhatsApp">
                     <span>📱</span>
                 </a>
                 <a href="https://vk.com/dream_lady_studio" class="social-link" onclick="openLink('https://vk.com/dream_lady_studio'); return false;" title="ВКонтакте">
@@ -1577,7 +1675,7 @@
                         </div>
                     </div>
                     
-                    <!-- КНОПКА ЗВОНКА -->
+                    <!-- КНОПКА ЗВОНКА (ИСПРАВЛЕНА) -->
                     <button onclick="makePhoneCall('+79169947368')" 
                             style="background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); 
                                    color: white; 
@@ -1622,7 +1720,7 @@
                     </button>
                     
                     <!-- КНОПКА TELEGRAM -->
-                    <button onclick="openLink('https://t.me/DreamLady_Koroleva')" 
+                    <button onclick="openAdminChat()" 
                             style="background: linear-gradient(135deg, #0088cc 0%, #005580 100%); 
                                    color: white; 
                                    border: none; 
@@ -1766,19 +1864,17 @@ console.log('🚀 Dream Lady Mini Apps 2.0 запускается...');
 if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
     const tg = Telegram.WebApp;
     
-    // === ДОБАВЛЕНО 3 КРИТИЧЕСКИХ ПУНКТА ===
-    
-    // 1. ПРОВЕРКА ВЕРСИИ TELEGRAM (как в вашей игре)
+    // 1. ПРОВЕРКА ВЕРСИИ TELEGRAM
     const version = parseFloat(tg.version) || 6.0;
     console.log('📱 Версия Telegram:', version);
     
     // 2. АКТИВАЦИЯ
     tg.ready();
     
-    // 3. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ (как в вашей игре)
+    // 3. ВКЛЮЧАЕМ ПОЛНОЭКРАННЫЙ РЕЖИМ
     tg.expand();
     
-    // 4. КРИТИЧЕСКИ ВАЖНО: requestFullscreen() (как в вашей игре)
+    // 4. КРИТИЧЕСКИ ВАЖНО: requestFullscreen()
     if (version >= 6.1) {
         tg.requestFullscreen();
         console.log('✅ Полноэкранный режим активирован (requestFullscreen)');
@@ -1786,7 +1882,7 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         console.log('ℹ️ requestFullscreen доступен с версии 6.1');
     }
     
-    // 5. ОТКЛЮЧАЕМ СВАЙПЫ ВНИЗ (чтобы не сворачивалось)
+    // 5. ОТКЛЮЧАЕМ СВАЙПЫ ВНИЗ
     tg.disableVerticalSwipes();
     
     // 6. СКРЫВАЕМ КНОПКУ "НАЗАД"
@@ -1796,10 +1892,9 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
     tg.setHeaderColor('#1A1F2B');
     tg.setBackgroundColor('#1A1F2B');
     
-    // 8. ОБРАБОТКА START_PARAM ДЛЯ АВТОМАТИЧЕСКОГО ЗАПУСКА (как в вашей игре)
+    // 8. ОБРАБОТКА START_PARAM ДЛЯ АВТОМАТИЧЕСКОГО ЗАПУСКА
     if (tg.initDataUnsafe?.start_param === 'fullscreen') {
         console.log('🚀 Автоматический запуск из бота');
-        // Можете добавить автоматическое открытие чего-то
     }
     
     console.log('✅ Mini Apps 2.0 инициализирован');
@@ -1811,16 +1906,96 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
 }
 
 // ============================================
-// ВАШИ ФУНКЦИИ (БЕЗ ИЗМЕНЕНИЙ)
+// ОСНОВНЫЕ ФУНКЦИИ
 // ============================================
 
 function openLink(url) {
+    console.log('🔗 Открываем ссылку:', url);
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.openLink(url);
     } else {
         window.open(url, '_blank');
     }
 }
+
+// Функция для открытия чата с администратором
+function openAdminChat() {
+    console.log('💬 Открываем чат с администратором');
+    const adminTelegram = 'https://t.me/DreamLady_Koroleva';
+    
+    // Создаем текст сообщения с приветствием
+    const message = encodeURIComponent('Здравствуйте! Хочу задать вопрос по занятиям в студии Dream Lady.');
+    const fullUrl = `${adminTelegram}?start=${message}`;
+    
+    openLink(fullUrl);
+    
+    // Обновляем бейдж (уменьшаем цифру)
+    updateChatBadge();
+}
+
+// Обновление бейджа чата
+function updateChatBadge() {
+    const badge = document.getElementById('chatBadge');
+    if (badge) {
+        let currentCount = parseInt(badge.textContent);
+        if (currentCount > 1) {
+            badge.textContent = (currentCount - 1).toString();
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+}
+
+// ИСПРАВЛЕННАЯ функция для звонка
+function makePhoneCall(phoneNumber) {
+    console.log('📞 Пытаемся позвонить на номер:', phoneNumber);
+    
+    // Создаем ссылку для звонка
+    const telLink = 'tel:' + phoneNumber.replace(/[^\d+]/g, '');
+    console.log('🔗 Ссылка для звонка:', telLink);
+    
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        // В Telegram Mini Apps используем openLink
+        Telegram.WebApp.openLink(telLink);
+    } else {
+        // В браузере пробуем разные способы
+        const link = document.createElement('a');
+        link.href = telLink;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Дополнительный способ для iOS
+        setTimeout(() => {
+            window.location.href = telLink;
+        }, 100);
+    }
+}
+
+// Функция для открытия WhatsApp
+function openWhatsApp(phoneNumber) {
+    console.log('📱 Открываем WhatsApp для номера:', phoneNumber);
+    
+    // Очищаем номер от всех символов, кроме цифр
+    const cleanNumber = phoneNumber.replace(/[^\d]/g, '');
+    
+    // Формируем ссылку для WhatsApp
+    const whatsappLink = 'https://wa.me/' + cleanNumber + '?text=' + 
+        encodeURIComponent('Здравствуйте! У меня вопрос по занятиям в студии Dream Lady.');
+    
+    console.log('🔗 Ссылка WhatsApp:', whatsappLink);
+    
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.openLink(whatsappLink);
+    } else {
+        window.open(whatsappLink, '_blank');
+    }
+}
+
+// ============================================
+// ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН (БЕЗ ИЗМЕНЕНИЙ)
+// ============================================
 
 function openTelegramBotFullscreen() {
     document.getElementById('telegramBotFullscreen').classList.add('active');
@@ -1960,6 +2135,10 @@ function closeTrainersModal() {
     }
 }
 
+function openTelegramBot() {
+    openLink('https://t.me/DreamTeamStudio_Bot');
+}
+
 // Закрытие модальных окон при клике на фон
 document.querySelectorAll('.modal-overlay').forEach(modal => {
     modal.addEventListener('click', function(e) {
@@ -2017,49 +2196,6 @@ function initWapiAuth() {
     }
 }
 
-function openTelegramBot() {
-    openLink('https://t.me/DreamTeamStudio_Bot');
-}
-
-// ============================================
-// ИСПРАВЛЕННЫЕ ФУНКЦИИ ДЛЯ КОНТАКТОВ
-// ============================================
-
-function makePhoneCall(phoneNumber) {
-    // Убираем все символы, кроме цифр и плюса
-    const cleanNumber = phoneNumber.replace(/[^\d+]/g, '');
-    // Создаем ссылку для звонка
-    const telLink = 'tel:' + cleanNumber;
-    
-    console.log('📞 Пытаемся позвонить на номер:', cleanNumber);
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        // В Telegram Mini Apps используем openLink
-        Telegram.WebApp.openLink(telLink);
-    } else {
-        // В браузере пробуем открыть ссылку
-        window.location.href = telLink;
-    }
-}
-
-function openWhatsApp(phoneNumber) {
-    // Убираем все символы, кроме цифр
-    const cleanNumber = phoneNumber.replace(/[^\d]/g, '');
-    // Формируем ссылку для WhatsApp с номером
-    const whatsappLink = 'https://wa.me/' + cleanNumber;
-    
-    console.log('📱 Открываем WhatsApp для номера:', cleanNumber);
-    console.log('🔗 Ссылка:', whatsappLink);
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        // В Telegram Mini Apps используем openLink
-        Telegram.WebApp.openLink(whatsappLink);
-    } else {
-        // В браузере открываем в новом окне
-        window.open(whatsappLink, '_blank');
-    }
-}
-
 // ============================================
 // ЗАГРУЗКА СТРАНИЦЫ
 // ============================================
@@ -2082,6 +2218,15 @@ document.addEventListener('DOMContentLoaded', function() {
         schedule.style.marginTop = marginTop + 'px';
     }
     
+    // Настройка иконки чата
+    const chatIcon = document.querySelector('.chat-admin-float');
+    if (chatIcon) {
+        // Показываем анимацию пульсации при загрузке
+        setTimeout(() => {
+            chatIcon.style.animation = 'pulse 2s infinite';
+        }, 1000);
+    }
+    
     console.log('🚀 Mini App готов к работе');
 });
 
@@ -2102,7 +2247,6 @@ setInterval(function() {
             console.log('🔄 Восстановление полноэкранного режима...');
             tg.expand();
             
-            // Для версий 6.1+ добавляем requestFullscreen
             if (version >= 6.1) {
                 tg.requestFullscreen();
             }
@@ -2111,6 +2255,14 @@ setInterval(function() {
         }
     }
 }, 1000);
+
+// Добавляем обработчик для кнопки звонка в контактах (дополнительная защита)
+document.addEventListener('click', function(e) {
+    if (e.target.closest('button') && e.target.closest('button').textContent.includes('Позвонить сейчас')) {
+        e.preventDefault();
+        makePhoneCall('+79169947368');
+    }
+});
 </script>
 </body>
 </html>
