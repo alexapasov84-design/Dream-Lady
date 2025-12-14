@@ -192,7 +192,7 @@
                 0 8px 0 #1C3AA9,
                 0 15px 25px rgba(30, 144, 255, 0.3);
             animation: fadeInUp 0.5s ease backwards;
-            animation-delay: 0.2s;
+            animation-delay: 0.15s;
         }
         
         .city-chat-button:active {
@@ -1022,7 +1022,7 @@
         
         .city-chat-button {
             animation: fadeInUp 0.5s ease backwards;
-            animation-delay: 0.2s;
+            animation-delay: 0.15s;
         }
         
         .button-3d:nth-child(1) { animation-delay: 0.1s; }
@@ -1192,6 +1192,12 @@
             <div class="button-title">🩰 Личный кабинет</div>
         </div>
         
+        <!-- КНОПКА ЧАТА ГОРОДА НА ВТОРОМ МЕСТЕ -->
+        <div class="city-chat-button" onclick="openCityChat()">
+            <i class="fas fa-city"></i>
+            <span>Чат города</span>
+        </div>
+        
         <div class="button-3d" onclick="openLink('https://dream-lady.com')">
             <div class="button-title">🌐 Официальный сайт</div>
         </div>
@@ -1206,12 +1212,6 @@
         
         <div class="button-3d" onclick="openTestModal()">
             <div class="button-title">Найди своё направление</div>
-        </div>
-        
-        <!-- НОВАЯ КНОПКА: ЧАТ ГОРОДА -->
-        <div class="city-chat-button" onclick="openCityChat()">
-            <i class="fas fa-city"></i>
-            <span>Чат города</span>
         </div>
         
         <div class="button-3d" onclick="openTrainersModal()">
