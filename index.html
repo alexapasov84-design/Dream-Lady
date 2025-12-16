@@ -11,6 +11,35 @@
     <!-- Telegram Web App SDK для Mini Apps 2.0 -->
     <script src="https://telegram.org/js/telegram-web-app.js?2"></script>
     
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105481509', 'ym');
+
+        ym(105481509, 'init', {
+            ssr:true, 
+            webvisor:true, 
+            clickmap:true, 
+            ecommerce:"dataLayer", 
+            accurateTrackBounce:true, 
+            trackLinks:true,
+            trackHash:true,
+            ut:"noindex"
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105481509" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    <!-- Google Tag Manager для E-commerce -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -701,6 +730,45 @@
             padding-right: 30px;
         }
         
+        /* СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА ЧАТА ГОРОДА */
+        #cityChatContent {
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) rgba(198, 161, 110, 0.1);
+        }
+        
+        #cityChatContent::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #cityChatContent::-webkit-scrollbar-track {
+            background: rgba(198, 161, 110, 0.1);
+            border-radius: 3px;
+        }
+        
+        #cityChatContent::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        /* Анимация появления чата */
+        @keyframes chatFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        #cityChatModal .modal-content {
+            animation: chatFadeIn 0.3s ease;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
         /* ОКНО ЦЕН */
         .price-content {
             font-size: 14px;
@@ -1188,17 +1256,17 @@
         </div>
         
         <!-- КНОПКИ В НОВОМ ПОРЯДКЕ -->
-        <div class="button-3d" onclick="openLink('https://an9655.listokcrm.ru/wapi')">
+        <div class="button-3d" onclick="openLinkWithTracking('https://an9655.listokcrm.ru/wapi', 'Личный кабинет')">
             <div class="button-title">🩰 Личный кабинет</div>
         </div>
         
         <!-- КНОПКА ЧАТА ГОРОДА НА ВТОРОМ МЕСТЕ -->
-        <div class="city-chat-button" onclick="openCityChat()">
+        <div class="city-chat-button" onclick="openCityChatModal()">
             <i class="fas fa-city"></i>
             <span>Чат города</span>
         </div>
         
-        <div class="button-3d" onclick="openLink('https://dream-lady.com')">
+        <div class="button-3d" onclick="openLinkWithTracking('https://dream-lady.com', 'Официальный сайт')">
             <div class="button-title">🌐 Официальный сайт</div>
         </div>
         
@@ -1245,25 +1313,25 @@
                 <a href="https://t.me/DreamLady_Koroleva" class="social-link" onclick="openAdminChat(); return false;" title="Telegram администратора">
                     <span>💬</span>
                 </a>
-                <a href="https://t.me/dream_lady_studio" class="social-link" onclick="openCityChat(); return false;" title="Чат города">
+                <a href="https://t.me/dream_lady_studio" class="social-link" onclick="openCityChatModal(); return false;" title="Чат города">
                     <span>🏙️</span>
                 </a>
                 <a href="https://api.whatsapp.com/send/?phone=79169947368" class="social-link" onclick="openWhatsApp('+79169947368'); return false;" title="WhatsApp">
                     <span>📱</span>
                 </a>
-                <a href="https://vk.com/dream_lady_studio" class="social-link" onclick="openLink('https://vk.com/dream_lady_studio'); return false;" title="ВКонтакте">
+                <a href="https://vk.com/dream_lady_studio" class="social-link" onclick="openLinkWithTracking('https://vk.com/dream_lady_studio', 'ВКонтакте'); return false;" title="ВКонтакте">
                     <span>VK</span>
                 </a>
-                <a href="https://ok.ru/group/70000036908725" class="social-link" onclick="openLink('https://ok.ru/group/70000036908725'); return false;" title="Одноклассники">
+                <a href="https://ok.ru/group/70000036908725" class="social-link" onclick="openLinkWithTracking('https://ok.ru/group/70000036908725', 'Одноклассники'); return false;" title="Одноклассники">
                     <span>OK</span>
                 </a>
-                <a href="https://dzen.ru/dream_lady" class="social-link" onclick="openLink('https://dzen.ru/dream_lady'); return false;" title="Дзен">
+                <a href="https://dzen.ru/dream_lady" class="social-link" onclick="openLinkWithTracking('https://dzen.ru/dream_lady', 'Дзен'); return false;" title="Дзен">
                     <span>Д</span>
                 </a>
-                <a href="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865" class="social-link" onclick="openLink('https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865'); return false;" title="Яндекс Карты">
+                <a href="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865" class="social-link" onclick="openLinkWithTracking('https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=86436673865', 'Яндекс Карты'); return false;" title="Яндекс Карты">
                     <span>🗺️</span>
                 </a>
-                <a href="https://www.tiktok.com/@dream_lady_studio?_r=1" class="social-link" onclick="openLink('https://www.tiktok.com/@dream_lady_studio?_r=1'); return false;" title="TikTok">
+                <a href="https://www.tiktok.com/@dream_lady_studio?_r=1" class="social-link" onclick="openLinkWithTracking('https://www.tiktok.com/@dream_lady_studio?_r=1', 'TikTok'); return false;" title="TikTok">
                     <span>🎵</span>
                 </a>
             </div>
@@ -1278,6 +1346,76 @@
     <!-- WAPI СКРИПТ ПОД МЕНЮ (как вы просили) -->
     <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
     <div id="listokWidgetContainer"></div>
+    
+    <!-- МОДАЛЬНОЕ ОКНО ЧАТА ГОРОДА -->
+    <div id="cityChatModal" class="modal-overlay">
+        <div class="modal-content" style="height: 85vh; display: flex; flex-direction: column;">
+            <div class="modal-close" onclick="closeCityChatModal()">×</div>
+            <h2 class="modal-title">🏙️ Чат города Dream Lady</h2>
+            
+            <div style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+                <!-- Заглушка или iframe -->
+                <div id="cityChatContent" style="flex: 1; overflow-y: auto; background: rgba(198, 161, 110, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 60px; color: var(--gold); margin-bottom: 20px;">💬</div>
+                        <h3 style="color: var(--gold); font-family: 'Cormorant', serif; margin-bottom: 15px;">Чат города Dream Lady</h3>
+                        <p style="color: var(--light-gold); margin-bottom: 20px; line-height: 1.5;">
+                            Здесь отображались бы сообщения из чата города.<br>
+                            Для просмотра полного чата и отправки сообщений<br>
+                            нажмите кнопку ниже.
+                        </p>
+                        
+                        <!-- Статистика чата -->
+                        <div style="display: flex; justify-content: space-around; width: 100%; margin: 20px 0; padding: 15px; background: rgba(198, 161, 110, 0.1); border-radius: 10px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 24px; color: var(--gold); font-weight: bold;">500+</div>
+                                <div style="font-size: 12px; color: var(--light-gold);">Участников</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 24px; color: var(--gold); font-weight: bold;">24/7</div>
+                                <div style="font-size: 12px; color: var(--light-gold);">Активность</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 24px; color: var(--gold); font-weight: bold;">Новое</div>
+                                <div style="font-size: 12px; color: var(--light-gold);">Каждый день</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Кнопки действий -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button onclick="openTelegramCityChat()" 
+                            style="background: linear-gradient(135deg, #0088cc 0%, #005580 100%); 
+                                   color: white; border: none; padding: 15px; 
+                                   font-size: 16px; font-weight: 600; border-radius: 10px; 
+                                   cursor: pointer; font-family: 'Cormorant', serif;
+                                   display: flex; align-items: center; justify-content: center; 
+                                   gap: 10px; box-shadow: 0 4px 0 #00334d;">
+                        <i class="fab fa-telegram"></i> Открыть полный чат в Telegram
+                    </button>
+                    
+                    <button onclick="copyChatLink()" 
+                            style="background: rgba(198, 161, 110, 0.1); 
+                                   color: var(--gold); border: 1px solid var(--gold); 
+                                   padding: 12px; font-size: 14px; border-radius: 10px; 
+                                   cursor: pointer; font-family: 'Cormorant', serif;
+                                   display: flex; align-items: center; justify-content: center; 
+                                   gap: 10px;">
+                        <i class="fas fa-link"></i> Скопировать ссылку на чат
+                    </button>
+                    
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="https://t.me/dream_lady_studio" 
+                           onclick="openLinkWithTracking('https://t.me/dream_lady_studio', 'Chat Rules')"
+                           style="color: var(--light-gold); font-size: 13px; text-decoration: none;">
+                            📜 Правила чата
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- ПОЛНОЭКРАННОЕ ОКНО ДЛЯ TELEGRAM-БОТА -->
     <div id="telegramBotFullscreen" class="fullscreen-overlay">
@@ -1345,7 +1483,7 @@
             </div>
             
             <div class="fullscreen-action">
-                <button class="fullscreen-button" onclick="openTelegramBot()">
+                <button class="fullscreen-button" onclick="openLinkWithTracking('https://t.me/DreamTeamStudio_Bot', 'Telegram Bot')">
                     📲 Перейти к боту @DreamTeamStudio_Bot
                 </button>
                 <p class="fullscreen-note">
@@ -1399,7 +1537,7 @@
                     <p>в разделе "Акции"</p>
                 </div>
                 <div style="margin-top: 20px; font-size: 13px; color: var(--light-gold);">
-                    <button class="signup-button" onclick="openLink('https://dream-lady.com/price')">Информация на сайте</button>
+                    <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/price', 'Цены на сайте')">Информация на сайте</button>
                 </div>
             </div>
         </div>
@@ -1417,7 +1555,7 @@
                 </div>
                 <p>Подробная информация о текущих акциях</p>
                 <p>и специальных предложениях на сайте:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/stock')">
+                <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/stock', 'Акции на сайте')">
                     Информация на сайте
                 </button>
                 <p style="margin-top: 15px; font-size: 13px;">
@@ -1663,7 +1801,7 @@
                 </div>
             </div>
             <div style="margin-top: 20px; text-align: center;">
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#directions')">Все направления на сайте</button>
+                <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/#directions', 'Все направления')">Все направления на сайте</button>
             </div>
         </div>
     </div>
@@ -1679,7 +1817,7 @@
                     Персональный подход к каждой ученице
                 </div>
                 <p>Для записи на занятие перейдите на сайт студии:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda')">
+                <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda', 'Запись онлайн')">
                     Записаться онлайн
                 </button>
                 <p style="margin-top: 15px; font-size: 13px;">
@@ -1701,7 +1839,7 @@
                     какое направление подойдёт именно вам
                 </div>
                 <p>Тест доступен на официальном сайте студии:</p>
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#quiz')">
+                <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/#quiz', 'Тест направлений')">
                     Пройти тест
                 </button>
                 <p style="margin-top: 15px; font-size: 13px;">
@@ -1808,7 +1946,7 @@
             <!-- КНОПКА НА КАРТЫ -->
             <div style="text-align: center; margin-top: 20px;">
                 <a href="https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2" 
-                   onclick="openLink('https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2'); return false;"
+                   onclick="openLinkWithTracking('https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2', 'Яндекс Карты')"
                    style="display: inline-block; background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%); color: var(--deep-navy); border: none; padding: 12px 25px; font-size: 15px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: 'Cormorant', serif; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">
                     <i class="fas fa-map-marked-alt"></i> Открыть на карте
                 </a>
@@ -1881,7 +2019,7 @@
             </div>
             <!-- КНОПКА ЗАПИСИ В ОКНЕ ТРЕНЕРОВ -->
             <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(198, 161, 110, 0.2);">
-                <button class="signup-button" onclick="openLink('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda')">
+                <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda', 'Запись от тренеров')">
                     Записаться на пробное занятие
                 </button>
                 <p style="margin-top: 10px; font-size: 12px; color: var(--light-gold);">
@@ -1892,6 +2030,63 @@
     </div>
     
 <script>
+// ============================================
+// YANDEX METRIKA FUNCTIONS
+// ============================================
+
+// Трекинг кликов по кнопкам
+function trackYandexGoal(goalName) {
+    if (typeof ym !== 'undefined') {
+        ym(105481509, 'reachGoal', goalName);
+        console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+    }
+}
+
+// Трекинг открытия ссылок
+function openLinkWithTracking(url, goalName) {
+    console.log('🔗 Открываем ссылку с трекингом:', url, 'Цель:', goalName);
+    
+    // Отправляем цель в Яндекс.Метрику
+    if (goalName && typeof ym !== 'undefined') {
+        ym(105481509, 'reachGoal', goalName);
+        console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+    }
+    
+    // Открываем ссылку
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.openLink(url);
+    } else {
+        window.open(url, '_blank');
+    }
+}
+
+// Трекинг открытия модальных окон
+function trackModalOpen(modalName) {
+    if (typeof ym !== 'undefined') {
+        ym(105481509, 'reachGoal', 'open_' + modalName + '_modal');
+        console.log('🎯 Яндекс.Метрика: открыто модальное окно "' + modalName + '"');
+    }
+}
+
+// Трекинг действий пользователя
+function trackUserAction(actionName, category = 'user_action') {
+    if (typeof ym !== 'undefined') {
+        const goalName = category + '_' + actionName;
+        ym(105481509, 'reachGoal', goalName);
+        console.log('🎯 Яндекс.Метрика: действие "' + goalName + '"');
+        
+        // Также отправляем в dataLayer для e-commerce
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'customEvent',
+                'eventCategory': category,
+                'eventAction': actionName,
+                'eventLabel': goalName
+            });
+        }
+    }
+}
+
 // ============================================
 // MINI APPS 2.0: ПОЛНОЭКРАННЫЙ РЕЖИМ С БЛОКИРОВКОЙ СВАЙПОВ
 // ============================================
@@ -1933,7 +2128,11 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
     // 8. ОБРАБОТКА START_PARAM ДЛЯ АВТОМАТИЧЕСКОГО ЗАПУСКА
     if (tg.initDataUnsafe?.start_param === 'fullscreen') {
         console.log('🚀 Автоматический запуск из бота');
+        trackUserAction('bot_launch', 'telegram');
     }
+    
+    // Трекинг запуска из Telegram
+    trackUserAction('mini_app_open', 'telegram');
     
     console.log('✅ Mini Apps 2.0 инициализирован');
     console.log('🖥 Платформа:', tg.platform);
@@ -1941,10 +2140,11 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
     
 } else {
     console.log('🌐 Режим браузера');
+    trackUserAction('browser_open', 'web');
 }
 
 // ============================================
-// ОСНОВНЫЕ ФУНКЦИИ
+// ОСНОВНЫЕ ФУНКЦИИ С ТРЕКИНГОМ
 // ============================================
 
 function openLink(url) {
@@ -1965,22 +2165,172 @@ function openAdminChat() {
     const message = encodeURIComponent('Здравствуйте! Хочу задать вопрос по занятиям в студии Dream Lady.');
     const fullUrl = `${adminTelegram}?start=${message}`;
     
+    // Трекинг
+    trackUserAction('open_admin_chat', 'telegram');
+    trackYandexGoal('open_admin_chat');
+    
     openLink(fullUrl);
     
     // Обновляем бейдж (уменьшаем цифру)
     updateChatBadge();
 }
 
-// Функция для открытия чата города
-function openCityChat() {
-    console.log('🏙️ Открываем чат города');
-    const cityChatUrl = 'https://t.me/dream_lady_studio';
+// ============================================
+// ФУНКЦИИ ДЛЯ МОДАЛЬНОГО ОКНА ЧАТА ГОРОДА
+// ============================================
+
+// Функция для открытия модального окна чата города
+function openCityChatModal() {
+    console.log('🏙️ Открываем модальное окно чата города');
     
-    // Создаем текст сообщения с приветствием
-    const message = encodeURIComponent('Привет! Хочу присоединиться к чату города Dream Lady!');
+    // Показываем модальное окно
+    document.getElementById('cityChatModal').classList.add('active');
+    
+    // Трекинг
+    trackModalOpen('city_chat');
+    trackYandexGoal('open_city_chat_modal');
+    trackUserAction('open_city_chat_modal', 'chat');
+    
+    // Блокируем свайпы в Telegram
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeCityChatModal);
+    }
+    
+    // Загружаем информацию о чате
+    loadChatInfo();
+}
+
+// Функция для закрытия модального окна чата города
+function closeCityChatModal() {
+    document.getElementById('cityChatModal').classList.remove('active');
+    
+    // Разблокируем свайпы в Telegram
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.enableVerticalSwipes();
+        Telegram.WebApp.BackButton.hide();
+    }
+}
+
+// Функция для открытия полного чата в Telegram
+function openTelegramCityChat() {
+    console.log('🔗 Открываем полный чат в Telegram');
+    
+    const cityChatUrl = 'https://t.me/dream_lady_studio';
+    const message = encodeURIComponent('Привет! Я из мини-приложения Dream Lady. Хочу присоединиться к чату!');
     const fullUrl = `${cityChatUrl}?start=${message}`;
     
+    // Трекинг
+    trackUserAction('open_full_city_chat', 'telegram');
+    trackYandexGoal('open_full_city_chat');
+    
+    // Закрываем модальное окно
+    closeCityChatModal();
+    
+    // Открываем ссылку
     openLink(fullUrl);
+}
+
+// Обновленная функция для открытия чата города (старая версия)
+function openCityChat() {
+    // Теперь открываем модальное окно вместо прямой ссылки
+    openCityChatModal();
+}
+
+// Функция для копирования ссылки на чат
+function copyChatLink() {
+    const chatLink = 'https://t.me/dream_lady_studio';
+    
+    // Используем Clipboard API если доступен
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(chatLink).then(() => {
+            showNotification('✅ Ссылка скопирована в буфер обмена!');
+        }).catch(err => {
+            console.error('Ошибка копирования:', err);
+            fallbackCopyToClipboard(chatLink);
+        });
+    } else {
+        fallbackCopyToClipboard(chatLink);
+    }
+    
+    // Трекинг
+    trackUserAction('copy_chat_link', 'chat');
+}
+
+// Запасной метод копирования
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showNotification('✅ Ссылка скопирована в буфер обмена!');
+    } catch (err) {
+        console.error('Не удалось скопировать:', err);
+        showNotification('❌ Не удалось скопировать ссылку');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Функция для показа уведомления
+function showNotification(message) {
+    // Создаем элемент уведомления
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--gold);
+        color: var(--deep-navy);
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-family: 'Cormorant', serif;
+        z-index: 10000;
+        box-shadow: 0 4px 15px rgba(198, 161, 110, 0.4);
+        animation: fadeInOut 2.5s ease;
+    `;
+    
+    // Добавляем стили для анимации
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    
+    // Удаляем уведомление через 2.5 секунды
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 2500);
+}
+
+// Функция для загрузки информации о чате
+function loadChatInfo() {
+    // Здесь можно добавить загрузку реальной статистики чата
+    // Например, через Telegram Bot API или свой бэкенд
+    
+    console.log('📊 Загружаем информацию о чате...');
+    
+    // Имитируем загрузку данных
+    setTimeout(() => {
+        // Можно обновлять данные в реальном времени
+        // document.getElementById('chatStats').innerHTML = '...';
+    }, 500);
 }
 
 // Обновление бейджа чата
@@ -2009,6 +2359,10 @@ function openWhatsApp(phoneNumber) {
     
     console.log('🔗 Ссылка WhatsApp:', whatsappLink);
     
+    // Трекинг
+    trackUserAction('open_whatsapp', 'messenger');
+    trackYandexGoal('open_whatsapp');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.openLink(whatsappLink);
     } else {
@@ -2016,12 +2370,22 @@ function openWhatsApp(phoneNumber) {
     }
 }
 
+// Функция для открытия Telegram бота
+function openTelegramBot() {
+    trackUserAction('open_telegram_bot', 'telegram');
+    trackYandexGoal('open_telegram_bot');
+    openLink('https://t.me/DreamTeamStudio_Bot');
+}
+
 // ============================================
-// ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН (БЕЗ ИЗМЕНЕНИЙ)
+// ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН С ТРЕКИНГОМ
 // ============================================
 
 function openTelegramBotFullscreen() {
     document.getElementById('telegramBotFullscreen').classList.add('active');
+    trackModalOpen('telegram_bot');
+    trackYandexGoal('open_telegram_bot_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2041,6 +2405,9 @@ function closeFullscreen() {
 
 function openPriceModal() {
     document.getElementById('priceModal').classList.add('active');
+    trackModalOpen('price');
+    trackYandexGoal('open_price_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2058,6 +2425,9 @@ function closePriceModal() {
 
 function openStockModal() {
     document.getElementById('stockModal').classList.add('active');
+    trackModalOpen('stock');
+    trackYandexGoal('open_stock_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2075,6 +2445,9 @@ function closeStockModal() {
 
 function openDirectionsModal() {
     document.getElementById('directionsModal').classList.add('active');
+    trackModalOpen('directions');
+    trackYandexGoal('open_directions_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2092,6 +2465,9 @@ function closeDirectionsModal() {
 
 function openSignupModal() {
     document.getElementById('signupModal').classList.add('active');
+    trackModalOpen('signup');
+    trackYandexGoal('open_signup_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2109,6 +2485,9 @@ function closeSignupModal() {
 
 function openTestModal() {
     document.getElementById('testModal').classList.add('active');
+    trackModalOpen('test');
+    trackYandexGoal('open_test_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2126,6 +2505,9 @@ function closeTestModal() {
 
 function openContactsModal() {
     document.getElementById('contactsModal').classList.add('active');
+    trackModalOpen('contacts');
+    trackYandexGoal('open_contacts_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2143,6 +2525,9 @@ function closeContactsModal() {
 
 function openTrainersModal() {
     document.getElementById('trainersModal').classList.add('active');
+    trackModalOpen('trainers');
+    trackYandexGoal('open_trainers_modal');
+    
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         Telegram.WebApp.disableVerticalSwipes();
         Telegram.WebApp.BackButton.show();
@@ -2158,10 +2543,6 @@ function closeTrainersModal() {
     }
 }
 
-function openTelegramBot() {
-    openLink('https://t.me/DreamTeamStudio_Bot');
-}
-
 // Закрытие модальных окон при клике на фон
 document.querySelectorAll('.modal-overlay').forEach(modal => {
     modal.addEventListener('click', function(e) {
@@ -2173,6 +2554,7 @@ document.querySelectorAll('.modal-overlay').forEach(modal => {
             else if (this.id === 'testModal') closeTestModal();
             else if (this.id === 'contactsModal') closeContactsModal();
             else if (this.id === 'trainersModal') closeTrainersModal();
+            else if (this.id === 'cityChatModal') closeCityChatModal();
         }
     });
 });
@@ -2211,9 +2593,15 @@ function initWapiAuth() {
             configId: '91afda9e057d0c742cda59a22cd5bdf4',
             onAuth: function(userData) {
                 console.log('✅ Пользователь авторизован');
+                trackUserAction('wapi_auth_success', 'auth');
             },
             onLoad: function() {
                 console.log('✅ WAPI загружен');
+                trackUserAction('wapi_loaded', 'system');
+            },
+            onError: function(error) {
+                console.log('❌ WAPI ошибка:', error);
+                trackUserAction('wapi_error', 'system');
             }
         });
     }
@@ -2227,6 +2615,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Страница загружена');
     createStars();
     initWapiAuth();
+    
+    // Трекинг загрузки страницы
+    trackUserAction('page_loaded', 'system');
     
     // Центрирование меню
     const menu = document.querySelector('.menu-container');
@@ -2278,6 +2669,20 @@ setInterval(function() {
         }
     }
 }, 1000);
+
+// Трекинг времени на странице
+let startTime = Date.now();
+window.addEventListener('beforeunload', function() {
+    const timeSpent = Math.round((Date.now() - startTime) / 1000);
+    console.log('⏱️ Время на странице:', timeSpent, 'секунд');
+    
+    if (typeof ym !== 'undefined') {
+        ym(105481509, 'params', {
+            time_on_page: timeSpent
+        });
+        ym(105481509, 'reachGoal', 'time_on_page_' + timeSpent + 's');
+    }
+});
 </script>
 </body>
 </html>
