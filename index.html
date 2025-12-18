@@ -303,8 +303,10 @@
             visibility: visible;
         }
         
+        /* 1. ОЧИЩЕННОЕ МОДАЛЬНОЕ ОКНО ШАРА */
         .fortune-modal-content {
-            background: rgba(26, 31, 43, 0.85);
+            background: transparent; /* Убрали фоновое изображение */
+            backdrop-filter: none; /* Убрали размытие */
             border: 3px solid var(--gold);
             border-radius: 25px;
             padding: 30px 25px;
@@ -312,14 +314,9 @@
             width: 90%;
             text-align: center;
             position: relative;
-            backdrop-filter: blur(5px);
             box-shadow: 0 25px 60px rgba(198, 161, 110, 0.5);
             transform: translateY(20px) scale(0.95);
             transition: transform 0.4s ease;
-            background-image: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/b9881671-182b-46af-a30a-ce855f154762.gif');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
         
         .fortune-modal-overlay.active .fortune-modal-content {
@@ -441,6 +438,7 @@
             transform: translate(-50%, -50%) scale(1);
         }
         
+        /* ТЕКСТ ПРЕДСКАЗАНИЯ С ЗОЛОТОЙ ОБВОДКОЙ БУКВ */
         .fortune-text {
             font-family: 'Cormorant', serif;
             font-size: 18px;
@@ -448,14 +446,26 @@
             color: var(--soft-white);
             text-align: center;
             line-height: 1.4;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            text-shadow: 
+                0 0 2px var(--gold),
+                0 0 4px var(--gold),
+                0 0 6px rgba(198, 161, 110, 0.5),
+                0 0 8px rgba(198, 161, 110, 0.3);
             padding: 15px;
             animation: textGlow 2s ease-in-out infinite alternate;
         }
         
         @keyframes textGlow {
-            0% { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
-            100% { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3), 0 2px 10px rgba(0, 0, 0, 0.7); }
+            0% { text-shadow: 
+                0 0 2px var(--gold),
+                0 0 4px var(--gold),
+                0 0 6px rgba(198, 161, 110, 0.5),
+                0 0 8px rgba(198, 161, 110, 0.3); }
+            100% { text-shadow: 
+                0 0 4px var(--gold),
+                0 0 8px var(--gold),
+                0 0 12px rgba(198, 161, 110, 0.7),
+                0 0 16px rgba(198, 161, 110, 0.5); }
         }
         
         /* КНОПКА ПОЛУЧИТЬ ПРЕДСКАЗАНИЕ */
@@ -525,11 +535,12 @@
             margin: 15px 20px;
         }
         
+        /* 2. ШАПОЧКА ПОВЕРНУТА НА 45° И СДВИНУТА ВПРАВО */
         .cabinet-hat {
             position: absolute;
             top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: calc(50% + 20px); /* Сдвиг вправо от центра */
+            transform: translateX(-50%) rotate(45deg); /* Поворот на 45° */
             width: 100px;
             height: 60px;
             background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
@@ -1632,7 +1643,7 @@
             </div>
         </div>
         
-        <!-- КНОПКА ЛИЧНОГО КАБИНЕТА С ШАПКОЙ СВЕРХУ -->
+        <!-- КНОПКА ЛИЧНОГО КАБИНЕТА С ШАПКОЙ СВЕРХУ (ИСПРАВЛЕННАЯ) -->
         <div class="personal-cabinet-container">
             <div class="cabinet-hat"></div>
             <div class="personal-cabinet-button" onclick="openLinkWithTracking('https://an9655.listokcrm.ru/wapi', 'Личный кабинет')">
