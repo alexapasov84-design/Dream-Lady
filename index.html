@@ -365,9 +365,41 @@
         .fortune-subtitle {
             font-size: 18px;
             color: var(--soft-white);
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             opacity: 0.9;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* ЛОГОТИП В МОДАЛЬНОМ ОКНЕ ШАРА (ДОБАВЛЕНО) */
+        .fortune-logo-container {
+            text-align: center;
+            margin: 15px auto 25px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .fortune-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            box-shadow: 0 8px 20px rgba(198, 161, 110, 0.5);
+            background: var(--graphite);
+            padding: 5px;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(198, 161, 110, 0.5),
+                            0 0 20px rgba(198, 161, 110, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(198, 161, 110, 0.7),
+                            0 0 30px rgba(198, 161, 110, 0.5),
+                            0 0 45px rgba(198, 161, 110, 0.3);
+            }
         }
         
         /* КОНТЕЙНЕР ШАРА - УБИРАЕМ ЗОЛОТОЙ КРУГ */
@@ -556,30 +588,35 @@
             margin: 15px 20px;
         }
         
-/* ШАПОЧКА ПОВЕРНУТА НА 45° И ПЕРЕМЕЩЕНА НА ПРАВЫЙ УГОЛ КНОПКИ - ИСПРАВЛЕННЫЙ ВАРИАНТ */
-.cabinet-hat {
-    position: absolute;
-    top: -20px; /* Увеличили отрицательное значение (было -14px) */
-    right: -55px; /* Увеличили отрицательное значение (было -38px) */
-    transform: rotate(45deg); /* Поворот на 45° */
-    width: 102px; /* Увеличили на 50% (было 68px) */
-    height: 66px; /* Увеличили на 50% (было 44px) */
-    background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
-    z-index: 100000; /* УВЕЛИЧИЛИ ДЛЯ ПОВЕРХ ВСЕХ ОКОН (было 11) */
-    pointer-events: none;
-    /* Легкая тень для объема */
-    filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
-}
-
-@media (max-width: 400px) {
-    .cabinet-hat {
-        width: 87px;
-        height: 57px;
-        top: -16px;
-        right: -47px; /* Скорректировал для мобильных */
-        z-index: 100000; /* Тоже увеличили */
-    }
-}
+        /* ШАПОЧКА ПОВЕРНУТА НА 45° И ПЕРЕМЕЩЕНА НА ПРАВЫЙ УГОЛ КНОПКИ - ИСПРАВЛЕННЫЙ ВАРИАНТ */
+        .cabinet-hat {
+            position: absolute;
+            top: -60px; /* Увеличили отрицательное значение (было -20px) */
+            right: -60px; /* Скорректировали */
+            transform: rotate(45deg); /* Поворот на 45° */
+            width: 102px; /* Увеличили на 50% (было 68px) */
+            height: 66px; /* Увеличили на 50% (было 44px) */
+            background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
+            z-index: 100000; /* УВЕЛИЧИЛИ ДЛЯ ПОВЕРХ ВСЕХ ОКОН (было 11) */
+            pointer-events: none;
+            /* Легкая тень для объема */
+            filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
+        }
+        
+        @media (max-width: 400px) {
+            .cabinet-hat {
+                width: 87px;
+                height: 57px;
+                top: -50px; /* Увеличил для мобильных */
+                right: -47px; /* Скорректировал для мобильных */
+                z-index: 100000; /* Тоже увеличили */
+            }
+            
+            .fortune-logo {
+                width: 70px;
+                height: 70px;
+            }
+        }
         
         .personal-cabinet-button {
             position: relative;
@@ -1522,8 +1559,8 @@
             .cabinet-hat {
                 width: 80px;
                 height: 50px;
-                top: -35px;
-                right: -10px;
+                top: -45px;
+                right: -15px;
             }
             
             .button-title {
@@ -1780,6 +1817,12 @@
             <div class="fortune-year">2026</div>
             <h2 class="fortune-title">Что ждёт вас в новом году?</h2>
             <div class="fortune-subtitle">Волшебный шар покажет ваше будущее</div>
+            
+            <!-- ЛОГОТИП В МОДАЛЬНОМ ОКНЕ (ДОБАВЛЕН) -->
+            <div class="fortune-logo-container">
+                <img src="https://static.craftum.com/6WjjbbQXSzCV9-QdJfwKZedW_Ss=/288x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/fa8379ad-9065-4523-a9a4-8a24ef6ee0fe.webp" 
+                     alt="Dream Lady Logo" class="fortune-logo">
+            </div>
             
             <!-- ШАР С ПРЕДСКАЗАНИЕМ -->
             <div class="fortune-ball-container">
@@ -2209,8 +2252,8 @@
                     <span style="color: var(--gold); font-weight: 500;">+7 916 994-73-68</span>
                 </p>
             </div>
-</div>
-</div>
+        </div>
+    </div>
     
     <!-- МОДАЛЬНОЕ ОКНО ТЕСТА -->
     <div id="testModal" class="modal-overlay">
