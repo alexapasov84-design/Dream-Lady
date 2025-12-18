@@ -565,7 +565,7 @@
     width: 102px; /* Увеличили на 50% (было 68px) */
     height: 66px; /* Увеличили на 50% (было 44px) */
     background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
-    z-index: 11;
+    z-index: 10000; /* УВЕЛИЧИЛИ ДЛЯ ПОВЕРХ ВСЕХ ОКОН (было 11) */
     pointer-events: none;
     /* Легкая тень для объема */
     filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
@@ -573,26 +573,11 @@
 
 @media (max-width: 400px) {
     .cabinet-hat {
-        width: 87px; /* Увеличили на 50% для мобильных (было 58px) */
-        height: 57px; /* Увеличили на 50% для мобильных (было 38px) */
-        top: -16px; /* Увеличили отрицательное значение */
-        right: -36px; /* Увеличили отрицательное значение */
-    }
-}
-@media (max-width: 400px) {
-    .cabinet-hat {
-        width: 87px; /* Увеличили на 50% для мобильных (было 58px) */
-        height: 57px; /* Увеличили на 50% для мобильных (было 38px) */
-        top: -12px; /* Немного скорректировали */
-        right: -32px; /* Немного скорректировали */
-    }
-}
-@media (max-width: 400px) {
-    .cabinet-hat {
-        width: 58px;
-        height: 38px;
-        top: -28px;
-        right: -6px;
+        width: 87px;
+        height: 57px;
+        top: -16px;
+        right: -47px; /* Скорректировал для мобильных */
+        z-index: 10000; /* Тоже увеличили */
     }
 }
         
