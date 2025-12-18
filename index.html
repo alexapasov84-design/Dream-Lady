@@ -556,17 +556,28 @@
             margin: 15px 20px;
         }
         
-/* ШАПОЧКА ПОВЕРНУТА НА 45° И ПЕРЕМЕЩЕНА НА ПРАВЫЙ УГОЛ КНОПКИ */
+/* ШАПОЧКА ПОВЕРНУТА НА 45° И ПЕРЕМЕЩЕНА НА ПРАВЫЙ УГОЛ КНОПКИ - ИСПРАВЛЕННЫЙ ВАРИАНТ */
 .cabinet-hat {
     position: absolute;
-    top: -0px; /* Поднимаем над кнопкой */
-    right: +10px; /* Прижимаем к правому краю */
-    transform: rotate(45deg) translateX(50%); /* Поворот и смещение для центрирования */
-    width: 65px;
-    height: 42px;
+    top: -32px; /* Оптимальная высота */
+    right: -8px; /* Немного выходит за правый край */
+    transform: rotate(45deg); /* Поворот на 45° */
+    width: 68px;
+    height: 44px;
     background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
     z-index: 11;
     pointer-events: none;
+    /* Легкая тень для объема */
+    filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
+}
+
+@media (max-width: 400px) {
+    .cabinet-hat {
+        width: 58px;
+        height: 38px;
+        top: -28px;
+        right: -6px;
+    }
 }
         
         .personal-cabinet-button {
