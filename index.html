@@ -922,15 +922,17 @@
             z-index: 1000; /* Ниже шапочки */
         }
         
-        .logo-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(198, 161, 110, 0.1) 100%);
-        }
+       .logo-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ЗАМЕНЯЕМ ЖЕЛТЫЙ ГРАДИЕНТ НА ПРОЗРАЧНЫЙ ИЛИ НЕЙТРАЛЬНЫЙ */
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 50%; /* Делаем градиент круглым, а не квадратным */
+}
         
         h1 {
             font-family: 'Cormorant', serif;
