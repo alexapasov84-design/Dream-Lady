@@ -439,7 +439,7 @@
             50% { transform: translateY(-10px) rotate(2deg) translateZ(0); }
         }
         
-        /* ТЕКСТ ПРЕДСКАЗАНИЯ ВНУТРИ ШАРА */
+        /* ТЕКСТ ПРЕДСКАЗАНИЯ ВНУТРИ ШАРА - ИСПРАВЛЕННЫЙ */
         .fortune-prediction {
             position: absolute;
             top: 50%;
@@ -462,6 +462,7 @@
             border: none !important;
             box-shadow: none !important;
             transform: translateZ(0);
+            overflow: hidden;
         }
         
         .fortune-prediction.active {
@@ -470,7 +471,7 @@
             transform: translate(-50%, -50%) scale(1) translateZ(0);
         }
         
-        /* КРАСИВЫЙ ПРОПИСНОЙ ШРИФТ */
+        /* КРАСИВЫЙ ПРОПИСНОЙ ШРИФТ - С ОГРАНИЧЕНИЕМ ВЫСОТЫ */
         .fortune-text {
             font-family: 'Cormorant', serif;
             font-size: 22px;
@@ -487,9 +488,15 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transform: translateZ(0);
+            max-height: 70%;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         
-        /* ПОДПИСЬ ПОД ПРЕДСКАЗАНИЕМ */
+        /* ПОДПИСЬ ПОД ПРЕДСКАЗАНИЕМ - ЗАФИКСИРОВАННАЯ ПОЗИЦИЯ */
         .fortune-signature {
             font-family: 'Cormorant', serif;
             font-size: 14px;
@@ -500,6 +507,11 @@
             font-style: italic;
             opacity: 0.8;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
         }
         
         @keyframes textGlow {
@@ -566,7 +578,7 @@
             text-shadow: 0 2px 10px rgba(198, 161, 110, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
         
-        /* ШАПОЧКА НА ЛОГОТИПЕ */
+        /* ШАПОЧКА НА ЛОГОТИПЕ - ИСПРАВЛЕННАЯ ВЕРСИЯ С НАКЛОНОМ */
         .logo-hat-container {
             position: absolute;
             top: -40px;
@@ -584,12 +596,13 @@
             height: 100%;
             background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
             filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
-            transform: rotate(0deg) translateZ(0);
+            transform: rotate(-5deg); /* ВОССТАНАВЛИВАЕМ НАКЛОН */
         }
         
-        /* Сдвиг шапочки правее */
+        /* Сдвиг шапочки правее с небольшим наклоном */
         .logo-hat-right {
-            margin-left: 15px;
+            margin-left: 5px; /* Уменьшенный сдвиг */
+            transform: rotate(-5deg); /* Наклон вправо */
         }
         
         /* КНОПКА ЛИЧНОГО КАБИНЕТА - ОПТИМИЗИРОВАНА */
@@ -1510,6 +1523,7 @@
                 background-size: 140%;
             }
             
+            /* Исправление шапочки для мобильных */
             .logo-hat-container {
                 width: 100px;
                 height: 65px;
@@ -1517,7 +1531,12 @@
             }
             
             .logo-hat-right {
-                margin-left: 10px;
+                margin-left: 3px; /* Еще меньше сдвиг для мобильных */
+                transform: rotate(-5deg); /* Сохраняем наклон */
+            }
+            
+            .logo-hat {
+                transform: rotate(-5deg); /* Сохраняем наклон */
             }
             
             h1 {
@@ -1612,12 +1631,17 @@
                 height: 200px;
             }
             
+            /* Исправление текста предсказания для мобильных */
             .fortune-text {
                 font-size: 18px;
+                max-height: 65%;
+                padding: 10px;
             }
             
             .fortune-signature {
                 font-size: 12px;
+                bottom: 15px;
+                padding: 0 15px;
             }
             
             .fortune-title {
@@ -1651,6 +1675,12 @@
             .logo-container {
                 width: 90px;
                 height: 90px;
+            }
+            
+            .logo-hat-container {
+                width: 90px;
+                height: 60px;
+                top: -30px;
             }
             
             h1 {
@@ -2655,7 +2685,7 @@
         "ДРУЗЬЯ БУДУТ ТВОЕЙ ОПОРОЙ ВСЕГДА.",
         "ТВОЕ ТЕЛО СТАНЕТ ХРАМОМ КРАСОТЫ.",
         "ДЕНЕЖНЫЙ ДОЖДЬ БУДЕТ ИДТИ В ТВОЮ ПОЛЬЗУ.",
-        "ТЫ НАЙДЕШЬ ФИЛОСОФСКИЙ КАМЕНЬ УСПЕХА.",
+        "ТЫ НАЙДЕШ ФИЛОСОФСКИЙ КАМЕНЬ УСПЕХА.",
         "ТВОРЧЕСКИЙ ТАЛАНТ ПОЛУЧИТ НОБЕЛЕВКУ.",
         "ЛЮБОВЬ ПРИДЕТ КАК ТИХОЕ СЧАСТЬЕ.",
         "ТЫ ОБРЕТЕШЬ ДЗЕН В СОВРЕМЕННОМ МИРЕ.",
@@ -2825,7 +2855,7 @@
     }
 
     // ============================================
-    // ФУНКЦИИ ДЛЯ ШАРА ПРЕДСКАЗАНИЙ
+    // ФУНКЦИИ ДЛЯ ШАРА ПРЕДСКАЗАНИЙ С ИСПРАВЛЕНИЯМИ
     // ============================================
 
     // Открытие модального окна с шаром предсказаний
@@ -2870,7 +2900,7 @@
         }
     }
 
-    // Получение случайного предсказания
+    // Получение случайного предсказания - ИСПРАВЛЕННАЯ ВЕРСИЯ
     function getFortune() {
         const predictionElement = document.getElementById('fortunePrediction');
         const textElement = document.getElementById('fortuneText');
@@ -2896,6 +2926,11 @@
             // Устанавливаем текст предсказания
             textElement.textContent = randomPrediction;
             signatureElement.textContent = "С любовью Dream Lady!💋";
+            
+            // Прокручиваем текст в начало если он длинный
+            if (textElement.scrollHeight > textElement.clientHeight) {
+                textElement.scrollTop = 0;
+            }
             
             // Показываем предсказание с анимацией
             predictionElement.classList.add('active');
