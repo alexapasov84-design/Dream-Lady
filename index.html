@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="telegram:use_fullscreen" content="true">
     
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preconnect" href="https://274418.selcdn.ru">
+    <link rel="preconnect" href="https://static.craftum.com">
+    <link rel="dns-prefetch" href="https://telegram.org">
+    <link rel="preload" as="image" href="https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7d01fc01-e9e6-4a45-96e7-1081144bfe47.png">
+    
     <title>🌸 Dream Lady - Фитнес-студия танцев и балета</title>
     
     <!-- Telegram Web App SDK для Mini Apps 2.0 -->
@@ -40,12 +46,30 @@
         function gtag(){dataLayer.push(arguments);}
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap&display=swap" rel="stylesheet">
     <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ВАШ ОРИГИНАЛЬНЫЙ CSS С ИСПРАВЛЕНИЯМИ */
+        /* ОПТИМИЗАЦИИ CSS ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Отключение анимаций для пользователей с настройками доступности */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* БАЗОВЫЕ СТИЛИ */
         :root {
             --gold: #C6A16E;
             --deep-navy: #1A1F2B;
@@ -60,10 +84,8 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
             font-family: 'Inter', sans-serif;
-        }
-        
-        html {
-            scroll-behavior: smooth;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         
         body {
@@ -76,7 +98,21 @@
             position: relative;
         }
         
-        /* МЕРЦАЮЩИЕ ЗВЕЗДОЧКИ */
+        /* Исправления для Safari iOS */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+        
+        /* Отключение увеличения при фокусе на iOS */
+        input, textarea, button, select {
+            font-size: 16px;
+        }
+        
+        /* МЕРЦАЮЩИЕ ЗВЕЗДОЧКИ - ОПТИМИЗИРОВАНО */
         .stars-background {
             position: fixed;
             top: 0;
@@ -85,6 +121,8 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
+            will-change: transform;
+            transform: translateZ(0);
         }
         
         .star {
@@ -92,6 +130,8 @@
             background: #C6A16E;
             border-radius: 50%;
             animation: twinkle 3s infinite;
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
         
         @keyframes twinkle {
@@ -99,7 +139,7 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
-        /* СНЕЖИНКИ - ИСПРАВЛЕННЫЕ (УМЕНЬШЕНЫ НА 70%) */
+        /* СНЕЖИНКИ - ОПТИМИЗИРОВАНО ДЛЯ МОБИЛЬНЫХ */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -108,6 +148,8 @@
             height: 100%;
             pointer-events: none;
             z-index: 999;
+            will-change: transform;
+            transform: translateZ(0);
         }
         
         .snowflake {
@@ -118,6 +160,9 @@
             animation-name: snowfall;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
         }
         
         @keyframes snowfall {
@@ -153,10 +198,10 @@
             pointer-events: none;
         }
         
-        /* ИКОНКА ЧАТА С АДМИНИСТРАТОРОМ */
+        /* ИКОНКА ЧАТА С АДМИНИСТРАТОРОМ - ОПТИМИЗИРОВАНО ДЛЯ МОБИЛЬНЫХ */
         .chat-admin-float {
             position: fixed;
-            bottom: 20px;
+            bottom: calc(20px + env(safe-area-inset-bottom));
             right: 20px;
             width: 60px;
             height: 60px;
@@ -174,15 +219,11 @@
             transition: all 0.3s ease;
             text-decoration: none;
             animation: pulse 2s infinite;
-        }
-        
-        .chat-admin-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(198, 161, 110, 0.6);
+            transform: translateZ(0);
         }
         
         .chat-admin-float:active {
-            transform: scale(0.95);
+            transform: scale(0.95) translateZ(0);
         }
         
         .chat-admin-float span {
@@ -215,7 +256,7 @@
                 box-shadow: 0 8px 25px rgba(198, 161, 110, 0.4);
             }
             50% {
-                box-shadow: 0 8px 30px rgba(198, 161, 110, 0.6), 0 0 20px rgba(198, 161, 110, 0.3);
+                box-shadow: 0 8px 30px rgba(198, 161, 110, 0.6);
             }
             100% {
                 box-shadow: 0 8px 25px rgba(198, 161, 110, 0.4);
@@ -231,10 +272,10 @@
             }
         }
         
-        /* ИКОНКА НОВОГОДНЕГО ШАРА (слева) - ИСПРАВЛЕННЫЙ СТИЛЬ */
+        /* ИКОНКА НОВОГОДНЕГО ШАРА (слева) - ОПТИМИЗИРОВАНО */
         .fortune-ball-float {
             position: fixed;
-            bottom: 20px;
+            bottom: calc(20px + env(safe-area-inset-bottom));
             left: 20px;
             width: 60px;
             height: 60px;
@@ -247,6 +288,7 @@
             background: none !important;
             border: none !important;
             box-shadow: none !important;
+            transform: translateZ(0);
         }
         
         .fortune-ball-float img {
@@ -256,16 +298,8 @@
             transition: transform 0.3s ease;
         }
         
-        .fortune-ball-float:hover {
-            transform: scale(1.1);
-        }
-        
-        .fortune-ball-float:hover img {
-            transform: scale(1.1);
-        }
-        
         .fortune-ball-float:active {
-            transform: scale(0.95);
+            transform: scale(0.95) translateZ(0);
         }
         
         @keyframes fortunePulse {
@@ -273,14 +307,14 @@
                 filter: drop-shadow(0 8px 25px rgba(86, 119, 252, 0.4));
             }
             50% {
-                filter: drop-shadow(0 8px 30px rgba(86, 119, 252, 0.6)) drop-shadow(0 0 20px rgba(86, 119, 252, 0.3));
+                filter: drop-shadow(0 8px 30px rgba(86, 119, 252, 0.6));
             }
             100% {
                 filter: drop-shadow(0 8px 25px rgba(86, 119, 252, 0.4));
             }
         }
         
-        /* МОДАЛЬНОЕ ОКНО ШАРА ПРЕДСКАЗАНИЙ - ВОССТАНАВЛИВАЕМ ФОН */
+        /* МОДАЛЬНОЕ ОКНО ШАРА ПРЕДСКАЗАНИЙ */
         .fortune-modal-overlay {
             position: fixed;
             top: 0;
@@ -296,6 +330,7 @@
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
             backdrop-filter: blur(15px);
+            transform: translateZ(0);
         }
         
         .fortune-modal-overlay.active {
@@ -316,11 +351,11 @@
             box-shadow: 0 25px 60px rgba(198, 161, 110, 0.5);
             transform: translateY(20px) scale(0.95);
             transition: transform 0.4s ease;
-            /* ВОССТАНАВЛИВАЕМ ФОНОВОЕ ИЗОБРАЖЕНИЕ */
             background-image: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/b9881671-182b-46af-a30a-ce855f154762.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            transform: translateZ(0);
         }
         
         .fortune-modal-overlay.active .fortune-modal-content {
@@ -345,11 +380,12 @@
             font-family: 'Cormorant', serif;
             z-index: 20001;
             transition: all 0.3s;
+            transform: translateZ(0);
         }
         
-        .fortune-modal-close:hover {
+        .fortune-modal-close:active {
             background: rgba(198, 161, 110, 0.3);
-            transform: rotate(90deg);
+            transform: rotate(90deg) translateZ(0);
         }
         
         .fortune-title {
@@ -370,13 +406,14 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
         
-        /* КОНТЕЙНЕР ШАРА - УБИРАЕМ ЗОЛОТОЙ КРУГ */
+        /* КОНТЕЙНЕР ШАРА */
         .fortune-ball-container {
             position: relative;
             width: 250px;
             height: 250px;
             margin: 0 auto 30px;
             perspective: 1000px;
+            transform: translateZ(0);
         }
         
         .fortune-ball {
@@ -394,23 +431,12 @@
             transform-style: preserve-3d;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(3px);
+            transform: translateZ(0);
         }
         
         @keyframes ballFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-        }
-        
-        .fortune-ball::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            border-radius: 50%;
-            z-index: 1;
+            0%, 100% { transform: translateY(0) rotate(0deg) translateZ(0); }
+            50% { transform: translateY(-10px) rotate(2deg) translateZ(0); }
         }
         
         /* ТЕКСТ ПРЕДСКАЗАНИЯ ВНУТРИ ШАРА */
@@ -435,15 +461,16 @@
             backdrop-filter: none;
             border: none !important;
             box-shadow: none !important;
+            transform: translateZ(0);
         }
         
         .fortune-prediction.active {
             opacity: 1;
             visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1) translateZ(0);
         }
         
-        /* КРАСИВЫЙ ПРОПИСНОЙ ШРИФТ С ЗОЛОТОЙ ОБВОДКОЙ БУКВ */
+        /* КРАСИВЫЙ ПРОПИСНОЙ ШРИФТ */
         .fortune-text {
             font-family: 'Cormorant', serif;
             font-size: 22px;
@@ -454,13 +481,12 @@
             text-shadow: 
                 0 0 3px var(--gold),
                 0 0 6px var(--gold),
-                0 0 9px rgba(198, 161, 110, 0.7),
-                0 0 12px rgba(198, 161, 110, 0.5),
-                0 0 15px rgba(198, 161, 110, 0.3);
+                0 0 9px rgba(198, 161, 110, 0.7);
             padding: 15px;
             animation: textGlow 2s ease-in-out infinite alternate;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transform: translateZ(0);
         }
         
         /* ПОДПИСЬ ПОД ПРЕДСКАЗАНИЕМ */
@@ -481,23 +507,19 @@
                 text-shadow: 
                     0 0 3px var(--gold),
                     0 0 6px var(--gold),
-                    0 0 9px rgba(198, 161, 110, 0.7),
-                    0 0 12px rgba(198, 161, 110, 0.5),
-                    0 0 15px rgba(198, 161, 110, 0.3);
+                    0 0 9px rgba(198, 161, 110, 0.7);
             }
             100% { 
                 text-shadow: 
                     0 0 5px var(--gold),
                     0 0 10px var(--gold),
-                    0 0 15px rgba(198, 161, 110, 0.8),
-                    0 0 20px rgba(198, 161, 110, 0.6),
-                    0 0 25px rgba(198, 161, 110, 0.4);
+                    0 0 15px rgba(198, 161, 110, 0.8);
             }
         }
         
-        /* КНОПКА ПОЛУЧИТЬ ПРЕДСКАЗАНИЕ */
+        /* КНОПКА ПОЛУЧИТЬ ПРЕДСКАЗАНИЕ - ОПТИМИЗИРОВАНО */
         .fortune-button {
-            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
             color: var(--deep-navy);
             border: none;
             padding: 18px 35px;
@@ -512,17 +534,11 @@
             box-shadow: 0 6px 0 #8B6B3D, 0 10px 25px rgba(198, 161, 110, 0.3);
             transition: all 0.3s ease;
             width: 100%;
-            animation: gradientShift 3s ease infinite;
-            background-size: 400% 400%;
-        }
-        
-        .fortune-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0 #8B6B3D, 0 15px 30px rgba(198, 161, 110, 0.4);
+            transform: translateZ(0);
         }
         
         .fortune-button:active {
-            transform: translateY(4px);
+            transform: translateY(4px) translateZ(0);
             box-shadow: 0 2px 0 #8B6B3D, 0 5px 15px rgba(198, 161, 110, 0.3);
         }
         
@@ -531,12 +547,6 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: 0 4px 0 #8B6B3D;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .fortune-instruction {
@@ -556,38 +566,33 @@
             text-shadow: 0 2px 10px rgba(198, 161, 110, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
         
-        /* ШАПОЧКА НА ЛОГОТИПЕ - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+        /* ШАПОЧКА НА ЛОГОТИПЕ */
         .logo-hat-container {
             position: absolute;
-            top: -40px; /* Выше логотипа */
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px; /* Увеличенный размер */
-            height: 80px; /* Увеличенный размер */
-            z-index: 100001; /* Выше всех элементов */
+            width: 120px;
+            height: 80px;
+            z-index: 100001;
             pointer-events: none;
+            transform: translateZ(0);
         }
         
         .logo-hat {
             width: 100%;
             height: 100%;
             background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6f68a314-8098-4d56-b486-b67e707d1749.png') center/contain no-repeat;
-            /* Легкая тень для объема */
             filter: drop-shadow(2px 2px 4px rgba(198, 161, 110, 0.4));
-            transform: rotate(0deg); /* Без поворота */
+            transform: rotate(0deg) translateZ(0);
         }
         
-        /* Сдвиг шапочки правее - отдельный класс */
+        /* Сдвиг шапочки правее */
         .logo-hat-right {
-            margin-left: 15px; /* Сдвиг вправо */
+            margin-left: 15px;
         }
         
-        /* Убрали шапочку с кнопки личного кабинета */
-        .cabinet-hat {
-            display: none; /* Скрываем старую шапочку */
-        }
-        
-        /* КНОПКА ЛИЧНОГО КАБИНЕТА БЕЗ ШАПКИ */
+        /* КНОПКА ЛИЧНОГО КАБИНЕТА - ОПТИМИЗИРОВАНА */
         .personal-cabinet-container {
             position: relative;
             margin: 15px 20px;
@@ -611,21 +616,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            box-shadow: 
-                0 8px 0 #8B6B3D,
-                0 15px 25px rgba(198, 161, 110, 0.3);
-            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 25%, #F4D483 50%, #D4AF37 75%, #C6A16E 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
+            box-shadow: 0 8px 0 #8B6B3D;
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
             overflow: visible;
             z-index: 10;
+            transform: translateZ(0);
         }
         
         .personal-cabinet-button:active {
-            transform: translateY(4px);
-            box-shadow: 
-                0 4px 0 #8B6B3D,
-                0 8px 15px rgba(198, 161, 110, 0.3);
+            transform: translateY(4px) translateZ(0);
+            box-shadow: 0 4px 0 #8B6B3D;
         }
         
         .button-title {
@@ -639,7 +639,7 @@
             z-index: 2;
         }
         
-        /* КНОПКА ЧАТА ГОРОДА */
+        /* КНОПКА ЧАТА ГОРОДА - ОПТИМИЗИРОВАНА */
         .city-chat-button {
             background: linear-gradient(135deg, #1E90FF 0%, #4169E1 100%);
             position: relative;
@@ -660,18 +660,15 @@
             transition: all 0.3s ease;
             text-align: center;
             margin: 15px 20px;
-            box-shadow: 
-                0 8px 0 #1C3AA9,
-                0 15px 25px rgba(30, 144, 255, 0.3);
+            box-shadow: 0 8px 0 #1C3AA9;
             animation: fadeInUp 0.5s ease backwards;
             animation-delay: 0.15s;
+            transform: translateZ(0);
         }
         
         .city-chat-button:active {
-            transform: translateY(4px);
-            box-shadow: 
-                0 4px 0 #1C3AA9,
-                0 8px 15px rgba(30, 144, 255, 0.3);
+            transform: translateY(4px) translateZ(0);
+            box-shadow: 0 4px 0 #1C3AA9;
         }
         
         .city-chat-button i {
@@ -692,6 +689,7 @@
             overflow-y: auto;
             padding: 20px;
             padding-top: 70px;
+            transform: translateZ(0);
         }
         
         .fullscreen-overlay.active {
@@ -719,12 +717,13 @@
             backdrop-filter: blur(10px);
             opacity: 0.8;
             transition: all 0.3s ease;
+            transform: translateZ(0);
         }
         
         .fullscreen-close:active {
             opacity: 1;
             background: rgba(198, 161, 110, 0.3);
-            transform: scale(0.95);
+            transform: scale(0.95) translateZ(0);
         }
         
         .fullscreen-content {
@@ -819,7 +818,7 @@
         }
         
         .fullscreen-button {
-            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
             color: var(--deep-navy);
             border: none;
             padding: 16px 30px;
@@ -834,10 +833,11 @@
             box-shadow: 0 6px 0 #8B6B3D;
             transition: all 0.3s ease;
             margin-bottom: 15px;
+            transform: translateZ(0);
         }
         
         .fullscreen-button:active {
-            transform: translateY(4px);
+            transform: translateY(4px) translateZ(0);
             box-shadow: 0 2px 0 #8B6B3D;
         }
         
@@ -857,7 +857,7 @@
             }
         }
         
-        /* КОНТЕЙНЕР МЕНЮ - ФИКСИРОВАННАЯ ШИРИНА */
+        /* КОНТЕЙНЕР МЕНЮ - ОПТИМИЗИРОВАН */
         .menu-container {
             width: 100%;
             max-width: 400px;
@@ -870,6 +870,7 @@
             backdrop-filter: blur(10px);
             position: relative;
             z-index: 10;
+            transform: translateZ(0);
         }
         
         /* БЛОК РАСПИСАНИЯ НАД МЕНЮ */
@@ -886,6 +887,7 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            transform: translateZ(0);
         }
         
         .schedule-notification strong {
@@ -901,7 +903,7 @@
         .header {
             background: transparent;
             color: var(--soft-white);
-            padding: 60px 20px 30px; /* Увеличили верхний отступ для шапочки */
+            padding: 60px 20px 30px;
             text-align: center;
             position: relative;
             border-bottom: 1px solid rgba(198, 161, 110, 0.3);
@@ -916,23 +918,23 @@
             background: url('https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7d01fc01-e9e6-4a45-96e7-1081144bfe47.png') center/contain;
             box-shadow: 0 15px 35px rgba(198, 161, 110, 0.4);
             position: relative;
-            overflow: visible; /* Разрешаем выходить элементам за границы */
+            overflow: visible;
             background-color: var(--graphite);
             background-size: 140%;
-            z-index: 1000; /* Ниже шапочки */
+            z-index: 1000;
+            transform: translateZ(0);
         }
         
-       .logo-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* ЗАМЕНЯЕМ ЖЕЛТЫЙ ГРАДИЕНТ НА ПРОЗРАЧНЫЙ ИЛИ НЕЙТРАЛЬНЫЙ */
-    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
-    border-radius: 50%; /* Делаем градиент круглым, а не квадратным */
-}
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 50%;
+        }
         
         h1 {
             font-family: 'Cormorant', serif;
@@ -956,7 +958,7 @@
             opacity: 0.9;
         }
         
-        /* 3D КНОПКИ - ОДИНАКОВЫЙ СТИЛЬ ДЛЯ ВСЕХ КНОПОК (кроме личного кабинета) */
+        /* 3D КНОПКИ - ОПТИМИЗИРОВАНЫ */
         .button-3d {
             position: relative;
             display: flex;
@@ -976,19 +978,14 @@
             transition: all 0.3s ease;
             text-align: center;
             margin: 15px 20px;
-            box-shadow: 
-                0 8px 0 #8B6B3D,
-                0 15px 25px rgba(198, 161, 110, 0.3);
-            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 25%, #F4D483 50%, #D4AF37 75%, #C6A16E 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
+            box-shadow: 0 8px 0 #8B6B3D;
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
+            transform: translateZ(0);
         }
         
         .button-3d:active {
-            transform: translateY(4px);
-            box-shadow: 
-                0 4px 0 #8B6B3D,
-                0 8px 15px rgba(198, 161, 110, 0.3);
+            transform: translateY(4px) translateZ(0);
+            box-shadow: 0 4px 0 #8B6B3D;
         }
         
         /* СТАТИСТИКА НАПРАВЛЕНИЙ */
@@ -1078,14 +1075,8 @@
             transition: all 0.3s ease;
         }
         
-        .social-link:hover {
-            background: rgba(198, 161, 110, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(198, 161, 110, 0.2);
-        }
-        
         .social-link:active {
-            transform: translateY(0);
+            transform: translateY(0) translateZ(0);
         }
         
         /* МОДАЛЬНЫЕ ОКНА */
@@ -1104,6 +1095,7 @@
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
             backdrop-filter: blur(5px);
+            transform: translateZ(0);
         }
         
         .modal-overlay.active {
@@ -1125,10 +1117,11 @@
             box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
             transform: translateY(20px);
             transition: transform 0.3s;
+            transform: translateZ(0);
         }
         
         .modal-overlay.active .modal-content {
-            transform: translateY(0);
+            transform: translateY(0) translateZ(0);
         }
         
         .modal-close {
@@ -1148,6 +1141,7 @@
             font-size: 18px;
             font-family: 'Cormorant', serif;
             z-index: 1001;
+            transform: translateZ(0);
         }
         
         .modal-title {
@@ -1232,6 +1226,7 @@
             box-shadow: 0 20px 50px rgba(198, 161, 110, 0.4);
             transform: translateY(20px);
             transition: transform 0.3s;
+            transform: translateZ(0);
         }
         
         .directions-grid {
@@ -1249,9 +1244,9 @@
             transition: all 0.3s ease;
         }
         
-        .direction-card-modal:hover {
+        .direction-card-modal:active {
             background: rgba(198, 161, 110, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-2px) translateZ(0);
         }
         
         .direction-image-container {
@@ -1334,7 +1329,7 @@
         }
         
         .signup-button {
-            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%);
+            background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
             color: var(--deep-navy);
             border: none;
             padding: 12px 25px;
@@ -1348,10 +1343,11 @@
             margin-top: 10px;
             box-shadow: 0 4px 0 #8B6B3D;
             transition: all 0.3s ease;
+            transform: translateZ(0);
         }
         
         .signup-button:active {
-            transform: translateY(2px);
+            transform: translateY(2px) translateZ(0);
             box-shadow: 0 2px 0 #8B6B3D;
         }
         
@@ -1434,9 +1430,9 @@
             transition: all 0.3s ease;
         }
         
-        .trainer-card:hover {
+        .trainer-card:active {
             background: rgba(198, 161, 110, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-2px) translateZ(0);
         }
         
         .trainer-photo {
@@ -1492,7 +1488,7 @@
         .button-3d:nth-of-type(8) { animation-delay: 0.55s; }
         .button-3d:nth-of-type(9) { animation-delay: 0.6s; }
         
-        /* МЕДИА-ЗАПРОСЫ */
+        /* МЕДИА-ЗАПРОСЫ ДЛЯ ОПТИМИЗАЦИИ */
         @media (max-width: 400px) {
             .menu-container {
                 max-width: 95%;
@@ -1504,7 +1500,7 @@
             }
             
             .header {
-                padding: 50px 15px 20px; /* Увеличили верхний отступ для мобильных */
+                padding: 50px 15px 20px;
             }
             
             .logo-container {
@@ -1514,7 +1510,6 @@
                 background-size: 140%;
             }
             
-            /* Адаптация шапочки на лого для мобильных */
             .logo-hat-container {
                 width: 100px;
                 height: 65px;
@@ -1522,7 +1517,7 @@
             }
             
             .logo-hat-right {
-                margin-left: 10px; /* Меньший сдвиг для мобильных */
+                margin-left: 10px;
             }
             
             h1 {
@@ -1595,7 +1590,7 @@
                 width: 50px;
                 height: 50px;
                 font-size: 22px;
-                bottom: 15px;
+                bottom: calc(15px + env(safe-area-inset-bottom));
                 right: 15px;
             }
             
@@ -1605,11 +1600,10 @@
                 font-size: 10px;
             }
             
-            /* Адаптация шара предсказаний */
             .fortune-ball-float {
                 width: 50px;
                 height: 50px;
-                bottom: 15px;
+                bottom: calc(15px + env(safe-area-inset-bottom));
                 left: 15px;
             }
             
@@ -1640,6 +1634,46 @@
             }
         }
         
+        /* Оптимизация для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .menu-container {
+                max-width: 100%;
+                border-radius: 15px;
+                margin: 0 5px;
+            }
+            
+            .button-3d, .personal-cabinet-button, .city-chat-button {
+                padding: 16px 15px;
+                font-size: 15px;
+                margin: 10px 10px;
+            }
+            
+            .logo-container {
+                width: 90px;
+                height: 90px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 11px;
+                letter-spacing: 1.5px;
+            }
+        }
+        
+        /* Оптимизация для высоких экранов */
+        @media (min-height: 800px) and (max-width: 400px) {
+            .menu-container {
+                margin-top: 20px;
+            }
+            
+            .schedule-notification {
+                margin-top: 20px;
+            }
+        }
+        
         /* ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ MINI APPS 2.0 */
         .telegram-miniapp-fix {
             min-height: 100vh;
@@ -1647,9 +1681,8 @@
         }
         
         @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: 100vh;
-                min-height: -webkit-fill-available;
+            .telegram-miniapp-fix {
+                padding-bottom: env(safe-area-inset-bottom);
             }
         }
     </style>
@@ -1664,10 +1697,10 @@
         <span>💬</span>
     </a>
     
-    <!-- ИКОНКА НОВОГОДНЕГО ШАРА (плавающая слева) - ИСПРАВЛЕННАЯ -->
+    <!-- ИКОНКА НОВОГОДНЕГО ШАРА (плавающая слева) -->
     <div class="fortune-ball-float" onclick="openFortuneModal()" title="Новогодний шар предсказаний">
         <img src="https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/33c6f291-ed9f-415a-9d30-76599240bc71.png" 
-             alt="Волшебный шар предсказаний">
+             alt="Волшебный шар предсказаний" loading="lazy">
     </div>
     
     <!-- Мерцающие звездочки -->
@@ -1712,7 +1745,7 @@
             </div>
         </div>
         
-        <!-- КНОПКА ЧАТА ГОРОДА НА ВТОРОМ МЕСТЕ - ИСПРАВЛЕННАЯ ССЫЛКА -->
+        <!-- КНОПКА ЧАТА ГОРОДА НА ВТОРОМ МЕСТЕ -->
         <div class="city-chat-button" onclick="openLinkWithTracking('https://t.me/dream_lady_studio/?startapp&addToHomeScreen', 'Чат города')">
             <i class="fas fa-city"></i>
             <span>Чат города</span>
@@ -1795,7 +1828,7 @@
         <strong>📅 Расписание занятий</strong>
     </div>
     
-    <!-- WAPI СКРИПТ ПОД МЕНЮ (как вы просили) -->
+    <!-- WAPI СКРИПТ ПОД МЕНЮ -->
     <script src="https://intgr91afda9e057d0c742cda59a22cd5bdf4.listokcrm.ru/wapi/script"></script>
     <div id="listokWidgetContainer"></div>
     
@@ -1988,7 +2021,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/Up1kKPt8lnaYJM-dLGQvUzyTn2M=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/683b537f-d7b6-439b-b37c-b26977ea93fe.jpg" 
-                             alt="Стретчинг" class="direction-image-modal">
+                             alt="Стретчинг" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Стретчинг</h3>
                         </div>
@@ -2007,7 +2040,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/F7T3qcFZya-9y_FDpDEszIsmUk4=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4bb0d4bc-556f-46d4-ad9f-ba1e5ede8a9f.jpg" 
-                             alt="Основы классического танца" class="direction-image-modal">
+                             alt="Основы классического танца" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Классический танец</h3>
                         </div>
@@ -2026,7 +2059,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/JupU0gklmEXWREASS2HzU8JN61A=/874x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/13486eed-8149-45c1-bf1a-dc8b36fa8202.jpg" 
-                             alt="Современная хореография" class="direction-image-modal">
+                             alt="Современная хореография" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Современная хореография</h3>
                         </div>
@@ -2045,7 +2078,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/FcBLKuDkGpWHHWigLxfkLJaQ3Jw=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/12229dbb-df89-49a4-843e-33684969c85c.jpg" 
-                             alt="Партерная гимнастика" class="direction-image-modal">
+                             alt="Партерная гимнастика" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Партерная гимнастика</h3>
                         </div>
@@ -2064,7 +2097,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/NSvYk3n1fQ8vfkqkRmVbAP-Nhh4=/480x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/a8311b30-f5ad-425a-b34c-fe460be2283b.webp" 
-                             alt="Сильная спина" class="direction-image-modal">
+                             alt="Сильная спина" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Сильная спина</h3>
                         </div>
@@ -2083,7 +2116,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/Yv-zI6f1Fd_iJvtj9f2noRGscec=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/55fa3cc3-84aa-4106-bea9-ad1b4a546b4a.jpg" 
-                             alt="Круговая тренировка" class="direction-image-modal">
+                             alt="Круговая тренировка" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Круговая тренировка</h3>
                         </div>
@@ -2102,7 +2135,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/zweozDZM8YbE7No5c0bQ4xA_Ybk=/1142x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/6ef3819f-2b2a-492b-a380-54a4ae5844c0.jpg" 
-                             alt="Искусство на кончиках пальцев" class="direction-image-modal">
+                             alt="Искусство на кончиках пальцев" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Искусство на кончиках пальцев</h3>
                         </div>
@@ -2121,7 +2154,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/GlPHTpkO1c7Uif7SPa484YFlyZw=/1376x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9fe89366-31a5-45f8-bf88-f52b02d885f7.jpg" 
-                             alt="Барре-фитнес" class="direction-image-modal">
+                             alt="Барре-фитнес" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Барре-фитнес</h3>
                         </div>
@@ -2140,7 +2173,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/lm_ikk1i1dWYS_mcNpUmT3BWIa4=/944x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/1624aca5-72cc-47a2-8ad4-8d6cb49b13f2.jpg" 
-                             alt="Фитнес балет" class="direction-image-modal">
+                             alt="Фитнес балет" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Фитнес балет</h3>
                         </div>
@@ -2159,7 +2192,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/U1i_iWV2yeJ_dxR-qYTavtNEbEM=/1140x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d754bbfb-9e1f-452f-8130-7016aeb91caf.jpg" 
-                             alt="Пилатес" class="direction-image-modal">
+                             alt="Пилатес" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Пилатес</h3>
                         </div>
@@ -2178,7 +2211,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/WbXux05v1S3YU9d02jkWDbGKbRE=/602x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/7f7fef97-f793-4903-a69a-c23588995f1f.jpg" 
-                             alt="Пресс и попа" class="direction-image-modal">
+                             alt="Пресс и попа" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Пресс и попа</h3>
                         </div>
@@ -2197,7 +2230,7 @@
                 <div class="direction-card-modal">
                     <div class="direction-image-container">
                         <img src="https://static.craftum.com/CmhMNAQ86h31ra76vylJ8XAqiyo=/1124x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/0ce1e11a-b005-4903-b21d-583c5e8c5f66.jpg" 
-                             alt="Фитнес танцы" class="direction-image-modal">
+                             alt="Фитнес танцы" class="direction-image-modal" loading="lazy">
                         <div class="direction-image-overlay">
                             <h3 class="direction-image-title">Фитнес танцы</h3>
                         </div>
@@ -2237,8 +2270,8 @@
                     <span style="color: var(--gold); font-weight: 500;">+7 916 994-73-68</span>
                 </p>
             </div>
-</div>
-</div>
+        </div>
+    </div>
     
     <!-- МОДАЛЬНОЕ ОКНО ТЕСТА -->
     <div id="testModal" class="modal-overlay">
@@ -2262,110 +2295,106 @@
         </div>
     </div>
 
-<!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
-<div id="contactsModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-close" onclick="closeContactsModal()">×</div>
-        <h2 class="modal-title">Контакты</h2>
-        <div class="contacts-content">
-            <div class="contact-item">
-                <!-- ТЕЛЕФОН БЕЗ КНОПКИ ЗВОНКА -->
-                <div style="text-align: center; margin-bottom: 15px;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
-                        <div style="width: 50px; height: 50px; background: rgba(198, 161, 110, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-phone-alt" style="color: var(--gold); font-size: 24px;"></i>
+    <!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
+    <div id="contactsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeContactsModal()">×</div>
+            <h2 class="modal-title">Контакты</h2>
+            <div class="contacts-content">
+                <div class="contact-item">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+                            <div style="width: 50px; height: 50px; background: rgba(198, 161, 110, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-phone-alt" style="color: var(--gold); font-size: 24px;"></i>
+                            </div>
+                            <div>
+                                <span style="color: var(--gold); font-weight: 500; font-size: 22px; font-family: 'Cormorant', serif; display: block;">
+                                    +7 916 994-73-68
+                                </span>
+                                <span style="color: var(--light-gold); font-size: 13px;">
+                                    Телефон студии
+                                </span>
+                            </div>
                         </div>
-                        <div>
-                            <span style="color: var(--gold); font-weight: 500; font-size: 22px; font-family: 'Cormorant', serif; display: block;">
-                                +7 916 994-73-68
-                            </span>
-                            <span style="color: var(--light-gold); font-size: 13px;">
-                                Телефон студии
-                            </span>
-                        </div>
+                        
+                        <button onclick="openWhatsApp('+79169947368')" 
+                                style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
+                                       color: white; 
+                                       border: none; 
+                                       padding: 12px 25px; 
+                                       font-size: 15px; 
+                                       font-weight: 600; 
+                                       border-radius: 10px; 
+                                       cursor: pointer; 
+                                       font-family: 'Cormorant', serif;
+                                       display: flex; 
+                                       align-items: center; 
+                                       justify-content: center; 
+                                       gap: 10px;
+                                       width: 100%;
+                                       margin: 10px 0;
+                                       box-shadow: 0 4px 0 #075E54;
+                                       transition: all 0.3s;">
+                            <i class="fab fa-whatsapp"></i> Написать в WhatsApp
+                        </button>
+                        
+                        <button onclick="openAdminChat()" 
+                                style="background: linear-gradient(135deg, #0088cc 0%, #005580 100%); 
+                                       color: white; 
+                                       border: none; 
+                                       padding: 12px 25px; 
+                                       font-size: 15px; 
+                                       font-weight: 600; 
+                                       border-radius: 10px; 
+                                       cursor: pointer; 
+                                       font-family: 'Cormorant', serif;
+                                       display: flex; 
+                                       align-items: center; 
+                                       justify-content: center; 
+                                       gap: 10px;
+                                       width: 100%;
+                                       margin: 10px 0;
+                                       box-shadow: 0 4px 0 #00334d;
+                                       transition: all 0.3s;">
+                            <i class="fab fa-telegram"></i> Написать администратору
+                        </button>
                     </div>
-                    
-                    <!-- КНОПКА WHATSAPP -->
-                    <button onclick="openWhatsApp('+79169947368')" 
-                            style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
-                                   color: white; 
-                                   border: none; 
-                                   padding: 12px 25px; 
-                                   font-size: 15px; 
-                                   font-weight: 600; 
-                                   border-radius: 10px; 
-                                   cursor: pointer; 
-                                   font-family: 'Cormorant', serif;
-                                   display: flex; 
-                                   align-items: center; 
-                                   justify-content: center; 
-                                   gap: 10px;
-                                   width: 100%;
-                                   margin: 10px 0;
-                                   box-shadow: 0 4px 0 #075E54;
-                                   transition: all 0.3s;">
-                        <i class="fab fa-whatsapp"></i> Написать в WhatsApp
-                    </button>
-                    
-                    <!-- КНОПКА TELEGRAM -->
-                    <button onclick="openAdminChat()" 
-                            style="background: linear-gradient(135deg, #0088cc 0%, #005580 100%); 
-                                   color: white; 
-                                   border: none; 
-                                   padding: 12px 25px; 
-                                   font-size: 15px; 
-                                   font-weight: 600; 
-                                   border-radius: 10px; 
-                                   cursor: pointer; 
-                                   font-family: 'Cormorant', serif;
-                                   display: flex; 
-                                   align-items: center; 
-                                   justify-content: center; 
-                                   gap: 10px;
-                                   width: 100%;
-                                   margin: 10px 0;
-                                   box-shadow: 0 4px 0 #00334d;
-                                   transition: all 0.3s;">
-                        <i class="fab fa-telegram"></i> Написать администратору
-                    </button>
                 </div>
-            </div>
-            
-            <div class="contact-item">
-                <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email" style="text-decoration: none; color: var(--light-gold); display: block;">
-                    <i class="fas fa-envelope" style="margin-right: 10px; color: var(--gold);"></i>DreamLadyStudio@yandex.ru
-                </a>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-address">
-                    <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--gold);"></i>
-                    г. Жуковский,<br>
-                    ул. Королева, дом 6, строение 2<br>
-                    (2 этаж)
+                
+                <div class="contact-item">
+                    <a href="mailto:DreamLadyStudio@yandex.ru" class="contact-email" style="text-decoration: none; color: var(--light-gold); display: block;">
+                        <i class="fas fa-envelope" style="margin-right: 10px; color: var(--gold);"></i>DreamLadyStudio@yandex.ru
+                    </a>
                 </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-details">
-                    Индивидуальный предприниматель<br>
-                    Пинчук И.М.<br>
-                    ИНН 773721380132<br>
-                    ОГРНИП 325774600149528
+                
+                <div class="contact-item">
+                    <div class="contact-address">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--gold);"></i>
+                        г. Жуковский,<br>
+                        ул. Королева, дом 6, строение 2<br>
+                        (2 этаж)
+                    </div>
                 </div>
-            </div>
-            
-            <!-- КНОПКА НА КАРТЫ -->
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2" 
-                   onclick="openLinkWithTracking('https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2', 'Яндекс Карты')"
-                   style="display: inline-block; background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 50%, #C6A16E 100%); color: var(--deep-navy); border: none; padding: 12px 25px; font-size: 15px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: 'Cormorant', serif; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">
-                    <i class="fas fa-map-marked-alt"></i> Открыть на карте
-                </a>
+                
+                <div class="contact-item">
+                    <div class="contact-details">
+                        Индивидуальный предприниматель<br>
+                        Пинчук И.М.<br>
+                        ИНН 773721380132<br>
+                        ОГРНИП 325774600149528
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2" 
+                       onclick="openLinkWithTracking('https://yandex.ru/maps/?text=г. Жуковский, ул. Королева, дом 6, строение 2', 'Яндекс Карты')"
+                       style="display: inline-block; background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%); color: var(--deep-navy); border: none; padding: 12px 25px; font-size: 15px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: 'Cormorant', serif; text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">
+                        <i class="fas fa-map-marked-alt"></i> Открыть на карте
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
     
     <!-- МОДАЛЬНОЕ ОКНО ТРЕНЕРОВ -->
     <div id="trainersModal" class="modal-overlay">
@@ -2376,7 +2405,7 @@
                 <!-- Даша -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/P5r-SC4Dhu1mY3Y-Kszy73SmCMw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/4e93ca77-230d-4322-bafc-c4cef4288c53.jpg" 
-                         alt="Даша" class="trainer-photo">
+                         alt="Даша" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Даша</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2384,7 +2413,7 @@
                 <!-- Мария -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/AJV_AXz1u2xW2BdFD5DzipBSlpc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/9faba137-73eb-42cf-8d6f-a47515f04e4a.jpg" 
-                         alt="Мария" class="trainer-photo">
+                         alt="Мария" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Мария</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2392,7 +2421,7 @@
                 <!-- Юля -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/Fn36bbdvsd1qiUd6JEGEPD0y-BI=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d2946384-5456-4077-a117-463fd3016889.jpg" 
-                         alt="Юля" class="trainer-photo">
+                         alt="Юля" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Юля</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2400,7 +2429,7 @@
                 <!-- Дарья -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/Y_JR_8qLyqcYg6fzStwlmwZbfxE=/422x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/277986f7-1711-417a-ad51-120b225919d8.jpg" 
-                         alt="Дарья" class="trainer-photo">
+                         alt="Дарья" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Дарья</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2408,7 +2437,7 @@
                 <!-- Василиса -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/S2lOgfb_E5mB7i-H0lca_NRW4Jc=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/91b6dc07-495c-47da-a49d-1b5c9477be1e.jpg" 
-                         alt="Василиса" class="trainer-photo">
+                         alt="Василиса" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Василиса</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2416,7 +2445,7 @@
                 <!-- Кристина -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/CRH9LDCCXQkVvjp3LbhMPQ1jeqw=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/07fb5a0b-fdb9-476a-96fd-cc964a57a11e.jpg" 
-                         alt="Кристина" class="trainer-photo">
+                         alt="Кристина" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Кристина</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
@@ -2424,12 +2453,11 @@
                 <!-- Камилла -->
                 <div class="trainer-card">
                     <img src="https://static.craftum.com/BdWEpHqi78nKZNahtSq3mP5cSRs=/394x0/filters:no_upscale()/https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/d6527981-880a-4f37-96e0-2a466a7a6305.jpg" 
-                         alt="Камилла" class="trainer-photo">
+                         alt="Камилла" class="trainer-photo" loading="lazy">
                     <div class="trainer-name">Камилла</div>
                     <div class="trainer-title">Тренер студии Dream Lady</div>
                 </div>
             </div>
-            <!-- КНОПКА ЗАПИСИ В ОКНЕ ТРЕНЕРОВ -->
             <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(198, 161, 110, 0.2);">
                 <button class="signup-button" onclick="openLinkWithTracking('https://dream-lady.com/#n-35307887-ccbc-4ca0-9b90-d36f7deaefda', 'Запись от тренеров')">
                     Записаться на пробное занятие
@@ -2441,849 +2469,904 @@
         </div>
     </div>
     
-<script>
-// ============================================
-// БАЗА ПРЕДСКАЗАНИЙ (250 самых красивых и нежных фраз)
-// ============================================
+    <script>
+    // ============================================
+    // БАЗА ПРЕДСКАЗАНИЙ (250 самых красивых и нежных фраз)
+    // ============================================
 
-const predictions = [
-    "ТВОЯ МЕЧТА СБУДЕТСЯ В БЛИЖАЙШЕЕ ВРЕМЯ.",
-    "ЛЮБОВЬ НАЙДЕТ ТЕБЯ В НЕОЖИДАННЫЙ МОМЕНТ.",
-    "НОВОЕ ХОББИ ПРИНЕСЕТ ТЕБЕ МНОГО РАДОСТИ.",
-    "ТЫ НАЙДЕШЬ ГАРМОНИЮ В СЕБЕ И ВОКРУГ.",
-    "СТАРАЯ ДРУЖБА ВОЗРОДИТСЯ С НОВОЙ СИЛОЙ.",
-    "ТЫ ОТКРОЕШЬ В СЕБЕ СКРЫТЫЙ ТАЛАНТ.",
-    "ТВОЕ ОБАЯНИЕ ПРИВЛЕЧЕТ НУЖНЫХ ЛЮДЕЙ.",
-    "СЕМЕЙНОЕ СЧАСТЬЕ НАПОЛНИТ ТВОЙ ДОМ.",
-    "НОВАЯ ЛЮБОВЬ БУДЕТ НЕЖНОЙ И СТРАСТНОЙ.",
-    "ТЫ НАЙДЕШЬ СВОЕ ИСТИННОЕ ПРИЗВАНИЕ.",
-    "ВНУТРЕННЯЯ СИЛА ПОМОЖЕТ ПРЕОДОЛЕТЬ ВСЁ.",
-    "ТВОЯ УЛЫБКА ПОКОРИТ ЧЬЕ-ТО СЕРДЦЕ.",
-    "ДОЛГОЖДАННАЯ ПОКУПКА ПРИНЕСЕТ РАДОСТЬ.",
-    "ТЫ СТАНЕШЬ ИСТОЧНИКОМ ВДОХНОВЕНИЯ ДЛЯ ДРУГИХ.",
-    "СТАРАЯ МЕЧТА НАКОНЕЦ-ТО ОСУЩЕСТВИТСЯ.",
-    "НОВЫЕ ЗНАКОМСТВА ПЕРЕРАСТУТ В КРЕПКУЮ ДРУЖБУ.",
-    "ТВОЕ ЗДОРОВЬЕ УЛУЧШИТСЯ ЕСТЕСТВЕННЫМ ОБРАЗОМ.",
-    "ФИНАНСОВАЯ СТАБИЛЬНОСТЬ СТАНЕТ ТВОЕЙ НОРМОЙ.",
-    "ТЫ НАЙДЕШЬ РЕШЕНИЕ ДАВНЕЙ ПРОБЛЕМЫ.",
-    "ТВОРЧЕСКАЯ ЭНЕРГИЯ БУДЕТ БИТЬ КЛЮЧОМ.",
-    "ЛЮБИМЫЙ ЧЕЛОВЕК СДЕЛАЕТ ТЕБЕ СЮРПРИЗ.",
-    "ТЫ ОБРЕТЕШЬ ДУШЕВНОЕ СПОКОЙСТВИЕ.",
-    "НОВЫЙ НАВЫК ОТКРОЕТ НЕВЕРОЯТНЫЕ ВОЗМОЖНОСТИ.",
-    "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОИМ ГЛАВНЫМ ОРУЖИЕМ.",
-    "СЕМЕЙНЫЙ ОТДЫХ ЗАПОМНИТСЯ НА ВСЮ ЖИЗНЬ.",
-    "ТЫ ПОЛУЧИШЬ ЗАСЛУЖЕННУЮ НАГРАДУ.",
-    "РОМАНТИЧЕСКОЕ ПРИКЛЮЧЕНИЕ ЖДЕТ ТЕБЯ.",
-    "ТЫ НАЙДЕШЬ СВОЙ УНИКАЛЬНЫЙ ПУТЬ.",
-    "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ СЧАСТЬЕ.",
-    "ТВОЯ ДОБРОТА ВЕРНЕТСЯ К ТЕБЕ ВДВОЙНЕ.",
-    "ДОЛГОЖДАННАЯ ВСТРЕЧА ИЗМЕНИТ ВСЁ.",
-    "ТЫ СТАНЕШЬ ПРИМЕРОМ ДЛЯ ПОДРАЖАНИЯ.",
-    "СБЫВШАЯСЯ МЕЧТА НАПОЛНИТ ЖИЗНЬ СМЫСЛОМ.",
-    "НОВЫЕ ДРУЗЬЯ СТАНУТ НАСТОЯЩЕЙ ПОДДЕРЖКОЙ.",
-    "ТВОЕ ТЕЛО СТАНЕТ СИЛЬНЕЕ И ВЫНОСЛИВЕЕ.",
-    "ФИНАНСОВЫЙ УСПЕХ ПРИДЕТ НЕОЖИДАННО.",
-    "ТЫ НАЙДЕШЬ ПРОСТОЙ ВЫХОД ИЗ СЛОЖНОЙ СИТУАЦИИ.",
-    "ТВОРЧЕСКИЙ ПРОРЫВ ПРИНЕСЕТ СЛАВУ.",
-    "ЛЮБОВЬ РАСЦВЕТЕТ КАК ВЕСЕННИЙ ЦВЕТОК.",
-    "ТЫ ОБРЕТЕШЬ МУДРОСТЬ И ПОНИМАНИЕ.",
-    "НОВОЕ УВЛЕЧЕНИЕ СТАНЕТ СТРАСТЬЮ ВСЕЙ ЖИЗНИ.",
-    "ТВОЕ ОБАЯНИЕ ОТКРОЕТ ВСЕ ДВЕРИ.",
-    "СЕМЕЙНОЕ БЛАГОПОЛУЧИЕ УКРЕПИТСЯ.",
-    "ТЫ ПОЛУЧИШЬ ТО, О ЧЕМ ДАВНО МЕЧТАЛ.",
-    "РОМАНТИЧЕСКАЯ ИСТОРИЯ БУДЕТ КАК В КИНО.",
-    "ТЫ НАЙДЕШЬ СВОЕ МЕСТО В МИРЕ.",
-    "ВНУТРЕННИЙ СВЕТ БУДЕТ СИЯТЬ ЯРКО.",
-    "ТВОЯ ЩЕДРОСТЬ ПРИНЕСЕТ ТЕБЕ УДАЧУ.",
-    "НЕОЖИДАННАЯ РАДОСТЬ ВОЙДЕТ В ТВОЮ ЖИЗНЬ.",
-    "ТЫ СТАНЕШЬ ИСТОЧНИКОМ ПОЗИТИВА ДЛЯ ДРУГИХ.",
-    "МЕЧТА ДЕТСТВА НАКОНЕЦ СБУДЕТСЯ.",
-    "НОВЫЕ ЗНАКОМСТВА ОБОГАТЯТ ТВОЮ ЖИЗНЬ.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ КРЕПКИМ КАК НИКОГДА.",
-    "ФИНАНСОВЫЕ ТУЧИ РАЗВЕЮТСЯ НАВСЕГДА.",
-    "ТЫ НАЙДЕШЬ ГЕНИАЛЬНОЕ РЕШЕНИЕ.",
-    "ТВОРЧЕСТВО ПРИНЕСЕТ МАТЕРИАЛЬНЫЙ УСПЕХ.",
-    "ЛЮБИМЫЙ ЧЕЛОВЕК ПОДАРИТ ТЕБЕ КРЫЛЬЯ.",
-    "ТЫ ОБРЕТЕШЬ ДУШЕВНЫЙ ПОКОЙ.",
-    "НОВЫЙ ОПЫТ ИЗМЕНИТ ТВОЕ МИРОВОЗЗРЕНИЕ.",
-    "ТВОЕ ОБАЯНИЕ БУДЕТ МАГНИТОМ ДЛЯ СЧАСТЬЯ.",
-    "СЕМЕЙНЫЕ УЗЫ СТАНУТ ЕЩЕ КРЕПЧЕ.",
-    "ТЫ ПОЛУЧИШЬ ПРИЗНАНИЕ СВОИХ ЗАСЛУГ.",
-    "РОМАНТИКА НАПОЛНИТ КАЖДЫЙ ДЕНЬ.",
-    "ТЫ НАЙДЕШЬ СВОЙ ИСТИННЫЙ ГОЛОС.",
-    "ВНУТРЕННЯЯ СИЛА ПОМОЖЕТ ДОБИТЬСЯ ВСЕГО.",
-    "ТВОЯ ДОБРОТА СДЕЛАЕТ МИР ЛУЧШЕ.",
-    "СУДЬБОНОСНАЯ ВСТРЕЧА ИЗМЕНИТ КУРС ЖИЗНИ.",
-    "ТЫ СТАНЕШЬ ВДОХНОВЕНИЕМ ДЛЯ МНОГИХ.",
-    "ЗАВЕТНАЯ МЕЧТА СТАНЕТ РЕАЛЬНОСТЬЮ.",
-    "ДРУЗЬЯ СТАНУТ ТВОЕЙ ОПОРОЙ.",
-    "ТВОЕ ТЕЛО БУДЕТ БЛАГОДАРИТЬ ТЕБЯ.",
-    "ДЕНЬГИ ПРИДУТ ЛЕГКО И ВОВРЕМЯ.",
-    "ТЫ НАЙДЕШЬ ВЫХОД ИЗ ЛЮБОГО ЛАБИРИНТА.",
-    "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ ОГЛУШИТЕЛЬНЫМ.",
-    "ЛЮБОВЬ ПРИДЕТ ТИХО И ОСТАНЕТСЯ НАВСЕГДА.",
-    "ТЫ ОБРЕТЕШЬ ГАРМОНИЮ С СОБОЙ.",
-    "НОВОЕ УМЕНИЕ ПРИНЕСЕТ БОГАТСТВО.",
-    "ТВОЕ ОБАЯНИЕ РАСТОПИТ ЛЮБОЕ СЕРДЦЕ.",
-    "СЕМЕЙНОЕ СЧАСТЬЕ БУДЕТ ПОЛНЫМ.",
-    "ТЫ ПОЛУЧИШЬ ТО, ЧЕГО ЗАСЛУЖИВАЕШЬ.",
-    "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ ЖДУТ ТЕБЯ.",
-    "ТЫ НАЙДЕШЬ СВОЙ ПУТЬ К СЧАСТЬЮ.",
-    "ВНУТРЕННИЙ ОГОНЬ БУДЕТ ГОРЕТЬ ЯРКО.",
-    "ТВОЯ ЩЕДРОСТЬ ВЕРНЕТСЯ БУМЕРАНГОМ.",
-    "НЕЖДАННАЯ УДАЧА ПОСТУЧИТСЯ В ДВЕРЬ.",
-    "ТЫ СТАНЕШЬ ЛУЧШЕЙ ВЕРСИЕЙ СЕБЯ.",
-    "МЕЧТЫ НАЧНУТ СБЫВАТЬСЯ ОДНА ЗА ДРУГОЙ.",
-    "НОВЫЕ ЛЮДИ ПРИНЕСУТ РАДОСТЬ В ЖИЗНЬ.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ ЖЕЛЕЗНЫМ.",
-    "ФИНАНСОВЫЕ РЕКИ ПОТЕКУТ К ТЕБЕ.",
-    "ТЫ НАЙДЕШЬ БЛЕСТЯЩУЮ ИДЕЮ.",
-    "ТВОРЧЕСТВО ПРИНЕСЕТ МИРОВОЕ ПРИЗНАНИЕ.",
-    "ЛЮБОВЬ БУДЕТ НЕЖНОЙ И ВЕЧНОЙ.",
-    "ТЫ ОБРЕТЕШЬ ВНУТРЕННИЙ СТЕРЖЕНЬ.",
-    "НОВЫЕ ЗНАНИЯ ОТКРОЮТ ГОРИЗОНТЫ.",
-    "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОЕЙ СУПЕРСИЛОЙ.",
-    "СЕМЬЯ БУДЕТ ГОРДИТЬСЯ ТОБОЙ.",
-    "ТЫ ПОЛУЧИШИШЬ ЗАСЛУЖЕННУЮ ПОХВАЛУ.",
-    "РОМАНТИКА БУДЕТ В КАЖДОМ МОМЕНТЕ.",
-    "ТЫ НАЙДЕШЬ СВОЮ ИСТИННУЮ СТРАСТЬ.",
-    "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ БОГАТСТВО.",
-    "ТВОЯ ДОБРОТА ИЗМЕНИТ ЧЬЮ-ТО ЖИЗНЬ.",
-    "ВАЖНАЯ ВСТРЕЧА ОПРЕДЕЛИТ БУДУЩЕЕ.",
-    "ТЫ СТАНЕШЬ МАЯКОМ ДЛЯ ДРУГИХ.",
-    "САМЫЕ СМЕЛЫЕ МЕЧТЫ СБУДУТСЯ.",
-    "ДРУЗЬЯ СТАНУТ ТВОЕЙ СЕМЬЕЙ.",
-    "ТВОЕ ТЕЛО БУДЕТ ЗДОРОВЫМ И КРАСИВЫМ.",
-    "ДЕНЕЖНЫЙ ПОТОК БУДЕТ ПОСТОЯННЫМ.",
-    "ТЫ НАЙДЕШЬ РЕШЕНИЕ ЛЮБОЙ ЗАДАЧИ.",
-    "ТВОРЧЕСКИЙ ТАЛАНТ РАСКРОЕТСЯ ПОЛНОСТЬЮ.",
-    "ЛЮБОВЬ ПРИДЕТ КАК ПОДАРОК СУДЬБЫ.",
-    "ТЫ ОБРЕТЕШЬ МУДРОСТЬ ВЕКОВ.",
-    "НОВОЕ ХОББИ ПРИНЕСЕТ ДОХОД.",
-    "ТВОЕ ОБАЯНИЕ ПОКОРИТ ВСЕХ ВОКРУГ.",
-    "СЕМЕЙНОЕ ГНЕЗДЫШКО БУДЕТ УЮТНЫМ.",
-    "ТЫ ПОЛУЧИШЬ ТО, О ЧЕМ ДАЖЕ НЕ МЕЧТАЛА.",
-    "РОМАНТИЧЕСКАЯ ИСТОРИЯ БУДЕТ САМОЙ КРАСИВОЙ.",
-    "ТЫ НАЙДЕШЬ СВОЙ ЗВЕЗДНЫЙ ПУТЬ.",
-    "ВНУТРЕННИЙ СВЕТ БУДЕТ НАПРАВЛЯТЬ ТЕБЯ.",
-    "ТВОЯ ЩЕДРОСТЬ ПРИНЕСЕТ СЧАСТЬЕ.",
-    "УДАЧА БУДЕТ ТВОЕЙ ВЕРНОЙ СПУТНИЦЕЙ.",
-    "ТЫ СТАНЕШЬ ПРИМЕРОМ УСПЕХА.",
-    "ДЕТСКИЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ В 2026.",
-    "НОВЫЕ ЗНАКОМСТВА СТАНУТ СУДЬБОНОСНЫМИ.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ БЕЗУПРЕЧНЫМ.",
-    "ФИНАНСОВОЕ БЛАГОПОЛУЧИЕ СТАНЕТ ПОСТОЯННЫМ.",
-    "ТЫ НАЙДЕШЬ КЛЮЧ К СЧАСТЬЮ.",
-    "ТВОРЧЕСКИЙ ГЕНИЙ ПОЛУЧИТ ПРИЗНАНИЕ.",
-    "ЛЮБОВЬ БУДЕТ САМОЙ НАСТОЯЩЕЙ.",
-    "ТЫ ОБРЕТЕШ ДУШЕВНОЕ РАВНОВЕСИЕ.",
-    "НОВЫЕ НАВЫКИ СДЕЛАЮТ ТЕБЯ УНИКАЛЬНОЙ.",
-    "ТВОЕ ОБАЯНИЕ БУДЕТ ТВОИМ КАПИТАЛОМ.",
-    "СЕМЕЙНЫЕ ЦЕННОСТИ УКРЕПЯТСЯ.",
-    "ТЫ ПОЛУЧИШ НАГРАДУ ЗА ТЕРПЕНИЕ.",
-    "РОМАНТИКА НАПОЛНИТ СЕРДЦЕ ТЕПЛОМ.",
-    "ТЫ НАЙДЕШЬ СВОЕ ИСТИННОЕ ПРИЗВАНИЕ.",
-    "ВНУТРЕННЯЯ СИЛА ПРИВЕДЕТ К ПОБЕДЕ.",
-    "ТВОЯ ДОБРОТА СОТВОРИТ ЧУДО.",
-    "СУДЬБОНОСНАЯ ВСТРЕЧА ПЕРЕВЕРНЕТ ЖИЗНЬ.",
-    "ТЫ СТАНЕШЬ СИМВОЛОМ УСПЕХА.",
-    "САМЫЕ ЗАВЕТНЫЕ ЖЕЛАНИЯ СБУДУТСЯ.",
-    "ДРУЗЬЯ БУДУТ ВСЕГДА РЯДОМ.",
-    "ТВОЕ ТЕЛО БУДЕТ В ИДЕАЛЬНОЙ ФОРМЕ.",
-    "ДЕНЬГИ ПРИДУТ ИЗ НЕОЖИДАННЫХ ИСТОЧНИКОВ.",
-    "ТЫ НАЙДЕШЬ ГЕНИАЛЬНОЕ РЕШЕНИЕ ПРОБЛЕМЫ.",
-    "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ МЕЖДУНАРОДНЫМ.",
-    "ЛЮБОВЬ ПРИДЕТ И ОСТАНЕТСЯ НАВСЕГДА.",
-    "ТЫ ОБРЕТЕШЬ ГАРМОНИЮ ДУШИ И ТЕЛА.",
-    "НОВОЕ УВЛЕЧЕНИЕ СТАНЕТ ДЕЛОМ ЖИЗНИ.",
-    "ТВОЕ ОБАЯНИЕ ОТКРОЕТ ВСЕ СЕРДЦА.",
-    "СЕМЕЙНЫЙ ОЧАГ БУДЕТ ГОРЕТЬ ЯРКО.",
-    "ТЫ ПОЛУЧИШ ТО, ЧЕГО ДЕЙСТВИТЕЛЬНО ДОСТОЙНА.",
-    "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ БУДУТ НЕЗАБЫВАЕМЫМИ.",
-    "ТЫ НАЙДЕШЬ СВОЙ ПУТЬ К ЗВЕЗДАМ.",
-    "ВНУТРЕННИЙ ОГОНЬ ЗАЖЖЕТ НОВЫЕ ЗВЕЗДЫ.",
-    "ТВОЯ ЩЕДРОСТЬ СДЕЛАЕТ ТЕБЯ БОГАЧЕ.",
-    "УДАЧА БУДЕТ УЛЫБАТЬСЯ ТЕБЕ КАЖДЫЙ ДЕНЬ.",
-    "ТЫ СТАНЕШЬ ЛЕГЕНДОЙ В СВОЕМ ДЕЛЕ.",
-    "МЕЧТЫ БУДУТ СБЫВАТЬСЯ КАК ПО ВОЛШЕБСТВУ.",
-    "НОВЫЕ ДРУЗЬЯ СТАНУТ РОДНЫМИ ДУШАМИ.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ СИЯТЬ ИЗНУТРИ.",
-    "ФИНАНСОВЫЕ ВОЗМОЖНОСТИ БУДУТ БЕЗГРАНИЧНЫ.",
-    "ТЫ НАЙДЕШЬ АЛМАЗ В ГРУДЕ КАМНЕЙ.",
-    "ТВОРЧЕСКИЙ ПРОРЫВ ИЗМЕНИТ МИР.",
-    "ЛЮБОВЬ БУДЕТ САМОЙ ЧИСТОЙ И СВЕТЛОЙ.",
-    "ТЫ ОБРЕТЕШ ВНУТРЕННИЙ ПОКОЙ.",
-    "НОВЫЕ ЗНАНИЯ СДЕЛАЮТ ТЕБЯ МУДРЕЕ.",
-    "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОЕЙ ВИЗИТНОЙ КАРТОЧКОЙ.",
-    "СЕМЕЙНЫЕ ТРАДИЦИИ ОБРЕТУТ НОВЫЙ СМЫСЛ.",
-    "ТЫ ПОЛУЧИШ КОРОНУ ЗА СВОИ ДОСТИЖЕНИЯ.",
-    "РОМАНТИКА БУДЕТ В КАЖДОМ ТВОЕМ ДНЕ.",
-    "ТЫ НАЙДЕШЬ СВОЮ ИСТИННУЮ МИССИЮ.",
-    "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ УСПЕХ.",
-    "ТВОЯ ДОБРОТА СОГРЕЕТ МНОГИХ.",
-    "ВАЖНАЯ ВСТРЕЧА ОПРЕДЕЛИТ ТВОЮ СУДЬБУ.",
-    "ТЫ СТАНЕШЬ ИКОНОЙ СТИЛЯ И УСПЕХА.",
-    "САМЫЕ БЕЗУМНЫЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ.",
-    "ДРУЗЬЯ БУДУТ ТВОЕЙ ОПОРОЙ ВСЕГДА.",
-    "ТВОЕ ТЕЛО СТАНЕТ ХРАМОМ КРАСОТЫ.",
-    "ДЕНЕЖНЫЙ ДОЖДЬ БУДЕТ ИДТИ В ТВОЮ ПОЛЬЗУ.",
-    "ТЫ НАЙДЕШЬ ФИЛОСОФСКИЙ КАМЕНЬ УСПЕХА.",
-    "ТВОРЧЕСКИЙ ТАЛАНТ ПОЛУЧИТ НОБЕЛЕВКУ.",
-    "ЛЮБОВЬ ПРИДЕТ КАК ТИХОЕ СЧАСТЬЕ.",
-    "ТЫ ОБРЕТЕШЬ ДЗЕН В СОВРЕМЕННОМ МИРЕ.",
-    "НОВОЕ ХОББИ СТАНЕТ ЗОЛОТОЙ ЖИЛОЙ.",
-    "ТВОЕ ОБАЯНИЕ РАСТОПИТ ЛЕД.",
-    "СЕМЕЙНОЕ СЧАСТЬЕ БУДЕТ ПОЛНОЙ ЧАШЕЙ.",
-    "ТЫ ПОЛУЧИШ КЛЮЧИ ОТ РАЯ.",
-    "РОМАНТИЧЕСКАЯ ИСТОРИЯ ЗАТМИТ ВСЕ РОМАНЫ.",
-    "ТЫ НАЙДЕШЬ ЭЛИКСИР ВЕЧНОЙ МОЛОДОСТИ.",
-    "ВНУТРЕННИЙ СВЕТ БУДЕТ СИЯТЬ КАК СОЛНЦЕ.",
-    "ТВОЯ ЩЕДРОСТЬ ОБЕРНЕТСЯ БОГАТСТВОМ.",
-    "УДАЧА БУДЕТ ТВОЕЙ ТЕНЬЮ.",
-    "ТЫ СТАНЕШЬ БОГИНЕЙ УСПЕХА.",
-    "ВСЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ В 2026 ГОДУ.",
-    "НОВЫЕ ЗНАКОМСТВА ПРИНЕСУТ МОРЕ ПОЗИТИВА.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ КАК У КОСМОНАВТА.",
-    "ФИНАНСОВЫЕ РЕКИ СЛЬЮТСЯ В ОКЕАН.",
-    "ТЫ НАЙДЕШЬ ПАНАЦЕЮ ОТ ВСЕХ БЕД.",
-    "ТВОРЧЕСКИЙ ГЕНИЙ ВЗОРВЕТ ИНТЕРНЕТ.",
-    "ЛЮБОВЬ БУДЕТ САМОЙ ИСКРЕННЕЙ.",
-    "ТЫ ОБРЕТЕШЬ НИРВАНУ В ПОВСЕДНЕВНОСТИ.",
-    "НОВЫЕ УМЕНИЯ СДЕЛАЮТ ТЕБЯ СУПЕРГЕРОЕМ.",
-    "ТВОЕ ОБАЯНИЕ БУДЕТ КАК МАГНИТ.",
-    "СЕМЕЙНЫЕ УЗЫ СТАНУТ НЕРАЗРЫВНЫМИ.",
-    "ТЫ ПОЛУЧИШ ОВАЦИИ СТОЯ.",
-    "РОМАНТИКА БУДЕТ ТВОИМ СПУТНИКОМ.",
-    "ТЫ НАЙДЕШЬ ФОРМУЛУ СЧАСТЬЯ.",
-    "ВНУТРЕННЯЯ СИЛА СДЕЛАЕТ ТЕБЯ НЕПОБЕДИМОЙ.",
-    "ТВОЯ ДОБРОТА ИЗЛЕЧИТ МИР.",
-    "СУДЬБОНОСНАЯ ВСТРЕЧА ИЗМЕНИТ ИСТОРИЮ.",
-    "ТЫ СТАНЕШЬ ИДОЛОМ ДЛЯ МИЛЛИОНОВ.",
-    "МЕЧТЫ БУДУТ МАТЕРИАЛИЗОВАТЬСЯ НА ГЛАЗАХ.",
-    "ДРУЗЬЯ БУДУТ ТВОИМ ТЫЛОМ.",
-    "ТВОЕ ТЕЛО БУДЕТ ПРЕДМЕТОМ ВОСХИЩЕНИЯ.",
-    "ДЕНЬГИ БУДУТ ПАДАТЬ С НЕБА.",
-    "ТЫ НАЙДЕШЬ ОТВЕТ НА ГЛАВНЫЙ ВОПРОС.",
-    "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ ВЕЧНЫМ.",
-    "ЛЮБОВЬ ПРИДЕТ КАК ДАР СВЫШЕ.",
-    "ТЫ ОБРЕТЕШЬ ПРОСВЕТЛЕНИЕ.",
-    "НОВОЕ УВЛЕЧЕНИЕ ПРИНЕСЕТ СЛАВУ.",
-    "ТВОЕ ОБАЯНИЕ ЗАВОЮЕТ ВСЕЛЕННУЮ.",
-    "СЕМЕЙНЫЙ ОЧАГ БУДЕТ САМЫМ УЮТНЫМ.",
-    "ТЫ ПОЛУЧИШ ВСЕ, ЧТО ПОЖЕЛАЕШЬ.",
-    "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ БУДУТ ЭПИЧНЫМИ.",
-    "ТЫ НАЙДЕШЬ ДОРОГУ К СЕРДЦУ МИРА.",
-    "ВНУТРЕННИЙ ОГОНЬ БУДЕТ ВЕЧНЫМ.",
-    "ТВОЯ ЩЕДРОСТЬ СПАСЕТ ПЛАНЕТУ.",
-    "УДАЧА БУДЕТ ТВОЕЙ РАБЫНЕЙ.",
-    "ТЫ СТАНЕШЬ СИМВОЛОМ ЭПОХИ.",
-    "ВСЕ ЖЕЛАНИЯ ИСПОЛНЯТСЯ МГНОВЕННО.",
-    "НОВЫЕ ДРУЗЬЯ СТАНУТ АНГЕЛАМИ-ХРАНИТЕЛЯМИ.",
-    "ТВОЕ ЗДОРОВЬЕ БУДЕТ БЕССМЕРТНЫМ.",
-    "ФИНАНСОВЫЕ ГОРЫ ПОКОРЯТСЯ ТЕБЕ.",
-    "ТЫ НАЙДЕШЬ ИСТОЧНИК ВЕЧНОЙ МОЛОДОСТИ.",
-    "ТВОРЧЕСТВО ИЗМЕНИТ ХОД ИСТОРИИ.",
-    "ЛЮБОВЬ БУДЕТ САМОЙ ВЕЛИКОЙ.",
-    "ТЫ ОБРЕТЕШЬ АБСОЛЮТНУЮ ГАРМОНИЮ.",
-    "НОВЫЕ ЗНАНИЯ ОТКРОЮТ ТАЙНЫ ВСЕЛЕННОЙ.",
-    "ТВОЕ ОБАЯНИЕ ПОКОРИТ ВРЕМЯ И ПРОСТРАНСТВО.",
-    "СЕМЕЙНОЕ ДРЕВО ДАСТ ЗОЛОТЫЕ ПЛОДЫ.",
-    "ТЫ ПОЛУЧИШ КЛЮЧ ОТ ВСЕХ ДВЕРЕЙ.",
-    "РОМАНТИКА БУДЕТ ТВОЕЙ СУЩНОСТЬЮ.",
-    "ТЫ НАЙДЕШЬ СМЫСЛ БЫТИЯ.",
-    "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ БЕССМЕРТИЕ.",
-    "ТВОЯ ДОБРОТА ВОСКРЕСИТ НАДЕЖДУ.",
-    "ВАЖНАЯ ВСТРЕЧА ИЗМЕНИТ СУДЬБУ ЧЕЛОВЕЧЕСТВА.",
-    "ТЫ СТАНЕШ БОГИНЕЙ НОВОГО МИРА.",
-    "МЕЧТЫ СОЗДАДУТ НОВУЮ РЕАЛЬНОСТЬ.",
-    "ДРУЗЬЯ БУДУТ ТВОИМИ КРЫЛЬЯМИ.",
-    "ТВОЕ ТЕЛО СТАНЕТ ИДЕАЛОМ СОВЕРШЕНСТВА.",
-    "ДЕНЕЖНЫЕ РЕКИ ПРЕВРАТЯТСЯ В ОКЕАНЫ.",
-    "ТЫ НАЙДЕШ ФИЛОСОФСКИЙ КАМЕНЬ.",
-    "ТВОРЧЕСКИЙ ПРОРЫВ ПЕРЕВЕРНЕТ СОЗНАНИЕ.",
-    "ЛЮБОВЬ БУДЕТ ВЕЧНОЙ И БЕСКОНЕЧНОЙ."
-];
+    const predictions = [
+        "ТВОЯ МЕЧТА СБУДЕТСЯ В БЛИЖАЙШЕЕ ВРЕМЯ.",
+        "ЛЮБОВЬ НАЙДЕТ ТЕБЯ В НЕОЖИДАННЫЙ МОМЕНТ.",
+        "НОВОЕ ХОББИ ПРИНЕСЕТ ТЕБЕ МНОГО РАДОСТИ.",
+        "ТЫ НАЙДЕШЬ ГАРМОНИЮ В СЕБЕ И ВОКРУГ.",
+        "СТАРАЯ ДРУЖБА ВОЗРОДИТСЯ С НОВОЙ СИЛОЙ.",
+        "ТЫ ОТКРОЕШЬ В СЕБЕ СКРЫТЫЙ ТАЛАНТ.",
+        "ТВОЕ ОБАЯНИЕ ПРИВЛЕЧЕТ НУЖНЫХ ЛЮДЕЙ.",
+        "СЕМЕЙНОЕ СЧАСТЬЕ НАПОЛНИТ ТВОЙ ДОМ.",
+        "НОВАЯ ЛЮБОВЬ БУДЕТ НЕЖНОЙ И СТРАСТНОЙ.",
+        "ТЫ НАЙДЕШЬ СВОЕ ИСТИННОЕ ПРИЗВАНИЕ.",
+        "ВНУТРЕННЯЯ СИЛА ПОМОЖЕТ ПРЕОДОЛЕТЬ ВСЁ.",
+        "ТВОЯ УЛЫБКА ПОКОРИТ ЧЬЕ-ТО СЕРДЦЕ.",
+        "ДОЛГОЖДАННАЯ ПОКУПКА ПРИНЕСЕТ РАДОСТЬ.",
+        "ТЫ СТАНЕШЬ ИСТОЧНИКОМ ВДОХНОВЕНИЯ ДЛЯ ДРУГИХ.",
+        "СТАРАЯ МЕЧТА НАКОНЕЦ-ТО ОСУЩЕСТВИТСЯ.",
+        "НОВЫЕ ЗНАКОМСТВА ПЕРЕРАСТУТ В КРЕПКУЮ ДРУЖБУ.",
+        "ТВОЕ ЗДОРОВЬЕ УЛУЧШИТСЯ ЕСТЕСТВЕННЫМ ОБРАЗОМ.",
+        "ФИНАНСОВАЯ СТАБИЛЬНОСТЬ СТАНЕТ ТВОЕЙ НОРМОЙ.",
+        "ТЫ НАЙДЕШЬ РЕШЕНИЕ ДАВНЕЙ ПРОБЛЕМЫ.",
+        "ТВОРЧЕСКАЯ ЭНЕРГИЯ БУДЕТ БИТЬ КЛЮЧОМ.",
+        "ЛЮБИМЫЙ ЧЕЛОВЕК СДЕЛАЕТ ТЕБЕ СЮРПРИЗ.",
+        "ТЫ ОБРЕТЕШЬ ДУШЕВНОЕ СПОКОЙСТВИЕ.",
+        "НОВЫЙ НАВЫК ОТКРОЕТ НЕВЕРОЯТНЫЕ ВОЗМОЖНОСТИ.",
+        "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОИМ ГЛАВНЫМ ОРУЖИЕМ.",
+        "СЕМЕЙНЫЙ ОТДЫХ ЗАПОМНИТСЯ НА ВСЮ ЖИЗНЬ.",
+        "ТЫ ПОЛУЧИШЬ ЗАСЛУЖЕННУЮ НАГРАДУ.",
+        "РОМАНТИЧЕСКОЕ ПРИКЛЮЧЕНИЕ ЖДЕТ ТЕБЯ.",
+        "ТЫ НАЙДЕШЬ СВОЙ УНИКАЛЬНЫЙ ПУТЬ.",
+        "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ СЧАСТЬЕ.",
+        "ТВОЯ ДОБРОТА ВЕРНЕТСЯ К ТЕБЕ ВДВОЙНЕ.",
+        "ДОЛГОЖДАННАЯ ВСТРЕЧА ИЗМЕНИТ ВСЁ.",
+        "ТЫ СТАНЕШЬ ПРИМЕРОМ ДЛЯ ПОДРАЖАНИЯ.",
+        "СБЫВШАЯСЯ МЕЧТА НАПОЛНИТ ЖИЗНЬ СМЫСЛОМ.",
+        "НОВЫЕ ДРУЗЬЯ СТАНУТ НАСТОЯЩЕЙ ПОДДЕРЖКОЙ.",
+        "ТВОЕ ТЕЛО СТАНЕТ СИЛЬНЕЕ И ВЫНОСЛИВЕЕ.",
+        "ФИНАНСОВЫЙ УСПЕХ ПРИДЕТ НЕОЖИДАННО.",
+        "ТЫ НАЙДЕШЬ ПРОСТОЙ ВЫХОД ИЗ СЛОЖНОЙ СИТУАЦИИ.",
+        "ТВОРЧЕСКИЙ ПРОРЫВ ПРИНЕСЕТ СЛАВУ.",
+        "ЛЮБОВЬ РАСЦВЕТЕТ КАК ВЕСЕННИЙ ЦВЕТОК.",
+        "ТЫ ОБРЕТЕШЬ МУДРОСТЬ И ПОНИМАНИЕ.",
+        "НОВОЕ УВЛЕЧЕНИЕ СТАНЕТ СТРАСТЬЮ ВСЕЙ ЖИЗНИ.",
+        "ТВОЕ ОБАЯНИЕ ОТКРОЕТ ВСЕ ДВЕРИ.",
+        "СЕМЕЙНОЕ БЛАГОПОЛУЧИЕ УКРЕПИТСЯ.",
+        "ТЫ ПОЛУЧИШЬ ТО, О ЧЕМ ДАВНО МЕЧТАЛ.",
+        "РОМАНТИЧЕСКАЯ ИСТОРИЯ БУДЕТ КАК В КИНО.",
+        "ТЫ НАЙДЕШЬ СВОЕ МЕСТО В МИРЕ.",
+        "ВНУТРЕННИЙ СВЕТ БУДЕТ СИЯТЬ ЯРКО.",
+        "ТВОЯ ЩЕДРОСТЬ ПРИНЕСЕТ ТЕБЕ УДАЧУ.",
+        "НЕОЖИДАННАЯ РАДОСТЬ ВОЙДЕТ В ТВОЮ ЖИЗНЬ.",
+        "ТЫ СТАНЕШЬ ИСТОЧНИКОМ ПОЗИТИВА ДЛЯ ДРУГИХ.",
+        "МЕЧТА ДЕТСТВА НАКОНЕЦ СБУДЕТСЯ.",
+        "НОВЫЕ ЗНАКОМСТВА ОБОГАТЯТ ТВОЮ ЖИЗНЬ.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ КРЕПКИМ КАК НИКОГДА.",
+        "ФИНАНСОВЫЕ ТУЧИ РАЗВЕЮТСЯ НАВСЕГДА.",
+        "ТЫ НАЙДЕШЬ ГЕНИАЛЬНОЕ РЕШЕНИЕ.",
+        "ТВОРЧЕСТВО ПРИНЕСЕТ МАТЕРИАЛЬНЫЙ УСПЕХ.",
+        "ЛЮБИМЫЙ ЧЕЛОВЕК ПОДАРИТ ТЕБЕ КРЫЛЬЯ.",
+        "ТЫ ОБРЕТЕШЬ ДУШЕВНЫЙ ПОКОЙ.",
+        "НОВЫЙ ОПЫТ ИЗМЕНИТ ТВОЕ МИРОВОЗЗРЕНИЕ.",
+        "ТВОЕ ОБАЯНИЕ БУДЕТ МАГНИТОМ ДЛЯ СЧАСТЬЯ.",
+        "СЕМЕЙНЫЕ УЗЫ СТАНУТ ЕЩЕ КРЕПЧЕ.",
+        "ТЫ ПОЛУЧИШЬ ПРИЗНАНИЕ СВОИХ ЗАСЛУГ.",
+        "РОМАНТИКА НАПОЛНИТ КАЖДЫЙ ДЕНЬ.",
+        "ТЫ НАЙДЕШЬ СВОЙ ИСТИННЫЙ ГОЛОС.",
+        "ВНУТРЕННЯЯ СИЛА ПОМОЖЕТ ДОБИТЬСЯ ВСЕГО.",
+        "ТВОЯ ДОБРОТА СДЕЛАЕТ МИР ЛУЧШЕ.",
+        "СУДЬБОНОСНАЯ ВСТРЕЧА ИЗМЕНИТ КУРС ЖИЗНИ.",
+        "ТЫ СТАНЕШЬ ВДОХНОВЕНИЕМ ДЛЯ МНОГИХ.",
+        "ЗАВЕТНАЯ МЕЧТА СТАНЕТ РЕАЛЬНОСТЬЮ.",
+        "ДРУЗЬЯ СТАНУТ ТВОЕЙ ОПОРОЙ.",
+        "ТВОЕ ТЕЛО БУДЕТ БЛАГОДАРИТЬ ТЕБЯ.",
+        "ДЕНЬГИ ПРИДУТ ЛЕГКО И ВОВРЕМЯ.",
+        "ТЫ НАЙДЕШЬ ВЫХОД ИЗ ЛЮБОГО ЛАБИРИНТА.",
+        "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ ОГЛУШИТЕЛЬНЫМ.",
+        "ЛЮБОВЬ ПРИДЕТ ТИХО И ОСТАНЕТСЯ НАВСЕГДА.",
+        "ТЫ ОБРЕТЕШЬ ГАРМОНИЮ С СОБОЙ.",
+        "НОВОЕ УМЕНИЕ ПРИНЕСЕТ БОГАТСТВО.",
+        "ТВОЕ ОБАЯНИЕ РАСТОПИТ ЛЮБОЕ СЕРДЦЕ.",
+        "СЕМЕЙНОЕ СЧАСТЬЕ БУДЕТ ПОЛНЫМ.",
+        "ТЫ ПОЛУЧИШЬ ТО, ЧЕГО ЗАСЛУЖИВАЕШЬ.",
+        "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ ЖДУТ ТЕБЯ.",
+        "ТЫ НАЙДЕШЬ СВОЙ ПУТЬ К СЧАСТЬЮ.",
+        "ВНУТРЕННИЙ ОГОНЬ БУДЕТ ГОРЕТЬ ЯРКО.",
+        "ТВОЯ ЩЕДРОСТЬ ВЕРНЕТСЯ БУМЕРАНГОМ.",
+        "НЕЖДАННАЯ УДАЧА ПОСТУЧИТСЯ В ДВЕРЬ.",
+        "ТЫ СТАНЕШЬ ЛУЧШЕЙ ВЕРСИЕЙ СЕБЯ.",
+        "МЕЧТЫ НАЧНУТ СБЫВАТЬСЯ ОДНА ЗА ДРУГОЙ.",
+        "НОВЫЕ ЛЮДИ ПРИНЕСУТ РАДОСТЬ В ЖИЗНЬ.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ ЖЕЛЕЗНЫМ.",
+        "ФИНАНСОВЫЕ РЕКИ ПОТЕКУТ К ТЕБЕ.",
+        "ТЫ НАЙДЕШЬ БЛЕСТЯЩУЮ ИДЕЮ.",
+        "ТВОРЧЕСТВО ПРИНЕСЕТ МИРОВОЕ ПРИЗНАНИЕ.",
+        "ЛЮБОВЬ БУДЕТ НЕЖНОЙ И ВЕЧНОЙ.",
+        "ТЫ ОБРЕТЕШЬ ВНУТРЕННИЙ СТЕРЖЕНЬ.",
+        "НОВЫЕ ЗНАНИЯ ОТКРОЮТ ГОРИЗОНТЫ.",
+        "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОЕЙ СУПЕРСИЛОЙ.",
+        "СЕМЬЯ БУДЕТ ГОРДИТЬСЯ ТОБОЙ.",
+        "ТЫ ПОЛУЧИШИШЬ ЗАСЛУЖЕННУЮ ПОХВАЛУ.",
+        "РОМАНТИКА БУДЕТ В КАЖДОМ МОМЕНТЕ.",
+        "ТЫ НАЙДЕШЬ СВОЮ ИСТИННУЮ СТРАСТЬ.",
+        "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ БОГАТСТВО.",
+        "ТВОЯ ДОБРОТА ИЗМЕНИТ ЧЬЮ-ТО ЖИЗНЬ.",
+        "ВАЖНАЯ ВСТРЕЧА ОПРЕДЕЛИТ БУДУЩЕЕ.",
+        "ТЫ СТАНЕШЬ МАЯКОМ ДЛЯ ДРУГИХ.",
+        "САМЫЕ СМЕЛЫЕ МЕЧТЫ СБУДУТСЯ.",
+        "ДРУЗЬЯ СТАНУТ ТВОЕЙ СЕМЬЕЙ.",
+        "ТВОЕ ТЕЛО БУДЕТ ЗДОРОВЫМ И КРАСИВЫМ.",
+        "ДЕНЕЖНЫЙ ПОТОК БУДЕТ ПОСТОЯННЫМ.",
+        "ТЫ НАЙДЕШЬ РЕШЕНИЕ ЛЮБОЙ ЗАДАЧИ.",
+        "ТВОРЧЕСКИЙ ТАЛАНТ РАСКРОЕТСЯ ПОЛНОСТЬЮ.",
+        "ЛЮБОВЬ ПРИДЕТ КАК ПОДАРОК СУДЬБЫ.",
+        "ТЫ ОБРЕТЕШЬ МУДРОСТЬ ВЕКОВ.",
+        "НОВОЕ ХОББИ ПРИНЕСЕТ ДОХОД.",
+        "ТВОЕ ОБАЯНИЕ ПОКОРИТ ВСЕХ ВОКРУГ.",
+        "СЕМЕЙНОЕ ГНЕЗДЫШКО БУДЕТ УЮТНЫМ.",
+        "ТЫ ПОЛУЧИШЬ ТО, О ЧЕМ ДАЖЕ НЕ МЕЧТАЛА.",
+        "РОМАНТИЧЕСКАЯ ИСТОРИЯ БУДЕТ САМОЙ КРАСИВОЙ.",
+        "ТЫ НАЙДЕШЬ СВОЙ ЗВЕЗДНЫЙ ПУТЬ.",
+        "ВНУТРЕННИЙ СВЕТ БУДЕТ НАПРАВЛЯТЬ ТЕБЯ.",
+        "ТВОЯ ЩЕДРОСТЬ ПРИНЕСЕТ СЧАСТЬЕ.",
+        "УДАЧА БУДЕТ ТВОЕЙ ВЕРНОЙ СПУТНИЦЕЙ.",
+        "ТЫ СТАНЕШЬ ПРИМЕРОМ УСПЕХА.",
+        "ДЕТСКИЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ В 2026.",
+        "НОВЫЕ ЗНАКОМСТВА СТАНУТ СУДЬБОНОСНЫМИ.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ БЕЗУПРЕЧНЫМ.",
+        "ФИНАНСОВОЕ БЛАГОПОЛУЧИЕ СТАНЕТ ПОСТОЯННЫМ.",
+        "ТЫ НАЙДЕШЬ КЛЮЧ К СЧАСТЬЮ.",
+        "ТВОРЧЕСКИЙ ГЕНИЙ ПОЛУЧИТ ПРИЗНАНИЕ.",
+        "ЛЮБОВЬ БУДЕТ САМОЙ НАСТОЯЩЕЙ.",
+        "ТЫ ОБРЕТЕШ ДУШЕВНОЕ РАВНОВЕСИЕ.",
+        "НОВЫЕ НАВЫКИ СДЕЛАЮТ ТЕБЯ УНИКАЛЬНОЙ.",
+        "ТВОЕ ОБАЯНИЕ БУДЕТ ТВОИМ КАПИТАЛОМ.",
+        "СЕМЕЙНЫЕ ЦЕННОСТИ УКРЕПЯТСЯ.",
+        "ТЫ ПОЛУЧИШ НАГРАДУ ЗА ТЕРПЕНИЕ.",
+        "РОМАНТИКА НАПОЛНИТ СЕРДЦЕ ТЕПЛОМ.",
+        "ТЫ НАЙДЕШЬ СВОЕ ИСТИННОЕ ПРИЗВАНИЕ.",
+        "ВНУТРЕННЯЯ СИЛА ПРИВЕДЕТ К ПОБЕДЕ.",
+        "ТВОЯ ДОБРОТА СОТВОРИТ ЧУДО.",
+        "СУДЬБОНОСНАЯ ВСТРЕЧА ПЕРЕВЕРНЕТ ЖИЗНЬ.",
+        "ТЫ СТАНЕШЬ СИМВОЛОМ УСПЕХА.",
+        "САМЫЕ ЗАВЕТНЫЕ ЖЕЛАНИЯ СБУДУТСЯ.",
+        "ДРУЗЬЯ БУДУТ ВСЕГДА РЯДОМ.",
+        "ТВОЕ ТЕЛО БУДЕТ В ИДЕАЛЬНОЙ ФОРМЕ.",
+        "ДЕНЬГИ ПРИДУТ ИЗ НЕОЖИДАННЫХ ИСТОЧНИКОВ.",
+        "ТЫ НАЙДЕШЬ ГЕНИАЛЬНОЕ РЕШЕНИЕ ПРОБЛЕМЫ.",
+        "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ МЕЖДУНАРОДНЫМ.",
+        "ЛЮБОВЬ ПРИДЕТ И ОСТАНЕТСЯ НАВСЕГДА.",
+        "ТЫ ОБРЕТЕШЬ ГАРМОНИЮ ДУШИ И ТЕЛА.",
+        "НОВОЕ УВЛЕЧЕНИЕ СТАНЕТ ДЕЛОМ ЖИЗНИ.",
+        "ТВОЕ ОБАЯНИЕ ОТКРОЕТ ВСЕ СЕРДЦА.",
+        "СЕМЕЙНЫЙ ОЧАГ БУДЕТ ГОРЕТЬ ЯРКО.",
+        "ТЫ ПОЛУЧИШ ТО, ЧЕГО ДЕЙСТВИТЕЛЬНО ДОСТОЙНА.",
+        "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ БУДУТ НЕЗАБЫВАЕМЫМИ.",
+        "ТЫ НАЙДЕШЬ СВОЙ ПУТЬ К ЗВЕЗДАМ.",
+        "ВНУТРЕННИЙ ОГОНЬ ЗАЖЖЕТ НОВЫЕ ЗВЕЗДЫ.",
+        "ТВОЯ ЩЕДРОСТЬ СДЕЛАЕТ ТЕБЯ БОГАЧЕ.",
+        "УДАЧА БУДЕТ УЛЫБАТЬСЯ ТЕБЕ КАЖДЫЙ ДЕНЬ.",
+        "ТЫ СТАНЕШЬ ЛЕГЕНДОЙ В СВОЕМ ДЕЛЕ.",
+        "МЕЧТЫ БУДУТ СБЫВАТЬСЯ КАК ПО ВОЛШЕБСТВУ.",
+        "НОВЫЕ ДРУЗЬЯ СТАНУТ РОДНЫМИ ДУШАМИ.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ СИЯТЬ ИЗНУТРИ.",
+        "ФИНАНСОВЫЕ ВОЗМОЖНОСТИ БУДУТ БЕЗГРАНИЧНЫ.",
+        "ТЫ НАЙДЕШЬ АЛМАЗ В ГРУДЕ КАМНЕЙ.",
+        "ТВОРЧЕСКИЙ ПРОРЫВ ИЗМЕНИТ МИР.",
+        "ЛЮБОВЬ БУДЕТ САМОЙ ЧИСТОЙ И СВЕТЛОЙ.",
+        "ТЫ ОБРЕТЕШ ВНУТРЕННИЙ ПОКОЙ.",
+        "НОВЫЕ ЗНАНИЯ СДЕЛАЮТ ТЕБЯ МУДРЕЕ.",
+        "ТВОЕ ОБАЯНИЕ СТАНЕТ ТВОЕЙ ВИЗИТНОЙ КАРТОЧКОЙ.",
+        "СЕМЕЙНЫЕ ТРАДИЦИИ ОБРЕТУТ НОВЫЙ СМЫСЛ.",
+        "ТЫ ПОЛУЧИШ КОРОНУ ЗА СВОИ ДОСТИЖЕНИЯ.",
+        "РОМАНТИКА БУДЕТ В КАЖДОМ ТВОЕМ ДНЕ.",
+        "ТЫ НАЙДЕШЬ СВОЮ ИСТИННУЮ МИССИЮ.",
+        "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ УСПЕХ.",
+        "ТВОЯ ДОБРОТА СОГРЕЕТ МНОГИХ.",
+        "ВАЖНАЯ ВСТРЕЧА ОПРЕДЕЛИТ ТВОЮ СУДЬБУ.",
+        "ТЫ СТАНЕШЬ ИКОНОЙ СТИЛЯ И УСПЕХА.",
+        "САМЫЕ БЕЗУМНЫЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ.",
+        "ДРУЗЬЯ БУДУТ ТВОЕЙ ОПОРОЙ ВСЕГДА.",
+        "ТВОЕ ТЕЛО СТАНЕТ ХРАМОМ КРАСОТЫ.",
+        "ДЕНЕЖНЫЙ ДОЖДЬ БУДЕТ ИДТИ В ТВОЮ ПОЛЬЗУ.",
+        "ТЫ НАЙДЕШЬ ФИЛОСОФСКИЙ КАМЕНЬ УСПЕХА.",
+        "ТВОРЧЕСКИЙ ТАЛАНТ ПОЛУЧИТ НОБЕЛЕВКУ.",
+        "ЛЮБОВЬ ПРИДЕТ КАК ТИХОЕ СЧАСТЬЕ.",
+        "ТЫ ОБРЕТЕШЬ ДЗЕН В СОВРЕМЕННОМ МИРЕ.",
+        "НОВОЕ ХОББИ СТАНЕТ ЗОЛОТОЙ ЖИЛОЙ.",
+        "ТВОЕ ОБАЯНИЕ РАСТОПИТ ЛЕД.",
+        "СЕМЕЙНОЕ СЧАСТЬЕ БУДЕТ ПОЛНОЙ ЧАШЕЙ.",
+        "ТЫ ПОЛУЧИШ КЛЮЧИ ОТ РАЯ.",
+        "РОМАНТИЧЕСКАЯ ИСТОРИЯ ЗАТМИТ ВСЕ РОМАНЫ.",
+        "ТЫ НАЙДЕШЬ ЭЛИКСИР ВЕЧНОЙ МОЛОДОСТИ.",
+        "ВНУТРЕННИЙ СВЕТ БУДЕТ СИЯТЬ КАК СОЛНЦЕ.",
+        "ТВОЯ ЩЕДРОСТЬ ОБЕРНЕТСЯ БОГАТСТВОМ.",
+        "УДАЧА БУДЕТ ТВОЕЙ ТЕНЬЮ.",
+        "ТЫ СТАНЕШЬ БОГИНЕЙ УСПЕХА.",
+        "ВСЕ МЕЧТЫ ОСУЩЕСТВЯТСЯ В 2026 ГОДУ.",
+        "НОВЫЕ ЗНАКОМСТВА ПРИНЕСУТ МОРЕ ПОЗИТИВА.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ КАК У КОСМОНАВТА.",
+        "ФИНАНСОВЫЕ РЕКИ СЛЬЮТСЯ В ОКЕАН.",
+        "ТЫ НАЙДЕШЬ ПАНАЦЕЮ ОТ ВСЕХ БЕД.",
+        "ТВОРЧЕСКИЙ ГЕНИЙ ВЗОРВЕТ ИНТЕРНЕТ.",
+        "ЛЮБОВЬ БУДЕТ САМОЙ ИСКРЕННЕЙ.",
+        "ТЫ ОБРЕТЕШЬ НИРВАНУ В ПОВСЕДНЕВНОСТИ.",
+        "НОВЫЕ УМЕНИЯ СДЕЛАЮТ ТЕБЯ СУПЕРГЕРОЕМ.",
+        "ТВОЕ ОБАЯНИЕ БУДЕТ КАК МАГНИТ.",
+        "СЕМЕЙНЫЕ УЗЫ СТАНУТ НЕРАЗРЫВНЫМИ.",
+        "ТЫ ПОЛУЧИШ ОВАЦИИ СТОЯ.",
+        "РОМАНТИКА БУДЕТ ТВОИМ СПУТНИКОМ.",
+        "ТЫ НАЙДЕШЬ ФОРМУЛУ СЧАСТЬЯ.",
+        "ВНУТРЕННЯЯ СИЛА СДЕЛАЕТ ТЕБЯ НЕПОБЕДИМОЙ.",
+        "ТВОЯ ДОБРОТА ИЗЛЕЧИТ МИР.",
+        "СУДЬБОНОСНАЯ ВСТРЕЧА ИЗМЕНИТ ИСТОРИЮ.",
+        "ТЫ СТАНЕШЬ ИДОЛОМ ДЛЯ МИЛЛИОНОВ.",
+        "МЕЧТЫ БУДУТ МАТЕРИАЛИЗОВАТЬСЯ НА ГЛАЗАХ.",
+        "ДРУЗЬЯ БУДУТ ТВОИМ ТЫЛОМ.",
+        "ТВОЕ ТЕЛО БУДЕТ ПРЕДМЕТОМ ВОСХИЩЕНИЯ.",
+        "ДЕНЬГИ БУДУТ ПАДАТЬ С НЕБА.",
+        "ТЫ НАЙДЕШЬ ОТВЕТ НА ГЛАВНЫЙ ВОПРОС.",
+        "ТВОРЧЕСКИЙ УСПЕХ БУДЕТ ВЕЧНЫМ.",
+        "ЛЮБОВЬ ПРИДЕТ КАК ДАР СВЫШЕ.",
+        "ТЫ ОБРЕТЕШЬ ПРОСВЕТЛЕНИЕ.",
+        "НОВОЕ УВЛЕЧЕНИЕ ПРИНЕСЕТ СЛАВУ.",
+        "ТВОЕ ОБАЯНИЕ ЗАВОЮЕТ ВСЕЛЕННУЮ.",
+        "СЕМЕЙНЫЙ ОЧАГ БУДЕТ САМЫМ УЮТНЫМ.",
+        "ТЫ ПОЛУЧИШ ВСЕ, ЧТО ПОЖЕЛАЕШЬ.",
+        "РОМАНТИЧЕСКИЕ ПРИКЛЮЧЕНИЯ БУДУТ ЭПИЧНЫМИ.",
+        "ТЫ НАЙДЕШЬ ДОРОГУ К СЕРДЦУ МИРА.",
+        "ВНУТРЕННИЙ ОГОНЬ БУДЕТ ВЕЧНЫМ.",
+        "ТВОЯ ЩЕДРОСТЬ СПАСЕТ ПЛАНЕТУ.",
+        "УДАЧА БУДЕТ ТВОЕЙ РАБЫНЕЙ.",
+        "ТЫ СТАНЕШЬ СИМВОЛОМ ЭПОХИ.",
+        "ВСЕ ЖЕЛАНИЯ ИСПОЛНЯТСЯ МГНОВЕННО.",
+        "НОВЫЕ ДРУЗЬЯ СТАНУТ АНГЕЛАМИ-ХРАНИТЕЛЯМИ.",
+        "ТВОЕ ЗДОРОВЬЕ БУДЕТ БЕССМЕРТНЫМ.",
+        "ФИНАНСОВЫЕ ГОРЫ ПОКОРЯТСЯ ТЕБЕ.",
+        "ТЫ НАЙДЕШЬ ИСТОЧНИК ВЕЧНОЙ МОЛОДОСТИ.",
+        "ТВОРЧЕСТВО ИЗМЕНИТ ХОД ИСТОРИИ.",
+        "ЛЮБОВЬ БУДЕТ САМОЙ ВЕЛИКОЙ.",
+        "ТЫ ОБРЕТЕШЬ АБСОЛЮТНУЮ ГАРМОНИЮ.",
+        "НОВЫЕ ЗНАНИЯ ОТКРОЮТ ТАЙНЫ ВСЕЛЕННОЙ.",
+        "ТВОЕ ОБАЯНИЕ ПОКОРИТ ВРЕМЯ И ПРОСТРАНСТВО.",
+        "СЕМЕЙНОЕ ДРЕВО ДАСТ ЗОЛОТЫЕ ПЛОДЫ.",
+        "ТЫ ПОЛУЧИШ КЛЮЧ ОТ ВСЕХ ДВЕРЕЙ.",
+        "РОМАНТИКА БУДЕТ ТВОЕЙ СУЩНОСТЬЮ.",
+        "ТЫ НАЙДЕШЬ СМЫСЛ БЫТИЯ.",
+        "ВНУТРЕННЯЯ ГАРМОНИЯ ПРИНЕСЕТ БЕССМЕРТИЕ.",
+        "ТВОЯ ДОБРОТА ВОСКРЕСИТ НАДЕЖДУ.",
+        "ВАЖНАЯ ВСТРЕЧА ИЗМЕНИТ СУДЬБУ ЧЕЛОВЕЧЕСТВА.",
+        "ТЫ СТАНЕШ БОГИНЕЙ НОВОГО МИРА.",
+        "МЕЧТЫ СОЗДАДУТ НОВУЮ РЕАЛЬНОСТЬ.",
+        "ДРУЗЬЯ БУДУТ ТВОИМИ КРЫЛЬЯМИ.",
+        "ТВОЕ ТЕЛО СТАНЕТ ИДЕАЛОМ СОВЕРШЕНСТВА.",
+        "ДЕНЕЖНЫЕ РЕКИ ПРЕВРАТЯТСЯ В ОКЕАНЫ.",
+        "ТЫ НАЙДЕШ ФИЛОСОФСКИЙ КАМЕНЬ.",
+        "ТВОРЧЕСКИЙ ПРОРЫВ ПЕРЕВЕРНЕТ СОЗНАНИЕ.",
+        "ЛЮБОВЬ БУДЕТ ВЕЧНОЙ И БЕСКОНЕЧНОЙ."
+    ];
 
-// ============================================
-// ФУНКЦИИ ДЛЯ ШАРА ПРЕДСКАЗАНИЙ
-// ============================================
+    // ============================================
+    // ОПТИМИЗИРОВАННЫЕ ФУНКЦИИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+    // ============================================
 
-// Открытие модального окна с шаром предсказаний
-function openFortuneModal() {
-    console.log('🔮 Открываем шар предсказаний');
-    document.getElementById('fortuneModal').classList.add('active');
-    
-    // Сброс предыдущего предсказания
-    const predictionElement = document.getElementById('fortunePrediction');
-    const textElement = document.getElementById('fortuneText');
-    const signatureElement = document.getElementById('fortuneSignature');
-    const buttonElement = document.getElementById('getFortuneBtn');
-    
-    predictionElement.classList.remove('active');
-    textElement.textContent = '';
-    signatureElement.textContent = '';
-    buttonElement.disabled = false;
-    buttonElement.textContent = 'Получить предсказание';
-    
-    // Трекинг
-    trackUserAction('open_fortune_modal', 'fortune');
-    trackYandexGoal('open_fortune_modal');
-    
-    // Блокировка свайпов в Telegram
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeFortuneModal);
+    // Debounce функция для оптимизации обработчиков событий
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
-}
 
-// Закрытие модального окна
-function closeFortuneModal() {
-    console.log('🔮 Закрываем шар предсказаний');
-    document.getElementById('fortuneModal').classList.remove('active');
-    
-    // Разблокировка свайпов в Telegram
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
+    // Функция для очистки неиспользуемых обработчиков событий
+    function cleanupModalEvents(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.onclick = null;
+        }
     }
-}
 
-// Получение случайного предсказания
-function getFortune() {
-    const predictionElement = document.getElementById('fortunePrediction');
-    const textElement = document.getElementById('fortuneText');
-    const signatureElement = document.getElementById('fortuneSignature');
-    const buttonElement = document.getElementById('getFortuneBtn');
-    
-    // Проверяем, не было ли уже показано предсказание
-    if (predictionElement.classList.contains('active')) {
-        // Если уже есть предсказание, закрываем окно
-        closeFortuneModal();
-        return;
+    // Оптимизированная функция для создания снежинок
+    function createSnowflakes() {
+        const snowflakesContainer = document.getElementById('snowflakes');
+        const snowflakeCount = 25; // Оптимизировано для мобильных
+        
+        // Простые символы для лучшей производительности
+        const snowflakeSymbols = ['•', '*', '·'];
+        
+        // Очищаем контейнер
+        snowflakesContainer.innerHTML = '';
+        
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+            
+            // Оптимизация производительности
+            snowflake.style.willChange = 'transform, opacity';
+            snowflake.style.transform = 'translateZ(0)';
+            
+            // Случайные параметры для снежинки
+            const size = Math.random() * 6 + 3;
+            const startPosition = Math.random() * 100;
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            
+            // Крупные снежинки падают медленнее, мелкие быстрее
+            const adjustedDuration = size < 6 ? duration * 0.7 : duration * 1.3;
+            
+            snowflake.style.fontSize = `${size}px`;
+            snowflake.style.left = `${startPosition}%`;
+            snowflake.style.animationDuration = `${adjustedDuration}s`;
+            snowflake.style.animationDelay = `${delay}s`;
+            snowflake.style.opacity = (0.5 + Math.random() * 0.3).toString();
+            
+            snowflakesContainer.appendChild(snowflake);
+        }
     }
-    
-    // Блокируем кнопку на время анимации
-    buttonElement.disabled = true;
-    buttonElement.textContent = 'Шар загадочно светится...';
-    
-    // Таймер для эффекта ожидания
-    setTimeout(() => {
-        // Получаем случайное предсказание
-        const randomIndex = Math.floor(Math.random() * predictions.length);
-        const randomPrediction = predictions[randomIndex];
+
+    // Оптимизированная функция для создания звезд
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        const starsCount = 120; // Уменьшено для оптимизации
         
-        // Устанавливаем текст предсказания
-        textElement.textContent = randomPrediction;
-        signatureElement.textContent = "С любовью Dream Lady!💋";
+        starsContainer.innerHTML = '';
         
-        // Показываем предсказание с анимацией
-        predictionElement.classList.add('active');
+        for (let i = 0; i < starsCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 2 + 1;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const delay = Math.random() * 3;
+            
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${posX}%`;
+            star.style.top = `${posY}%`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.willChange = 'transform, opacity';
+            star.style.transform = 'translateZ(0)';
+            
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // ============================================
+    // ФУНКЦИИ ДЛЯ ШАРА ПРЕДСКАЗАНИЙ
+    // ============================================
+
+    // Открытие модального окна с шаром предсказаний
+    function openFortuneModal() {
+        console.log('🔮 Открываем шар предсказаний');
+        document.getElementById('fortuneModal').classList.add('active');
         
-        // Меняем текст кнопки
-        buttonElement.textContent = 'Хочу ещё предсказание';
+        // Сброс предыдущего предсказания
+        const predictionElement = document.getElementById('fortunePrediction');
+        const textElement = document.getElementById('fortuneText');
+        const signatureElement = document.getElementById('fortuneSignature');
+        const buttonElement = document.getElementById('getFortuneBtn');
+        
+        predictionElement.classList.remove('active');
+        textElement.textContent = '';
+        signatureElement.textContent = '';
         buttonElement.disabled = false;
+        buttonElement.textContent = 'Получить предсказание';
         
-        // Трекинг получения предсказания
-        trackUserAction('get_fortune', 'fortune');
-        trackYandexGoal('get_fortune');
+        // Трекинг
+        trackUserAction('open_fortune_modal', 'fortune');
+        trackYandexGoal('open_fortune_modal');
         
-        console.log('🔮 Предсказание:', randomPrediction);
-    }, 1500);
-}
-
-// ============================================
-// ОСТАЛЬНОЙ КОД (ваш оригинальный JavaScript)
-// ============================================
-
-// YANDEX METRIKA FUNCTIONS
-function trackYandexGoal(goalName) {
-    if (typeof ym !== 'undefined') {
-        ym(105481509, 'reachGoal', goalName);
-        console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+        // Блокировка свайпов в Telegram
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeFortuneModal);
+        }
     }
-}
 
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ЧАТА ГОРОДА
-function openLinkWithTracking(url, goalName) {
-    console.log('🔗 Открываем ссылку с трекингом:', url, 'Цель:', goalName);
-    
-    if (goalName && typeof ym !== 'undefined') {
-        ym(105481509, 'reachGoal', goalName);
-        console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+    // Закрытие модального окна
+    function closeFortuneModal() {
+        console.log('🔮 Закрываем шар предсказаний');
+        document.getElementById('fortuneModal').classList.remove('active');
+        cleanupModalEvents('fortuneModal');
+        
+        // Разблокировка свайпов в Telegram
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
     }
-    
-    // Открываем ссылку через Telegram WebApp если доступен
+
+    // Получение случайного предсказания
+    function getFortune() {
+        const predictionElement = document.getElementById('fortunePrediction');
+        const textElement = document.getElementById('fortuneText');
+        const signatureElement = document.getElementById('fortuneSignature');
+        const buttonElement = document.getElementById('getFortuneBtn');
+        
+        // Проверяем, не было ли уже показано предсказание
+        if (predictionElement.classList.contains('active')) {
+            closeFortuneModal();
+            return;
+        }
+        
+        // Блокируем кнопку на время анимации
+        buttonElement.disabled = true;
+        buttonElement.textContent = 'Шар загадочно светится...';
+        
+        // Таймер для эффекта ожидания
+        setTimeout(() => {
+            // Получаем случайное предсказание
+            const randomIndex = Math.floor(Math.random() * predictions.length);
+            const randomPrediction = predictions[randomIndex];
+            
+            // Устанавливаем текст предсказания
+            textElement.textContent = randomPrediction;
+            signatureElement.textContent = "С любовью Dream Lady!💋";
+            
+            // Показываем предсказание с анимацией
+            predictionElement.classList.add('active');
+            
+            // Меняем текст кнопки
+            buttonElement.textContent = 'Хочу ещё предсказание';
+            buttonElement.disabled = false;
+            
+            // Трекинг получения предсказания
+            trackUserAction('get_fortune', 'fortune');
+            trackYandexGoal('get_fortune');
+            
+            console.log('🔮 Предсказание:', randomPrediction);
+        }, 1500);
+    }
+
+    // ============================================
+    // ОСТАЛЬНОЙ КОД С ОПТИМИЗАЦИЯМИ
+    // ============================================
+
+    // YANDEX METRIKA FUNCTIONS
+    function trackYandexGoal(goalName) {
+        if (typeof ym !== 'undefined') {
+            ym(105481509, 'reachGoal', goalName);
+            console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+        }
+    }
+
+    // ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ЧАТА ГОРОДА
+    function openLinkWithTracking(url, goalName) {
+        console.log('🔗 Открываем ссылку с трекингом:', url, 'Цель:', goalName);
+        
+        if (goalName && typeof ym !== 'undefined') {
+            ym(105481509, 'reachGoal', goalName);
+            console.log('🎯 Яндекс.Метрика: цель "' + goalName + '" достигнута');
+        }
+        
+        // Открываем ссылку через Telegram WebApp если доступен
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.openLink(url);
+        } else {
+            window.open(url, '_blank');
+        }
+    }
+
+    // ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ЧАТА ГОРОДА
+    function openCityChat() {
+        console.log('🏙️ Открываем чат города');
+        const cityChatUrl = 'https://t.me/dream_lady_studio/?startapp&addToHomeScreen';
+        
+        trackUserAction('open_city_chat', 'telegram');
+        trackYandexGoal('open_city_chat');
+        
+        openLinkWithTracking(cityChatUrl, 'Чат города');
+    }
+
+    function trackModalOpen(modalName) {
+        if (typeof ym !== 'undefined') {
+            ym(105481509, 'reachGoal', 'open_' + modalName + '_modal');
+            console.log('🎯 Яндекс.Метрика: открыто модальное окно "' + modalName + '"');
+        }
+    }
+
+    function trackUserAction(actionName, category = 'user_action') {
+        if (typeof ym !== 'undefined') {
+            const goalName = category + '_' + actionName;
+            ym(105481509, 'reachGoal', goalName);
+            console.log('🎯 Яндекс.Метрика: действие "' + goalName + '"');
+            
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'customEvent',
+                    'eventCategory': category,
+                    'eventAction': actionName,
+                    'eventLabel': goalName
+                });
+            }
+        }
+    }
+
+    // MINI APPS 2.0: ПОЛНОЭКРАННЫЙ РЕЖИМ С БЛОКИРОВКОЙ СВАЙПОВ
+    console.log('🚀 Dream Lady Mini Apps 2.0 запускается...');
+
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.openLink(url);
-    } else {
-        window.open(url, '_blank');
-    }
-}
-
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ЧАТА ГОРОДА
-function openCityChat() {
-    console.log('🏙️ Открываем чат города');
-    const cityChatUrl = 'https://t.me/dream_lady_studio/?startapp&addToHomeScreen';
-    
-    trackUserAction('open_city_chat', 'telegram');
-    trackYandexGoal('open_city_chat');
-    
-    openLinkWithTracking(cityChatUrl, 'Чат города');
-}
-
-function trackModalOpen(modalName) {
-    if (typeof ym !== 'undefined') {
-        ym(105481509, 'reachGoal', 'open_' + modalName + '_modal');
-        console.log('🎯 Яндекс.Метрика: открыто модальное окно "' + modalName + '"');
-    }
-}
-
-function trackUserAction(actionName, category = 'user_action') {
-    if (typeof ym !== 'undefined') {
-        const goalName = category + '_' + actionName;
-        ym(105481509, 'reachGoal', goalName);
-        console.log('🎯 Яндекс.Метрика: действие "' + goalName + '"');
+        const tg = Telegram.WebApp;
         
-        if (window.dataLayer) {
-            window.dataLayer.push({
-                'event': 'customEvent',
-                'eventCategory': category,
-                'eventAction': actionName,
-                'eventLabel': goalName
+        const version = parseFloat(tg.version) || 6.0;
+        console.log('📱 Версия Telegram:', version);
+        
+        tg.ready();
+        tg.expand();
+        
+        if (version >= 6.1) {
+            tg.requestFullscreen();
+            console.log('✅ Полноэкранный режим активирован (requestFullscreen)');
+        } else {
+            console.log('ℹ️ requestFullscreen доступен с версии 6.1');
+        }
+        
+        tg.disableVerticalSwipes();
+        tg.BackButton.hide();
+        tg.setHeaderColor('#1A1F2B');
+        tg.setBackgroundColor('#1A1F2B');
+        
+        if (tg.initDataUnsafe?.start_param === 'fullscreen') {
+            console.log('🚀 Автоматический запуск из бота');
+            trackUserAction('bot_launch', 'telegram');
+        }
+        
+        trackUserAction('mini_app_open', 'telegram');
+        
+        console.log('✅ Mini Apps 2.0 инициализирован');
+        console.log('🖥 Платформа:', tg.platform);
+        console.log('🔒 Vertical swipes disabled');
+        
+    } else {
+        console.log('🌐 Режим браузера');
+        trackUserAction('browser_open', 'web');
+    }
+
+    // ОСНОВНЫЕ ФУНКЦИИ С ТРЕКИНГОМ
+    function openLink(url) {
+        console.log('🔗 Открываем ссылку:', url);
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.openLink(url);
+        } else {
+            window.open(url, '_blank');
+        }
+    }
+
+    function openAdminChat() {
+        console.log('💬 Открываем чат с администратором');
+        const adminTelegram = 'https://t.me/DreamLady_Koroleva';
+        const message = encodeURIComponent('Здравствуйте! Хочу задать вопрос по занятиям в студии Dream Lady.');
+        const fullUrl = `${adminTelegram}?start=${message}`;
+        
+        trackUserAction('open_admin_chat', 'telegram');
+        trackYandexGoal('open_admin_chat');
+        
+        openLinkWithTracking(fullUrl, 'Чат с администратором');
+        updateChatBadge();
+    }
+
+    function updateChatBadge() {
+        const badge = document.getElementById('chatBadge');
+        if (badge) {
+            let currentCount = parseInt(badge.textContent);
+            if (currentCount > 1) {
+                badge.textContent = (currentCount - 1).toString();
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+    }
+
+    function openWhatsApp(phoneNumber) {
+        console.log('📱 Открываем WhatsApp для номера:', phoneNumber);
+        const cleanNumber = phoneNumber.replace(/[^\d]/g, '');
+        const whatsappLink = 'https://wa.me/' + cleanNumber + '?text=' + 
+            encodeURIComponent('Здравствуйте! У меня вопрос по занятиям в студии Dream Lady.');
+        
+        console.log('🔗 Ссылка WhatsApp:', whatsappLink);
+        
+        trackUserAction('open_whatsapp', 'messenger');
+        trackYandexGoal('open_whatsapp');
+        
+        openLinkWithTracking(whatsappLink, 'WhatsApp');
+    }
+
+    function openTelegramBot() {
+        trackUserAction('open_telegram_bot', 'telegram');
+        trackYandexGoal('open_telegram_bot');
+        openLinkWithTracking('https://t.me/DreamTeamStudio_Bot', 'Telegram Bot');
+    }
+
+    // ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН С ТРЕКИНГОМ
+    function openTelegramBotFullscreen() {
+        document.getElementById('telegramBotFullscreen').classList.add('active');
+        trackModalOpen('telegram_bot');
+        trackYandexGoal('open_telegram_bot_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(function() {
+                closeFullscreen();
             });
         }
     }
-}
 
-// ФУНКЦИЯ ДЛЯ СОЗДАНИЯ СНЕЖИНОК - ИСПРАВЛЕННАЯ (уменьшены на 70%)
-function createSnowflakes() {
-    const snowflakesContainer = document.getElementById('snowflakes');
-    const snowflakeCount = 35; // Уменьшили количество
-    
-    // Символы для снежинок
-    const snowflakeSymbols = ['❄', '❅', '❆', '•', '*'];
-    
-    for (let i = 0; i < snowflakeCount; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        
-        // Выбираем случайный символ
-        const symbol = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
-        snowflake.innerHTML = symbol;
-        
-        // Случайные параметры для снежинки (уменьшены на 70%)
-        const size = Math.random() * 6 + 3; // Было 10-30, стало 3-9 (уменьшение на 70%)
-        const startPosition = Math.random() * 100; // Начальная позиция по X
-        const duration = Math.random() * 10 + 10; // Продолжительность анимации от 10 до 20 секунд
-        const delay = Math.random() * 5; // Задержка начала анимации
-        
-        // Крупные снежинки падают медленнее, мелкие быстрее
-        const adjustedDuration = size < 6 ? duration * 0.7 : duration * 1.3;
-        
-        snowflake.style.fontSize = `${size}px`;
-        snowflake.style.left = `${startPosition}%`;
-        snowflake.style.animationDuration = `${adjustedDuration}s`;
-        snowflake.style.animationDelay = `${delay}s`;
-        
-        // Добавляем немного рандомизации для прозрачности
-        snowflake.style.opacity = (0.5 + Math.random() * 0.3).toString();
-        
-        snowflakesContainer.appendChild(snowflake);
-    }
-}
-
-// MINI APPS 2.0: ПОЛНОЭКРАННЫЙ РЕЖИМ С БЛОКИРОВКОЙ СВАЙПОВ
-console.log('🚀 Dream Lady Mini Apps 2.0 запускается...');
-
-if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-    const tg = Telegram.WebApp;
-    
-    const version = parseFloat(tg.version) || 6.0;
-    console.log('📱 Версия Telegram:', version);
-    
-    tg.ready();
-    tg.expand();
-    
-    if (version >= 6.1) {
-        tg.requestFullscreen();
-        console.log('✅ Полноэкранный режим активирован (requestFullscreen)');
-    } else {
-        console.log('ℹ️ requestFullscreen доступен с версии 6.1');
-    }
-    
-    tg.disableVerticalSwipes();
-    tg.BackButton.hide();
-    tg.setHeaderColor('#1A1F2B');
-    tg.setBackgroundColor('#1A1F2B');
-    
-    if (tg.initDataUnsafe?.start_param === 'fullscreen') {
-        console.log('🚀 Автоматический запуск из бота');
-        trackUserAction('bot_launch', 'telegram');
-    }
-    
-    trackUserAction('mini_app_open', 'telegram');
-    
-    console.log('✅ Mini Apps 2.0 инициализирован');
-    console.log('🖥 Платформа:', tg.platform);
-    console.log('🔒 Vertical swipes disabled');
-    
-} else {
-    console.log('🌐 Режим браузера');
-    trackUserAction('browser_open', 'web');
-}
-
-// ОСНОВНЫЕ ФУНКЦИИ С ТРЕКИНГОМ
-function openLink(url) {
-    console.log('🔗 Открываем ссылку:', url);
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.openLink(url);
-    } else {
-        window.open(url, '_blank');
-    }
-}
-
-function openAdminChat() {
-    console.log('💬 Открываем чат с администратором');
-    const adminTelegram = 'https://t.me/DreamLady_Koroleva';
-    const message = encodeURIComponent('Здравствуйте! Хочу задать вопрос по занятиям в студии Dream Lady.');
-    const fullUrl = `${adminTelegram}?start=${message}`;
-    
-    trackUserAction('open_admin_chat', 'telegram');
-    trackYandexGoal('open_admin_chat');
-    
-    openLinkWithTracking(fullUrl, 'Чат с администратором');
-    updateChatBadge();
-}
-
-function updateChatBadge() {
-    const badge = document.getElementById('chatBadge');
-    if (badge) {
-        let currentCount = parseInt(badge.textContent);
-        if (currentCount > 1) {
-            badge.textContent = (currentCount - 1).toString();
-        } else {
-            badge.style.display = 'none';
+    function closeFullscreen() {
+        document.getElementById('telegramBotFullscreen').classList.remove('active');
+        cleanupModalEvents('telegramBotFullscreen');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
         }
     }
-}
 
-function openWhatsApp(phoneNumber) {
-    console.log('📱 Открываем WhatsApp для номера:', phoneNumber);
-    const cleanNumber = phoneNumber.replace(/[^\d]/g, '');
-    const whatsappLink = 'https://wa.me/' + cleanNumber + '?text=' + 
-        encodeURIComponent('Здравствуйте! У меня вопрос по занятиям в студии Dream Lady.');
-    
-    console.log('🔗 Ссылка WhatsApp:', whatsappLink);
-    
-    trackUserAction('open_whatsapp', 'messenger');
-    trackYandexGoal('open_whatsapp');
-    
-    openLinkWithTracking(whatsappLink, 'WhatsApp');
-}
+    function openPriceModal() {
+        document.getElementById('priceModal').classList.add('active');
+        trackModalOpen('price');
+        trackYandexGoal('open_price_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closePriceModal);
+        }
+    }
 
-function openTelegramBot() {
-    trackUserAction('open_telegram_bot', 'telegram');
-    trackYandexGoal('open_telegram_bot');
-    openLinkWithTracking('https://t.me/DreamTeamStudio_Bot', 'Telegram Bot');
-}
+    function closePriceModal() {
+        document.getElementById('priceModal').classList.remove('active');
+        cleanupModalEvents('priceModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
 
-// ФУНКЦИИ ДЛЯ МОДАЛЬНЫХ ОКОН С ТРЕКИНГОМ
-function openTelegramBotFullscreen() {
-    document.getElementById('telegramBotFullscreen').classList.add('active');
-    trackModalOpen('telegram_bot');
-    trackYandexGoal('open_telegram_bot_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(function() {
-            closeFullscreen();
+    function openStockModal() {
+        document.getElementById('stockModal').classList.add('active');
+        trackModalOpen('stock');
+        trackYandexGoal('open_stock_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeStockModal);
+        }
+    }
+
+    function closeStockModal() {
+        document.getElementById('stockModal').classList.remove('active');
+        cleanupModalEvents('stockModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    function openDirectionsModal() {
+        document.getElementById('directionsModal').classList.add('active');
+        trackModalOpen('directions');
+        trackYandexGoal('open_directions_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeDirectionsModal);
+        }
+    }
+
+    function closeDirectionsModal() {
+        document.getElementById('directionsModal').classList.remove('active');
+        cleanupModalEvents('directionsModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    function openSignupModal() {
+        document.getElementById('signupModal').classList.add('active');
+        trackModalOpen('signup');
+        trackYandexGoal('open_signup_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeSignupModal);
+        }
+    }
+
+    function closeSignupModal() {
+        document.getElementById('signupModal').classList.remove('active');
+        cleanupModalEvents('signupModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    function openTestModal() {
+        document.getElementById('testModal').classList.add('active');
+        trackModalOpen('test');
+        trackYandexGoal('open_test_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeTestModal);
+        }
+    }
+
+    function closeTestModal() {
+        document.getElementById('testModal').classList.remove('active');
+        cleanupModalEvents('testModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    function openContactsModal() {
+        document.getElementById('contactsModal').classList.add('active');
+        trackModalOpen('contacts');
+        trackYandexGoal('open_contacts_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeContactsModal);
+        }
+    }
+
+    function closeContactsModal() {
+        document.getElementById('contactsModal').classList.remove('active');
+        cleanupModalEvents('contactsModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    function openTrainersModal() {
+        document.getElementById('trainersModal').classList.add('active');
+        trackModalOpen('trainers');
+        trackYandexGoal('open_trainers_modal');
+        
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.disableVerticalSwipes();
+            Telegram.WebApp.BackButton.show();
+            Telegram.WebApp.BackButton.onClick(closeTrainersModal);
+        }
+    }
+
+    function closeTrainersModal() {
+        document.getElementById('trainersModal').classList.remove('active');
+        cleanupModalEvents('trainersModal');
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            Telegram.WebApp.enableVerticalSwipes();
+            Telegram.WebApp.BackButton.hide();
+        }
+    }
+
+    // Закрытие модальных окон при клике на фон
+    document.querySelectorAll('.modal-overlay, .fortune-modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                if (this.id === 'priceModal') closePriceModal();
+                else if (this.id === 'stockModal') closeStockModal();
+                else if (this.id === 'directionsModal') closeDirectionsModal();
+                else if (this.id === 'signupModal') closeSignupModal();
+                else if (this.id === 'testModal') closeTestModal();
+                else if (this.id === 'contactsModal') closeContactsModal();
+                else if (this.id === 'trainersModal') closeTrainersModal();
+                else if (this.id === 'fortuneModal') closeFortuneModal();
+            }
         });
-    }
-}
+    });
 
-function closeFullscreen() {
-    document.getElementById('telegramBotFullscreen').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
+    function initWapiAuth() {
+        if (typeof Listok !== 'undefined') {
+            Listok.init({
+                containerId: 'listokWidgetContainer',
+                configId: '91afda9e057d0c742cda59a22cd5bdf4',
+                onAuth: function(userData) {
+                    console.log('✅ Пользователь авторизован');
+                    trackUserAction('wapi_auth_success', 'auth');
+                },
+                onLoad: function() {
+                    console.log('✅ WAPI загружен');
+                    trackUserAction('wapi_loaded', 'system');
+                },
+                onError: function(error) {
+                    console.log('❌ WAPI ошибка:', error);
+                    trackUserAction('wapi_error', 'system');
+                }
+            });
+        }
     }
-}
 
-function openPriceModal() {
-    document.getElementById('priceModal').classList.add('active');
-    trackModalOpen('price');
-    trackYandexGoal('open_price_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closePriceModal);
-    }
-}
+    // ОПТИМИЗИРОВАННАЯ ЗАГРУЗКА СТРАНИЦЫ
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📄 Страница загружена');
+        createStars();
+        createSnowflakes();
+        initWapiAuth();
+        
+        trackUserAction('page_loaded', 'system');
+        
+        // Центрирование меню с debounce для оптимизации
+        const centerMenu = debounce(function() {
+            const menu = document.querySelector('.menu-container');
+            const schedule = document.querySelector('.schedule-notification');
+            const windowHeight = window.innerHeight;
+            const menuHeight = menu.offsetHeight;
+            const scheduleHeight = schedule.offsetHeight;
+            const totalHeight = menuHeight + scheduleHeight + 30;
+            
+            if (totalHeight < windowHeight) {
+                const marginTop = (windowHeight - totalHeight) / 2;
+                schedule.style.marginTop = marginTop + 'px';
+            }
+        }, 100);
+        
+        centerMenu();
+        
+        // Настройка иконки чата
+        const chatIcon = document.querySelector('.chat-admin-float');
+        if (chatIcon) {
+            setTimeout(() => {
+                chatIcon.style.animation = 'pulse 2s infinite';
+            }, 1000);
+        }
+        
+        console.log('🚀 Mini App готов к работе');
+    });
 
-function closePriceModal() {
-    document.getElementById('priceModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
+    // Пассивные обработчики событий для оптимизации производительности
+    document.addEventListener('touchstart', function() {}, { passive: true });
+    document.addEventListener('touchmove', function() {}, { passive: true });
 
-function openStockModal() {
-    document.getElementById('stockModal').classList.add('active');
-    trackModalOpen('stock');
-    trackYandexGoal('open_stock_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeStockModal);
-    }
-}
+    // Автоматическое восстановление полноэкранного режима
+    setInterval(function() {
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            const tg = Telegram.WebApp;
+            const version = parseFloat(tg.version) || 6.0;
+            
+            if (!tg.isExpanded) {
+                console.log('🔄 Восстановление полноэкранного режима...');
+                tg.expand();
+                
+                if (version >= 6.1) {
+                    tg.requestFullscreen();
+                }
+                
+                tg.disableVerticalSwipes();
+            }
+        }
+    }, 1000);
 
-function closeStockModal() {
-    document.getElementById('stockModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-function openDirectionsModal() {
-    document.getElementById('directionsModal').classList.add('active');
-    trackModalOpen('directions');
-    trackYandexGoal('open_directions_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeDirectionsModal);
-    }
-}
-
-function closeDirectionsModal() {
-    document.getElementById('directionsModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-function openSignupModal() {
-    document.getElementById('signupModal').classList.add('active');
-    trackModalOpen('signup');
-    trackYandexGoal('open_signup_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeSignupModal);
-    }
-}
-
-function closeSignupModal() {
-    document.getElementById('signupModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-function openTestModal() {
-    document.getElementById('testModal').classList.add('active');
-    trackModalOpen('test');
-    trackYandexGoal('open_test_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeTestModal);
-    }
-}
-
-function closeTestModal() {
-    document.getElementById('testModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-function openContactsModal() {
-    document.getElementById('contactsModal').classList.add('active');
-    trackModalOpen('contacts');
-    trackYandexGoal('open_contacts_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeContactsModal);
-    }
-}
-
-function closeContactsModal() {
-    document.getElementById('contactsModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-function openTrainersModal() {
-    document.getElementById('trainersModal').classList.add('active');
-    trackModalOpen('trainers');
-    trackYandexGoal('open_trainers_modal');
-    
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.disableVerticalSwipes();
-        Telegram.WebApp.BackButton.show();
-        Telegram.WebApp.BackButton.onClick(closeTrainersModal);
-    }
-}
-
-function closeTrainersModal() {
-    document.getElementById('trainersModal').classList.remove('active');
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.enableVerticalSwipes();
-        Telegram.WebApp.BackButton.hide();
-    }
-}
-
-// Закрытие модальных окон при клике на фон
-document.querySelectorAll('.modal-overlay, .fortune-modal-overlay').forEach(modal => {
-    modal.addEventListener('click', function(e) {
-        if (e.target === this) {
-            if (this.id === 'priceModal') closePriceModal();
-            else if (this.id === 'stockModal') closeStockModal();
-            else if (this.id === 'directionsModal') closeDirectionsModal();
-            else if (this.id === 'signupModal') closeSignupModal();
-            else if (this.id === 'testModal') closeTestModal();
-            else if (this.id === 'contactsModal') closeContactsModal();
-            else if (this.id === 'trainersModal') closeTrainersModal();
-            else if (this.id === 'fortuneModal') closeFortuneModal();
+    // Трекинг времени на странице
+    let startTime = Date.now();
+    window.addEventListener('beforeunload', function() {
+        const timeSpent = Math.round((Date.now() - startTime) / 1000);
+        console.log('⏱️ Время на странице:', timeSpent, 'секунд');
+        
+        if (typeof ym !== 'undefined') {
+            ym(105481509, 'params', {
+                time_on_page: timeSpent
+            });
+            ym(105481509, 'reachGoal', 'time_on_page_' + timeSpent + 's');
         }
     });
-});
 
-// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-function createStars() {
-    const starsContainer = document.getElementById('stars');
-    const starsCount = 160;
-    
-    for (let i = 0; i < starsCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        const size = Math.random() * 2 + 1;
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
-        const delay = Math.random() * 3;
-        
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.left = `${posX}%`;
-        star.style.top = `${posY}%`;
-        star.style.animationDelay = `${delay}s`;
-        
-        starsContainer.appendChild(star);
+    // Оптимизация для медленных устройств
+    let isLowPerfDevice = false;
+    if ('hardwareConcurrency' in navigator) {
+        isLowPerfDevice = navigator.hardwareConcurrency <= 4;
     }
-}
-
-function initWapiAuth() {
-    if (typeof Listok !== 'undefined') {
-        Listok.init({
-            containerId: 'listokWidgetContainer',
-            configId: '91afda9e057d0c742cda59a22cd5bdf4',
-            onAuth: function(userData) {
-                console.log('✅ Пользователь авторизован');
-                trackUserAction('wapi_auth_success', 'auth');
-            },
-            onLoad: function() {
-                console.log('✅ WAPI загружен');
-                trackUserAction('wapi_loaded', 'system');
-            },
-            onError: function(error) {
-                console.log('❌ WAPI ошибка:', error);
-                trackUserAction('wapi_error', 'system');
-            }
+    
+    if (isLowPerfDevice) {
+        console.log('📱 Обнаружено устройство с низкой производительностью, применяем оптимизации');
+        // Дополнительные оптимизации для медленных устройств
+        const heavyAnimations = document.querySelectorAll('.star, .snowflake');
+        heavyAnimations.forEach(el => {
+            el.style.animationDuration = '5s';
         });
     }
-}
-
-// ЗАГРУЗКА СТРАНИЦЫ
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 Страница загружена');
-    createStars();
-    createSnowflakes(); // Создаем снежинки
-    initWapiAuth();
-    
-    trackUserAction('page_loaded', 'system');
-    
-    // Центрирование меню
-    const menu = document.querySelector('.menu-container');
-    const schedule = document.querySelector('.schedule-notification');
-    const windowHeight = window.innerHeight;
-    const menuHeight = menu.offsetHeight;
-    const scheduleHeight = schedule.offsetHeight;
-    const totalHeight = menuHeight + scheduleHeight + 30;
-    
-    if (totalHeight < windowHeight) {
-        const marginTop = (windowHeight - totalHeight) / 2;
-        schedule.style.marginTop = marginTop + 'px';
-    }
-    
-    // Настройка иконки чата
-    const chatIcon = document.querySelector('.chat-admin-float');
-    if (chatIcon) {
-        setTimeout(() => {
-            chatIcon.style.animation = 'pulse 2s infinite';
-        }, 1000);
-    }
-    
-    console.log('🚀 Mini App готов к работе');
-});
-
-// ДОПОЛНИТЕЛЬНАЯ БЛОКИРОВКА СВАЙПОВ
-document.addEventListener('touchmove', function(e) {
-    if (e.scale !== 1) {
-        e.preventDefault();
-    }
-}, { passive: false });
-
-// Автоматическое восстановление полноэкранного режима
-setInterval(function() {
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        const tg = Telegram.WebApp;
-        const version = parseFloat(tg.version) || 6.0;
-        
-        if (!tg.isExpanded) {
-            console.log('🔄 Восстановление полноэкранного режима...');
-            tg.expand();
-            
-            if (version >= 6.1) {
-                tg.requestFullscreen();
-            }
-            
-            tg.disableVerticalSwipes();
-        }
-    }
-}, 1000);
-
-// Трекинг времени на странице
-let startTime = Date.now();
-window.addEventListener('beforeunload', function() {
-    const timeSpent = Math.round((Date.now() - startTime) / 1000);
-    console.log('⏱️ Время на странице:', timeSpent, 'секунд');
-    
-    if (typeof ym !== 'undefined') {
-        ym(105481509, 'params', {
-            time_on_page: timeSpent
-        });
-        ym(105481509, 'reachGoal', 'time_on_page_' + timeSpent + 's');
-    }
-});
-</script>
+    </script>
 </body>
 </html>
