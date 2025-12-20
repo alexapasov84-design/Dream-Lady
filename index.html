@@ -2862,34 +2862,35 @@
     // ФУНКЦИИ ДЛЯ ШАРА ПРЕДСКАЗАНИЙ С ИСПРАВЛЕНИЯМИ
     // ============================================
 
-    // Открытие модального окна с шаром предсказаний
-    function openFortuneModal() {
-        console.log('🔮 Открываем шар предсказаний');
-        document.getElementById('fortuneModal').classList.add('active');
-        
-        // Сброс предыдущего предсказания
-        const predictionElement = document.getElementById('fortunePrediction');
-        const textElement = document.getElementById('fortuneText');
-        const signatureElement = document.getElementById('fortuneSignature');
-        const buttonElement = document.getElementById('getFortuneBtn');
-        
-        predictionElement.classList.remove('active');
-        textElement.textContent = '';
-        signatureElement.textContent = '';
-        buttonElement.disabled = false;
-        buttonElement.textContent = 'Получить предсказание';
-        
-        // Трекинг
-        trackUserAction('open_fortune_modal', 'fortune');
-        trackYandexGoal('open_fortune_modal');
-        
-        // Блокировка свайпов в Telegram
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            Telegram.WebApp.disableVerticalSwipes();
-            Telegram.WebApp.BackButton.show();
-            Telegram.WebApp.BackButton.onClick(closeFortuneModal);
-        }
+// Открытие модального окна с шаром предсказаний
+function openFortuneModal() {
+    console.log('🔮 Открываем шар предсказаний');
+    
+    // Всегда сбрасываем состояние при открытии
+    const predictionElement = document.getElementById('fortunePrediction');
+    const textElement = document.getElementById('fortuneText');
+    const signatureElement = document.getElementById('fortuneSignature');
+    const buttonElement = document.getElementById('getFortuneBtn');
+    
+    predictionElement.classList.remove('active');
+    textElement.textContent = '';
+    signatureElement.textContent = '';
+    buttonElement.disabled = false;
+    buttonElement.textContent = 'Получить предсказание';
+    
+    document.getElementById('fortuneModal').classList.add('active');
+    
+    // Трекинг
+    trackUserAction('open_fortune_modal', 'fortune');
+    trackYandexGoal('open_fortune_modal');
+    
+    // Блокировка свайпов в Telegram
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.BackButton.show();
+        Telegram.WebApp.BackButton.onClick(closeFortuneModal);
     }
+}
 
     // Закрытие модального окна
     function closeFortuneModal() {
@@ -2904,52 +2905,73 @@
         }
     }
 
-    // Получение случайного предсказания - ИСПРАВЛЕННАЯ ВЕРСИЯ
-    function getFortune() {
-        const predictionElement = document.getElementById('fortunePrediction');
-        const textElement = document.getElementById('fortuneText');
-        const signatureElement = document.getElementById('fortuneSignature');
-        const buttonElement = document.getElementById('getFortuneBtn');
+// Получение случайного предсказания - ИСПРАВЛЕННАЯ ВЕРСИЯ
+function getFortune() {
+    const predictionElement = document.getElementById('fortunePrediction');
+    const textElement = document.getElementById('fortuneText');
+    const signatureElement = document.getElementById('fortuneSignature');
+    const buttonElement = document.getElementById('getFortuneBtn');
+    const buttonText = buttonElement.textContent;
+    
+    console.log('🔮 Состояние кнопки:', buttonText);
+    console.log('🔮 Состояние предсказания (active):', predictionElement.classList.contains('active'));
+    
+    // Если уже есть предсказание И пользователь нажимает "Хочу ещё предсказание"
+    if (predictionElement.classList.contains('active') && buttonText.includes('ещё')) {
+        console.log('🔮 Сброс предсказания для нового');
         
-        // Проверяем, не было ли уже показано предсказание
-        if (predictionElement.classList.contains('active')) {
-            closeFortuneModal();
-            return;
+        // Сбрасываем предсказание
+        predictionElement.classList.remove('active');
+        textElement.textContent = '';
+        signatureElement.textContent = '';
+        
+        // Меняем текст кнопки обратно
+        buttonElement.disabled = false;
+        buttonElement.textContent = 'Получить предсказание';
+        
+        // Не закрываем модальное окно, просто сбрасываем
+        return;
+    }
+    
+    // Если предсказание уже активно, но кнопка не в режиме "ещё", просто выходим
+    if (predictionElement.classList.contains('active')) {
+        console.log('🔮 Предсказание уже активно, игнорируем клик');
+        return;
+    }
+    
+    // Блокируем кнопку на время анимации
+    buttonElement.disabled = true;
+    buttonElement.textContent = 'Шар загадочно светится...';
+    
+    // Таймер для эффекта ожидания
+    setTimeout(() => {
+        // Получаем случайное предсказание
+        const randomIndex = Math.floor(Math.random() * predictions.length);
+        const randomPrediction = predictions[randomIndex];
+        
+        // Устанавливаем текст предсказания
+        textElement.textContent = randomPrediction;
+        signatureElement.textContent = "С любовью Dream Lady!💋";
+        
+        // Прокручиваем текст в начало если он длинный
+        if (textElement.scrollHeight > textElement.clientHeight) {
+            textElement.scrollTop = 0;
         }
         
-        // Блокируем кнопку на время анимации
-        buttonElement.disabled = true;
-        buttonElement.textContent = 'Шар загадочно светится...';
+        // Показываем предсказание с анимацией
+        predictionElement.classList.add('active');
         
-        // Таймер для эффекта ожидания
-        setTimeout(() => {
-            // Получаем случайное предсказание
-            const randomIndex = Math.floor(Math.random() * predictions.length);
-            const randomPrediction = predictions[randomIndex];
-            
-            // Устанавливаем текст предсказания
-            textElement.textContent = randomPrediction;
-            signatureElement.textContent = "С любовью Dream Lady!💋";
-            
-            // Прокручиваем текст в начало если он длинный
-            if (textElement.scrollHeight > textElement.clientHeight) {
-                textElement.scrollTop = 0;
-            }
-            
-            // Показываем предсказание с анимацией
-            predictionElement.classList.add('active');
-            
-            // Меняем текст кнопки
-            buttonElement.textContent = 'Хочу ещё предсказание';
-            buttonElement.disabled = false;
-            
-            // Трекинг получения предсказания
-            trackUserAction('get_fortune', 'fortune');
-            trackYandexGoal('get_fortune');
-            
-            console.log('🔮 Предсказание:', randomPrediction);
-        }, 1500);
-    }
+        // Меняем текст кнопки
+        buttonElement.textContent = 'Хочу ещё предсказание';
+        buttonElement.disabled = false;
+        
+        // Трекинг получения предсказания
+        trackUserAction('get_fortune', 'fortune');
+        trackYandexGoal('get_fortune');
+        
+        console.log('🔮 Предсказание:', randomPrediction);
+    }, 1500);
+}
 
     // ============================================
     // ОСТАЛЬНОЙ КОД С ОПТИМИЗАЦИЯМИ
