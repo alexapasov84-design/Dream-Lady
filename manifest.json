@@ -1,0 +1,25 @@
+{
+    "name": "Dream Lady",
+    "short_name": "DreamLady",
+    "description": "Фитнес-студия танцев и балета",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1A1F2B",
+    "theme_color": "#C6A16E",
+    "orientation": "portrait",
+    "categories": ["health", "fitness", "lifestyle"],
+    "icons": [
+        {
+            "src": "https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/0a9aa599-d818-4f3a-a1ce-8c89181f0972.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/665bb0c2-e24d-4407-bac5-52e68e1f6116.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
