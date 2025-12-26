@@ -1794,6 +1794,69 @@
                 <div class="button-title">🩰 Личный кабинет</div>
             </div>
         </div>
+        <div class="progress-widget-placeholder" id="progressPlaceholder">
+    <div class="placeholder-content">
+        <div class="placeholder-icon">📊</div>
+        <h4>Ваш прогресс в студии</h4>
+        <p>Скоро здесь появится ваша персональная статистика</p>
+        <div class="placeholder-stats">
+            <div>🎯 Занятий: <span class="stat-value">—</span></div>
+            <div>⭐ Посещений: <span class="stat-value">—</span></div>
+            <div>🎖️ Достижений: <span class="stat-value">—</span></div>
+        </div>
+        <button class="placeholder-btn" onclick="openProgressAuth()">
+            🔐 Буду следить за прогрессом
+        </button>
+    </div>
+</div>
+
+<style>
+.progress-widget-placeholder {
+    background: rgba(198, 161, 110, 0.08);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px;
+    border: 2px dashed var(--gold);
+    text-align: center;
+}
+
+.placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.placeholder-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    background: rgba(26, 31, 43, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.placeholder-btn {
+    background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
+    color: var(--deep-navy);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 15px;
+}
+</style>
+<!-- ▲▲▲ ДО СЮДА ▲▲▲ -->
+
+<!-- Кнопка чата города (уже есть после) -->
+<div class="city-chat-button" onclick="openCityChat()">
+    <i class="fas fa-city"></i>
+    <span>Чат города</span>
+</div>
+
         
         <!-- КНОПКА ЧАТА ГОРОДА НА ВТОРОМ МЕСТЕ -->
         <div class="city-chat-button" onclick="openCityChat()">
@@ -3667,6 +3730,12 @@ function openUniversalLink(url, goalName) {
             el.style.animationDuration = '5s';
         });
     }
+    function openProgressAuth() {
+        // Временное уведомление
+        alert('🔐 Функция прогресса появится после подключения API Listok CRM');
+        // Позже здесь будет OAuth авторизация
+    }
+    // ▲▲▲ ДО СЮДА ▲▲▲
     </script>
 </body>
 </html>
