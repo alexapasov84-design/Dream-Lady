@@ -3735,20 +3735,19 @@
     min-width: 0;
 }
 
-/* ПРАВАЯ КОЛОНКА: Картинка - ОСТАВЛЯЕМ ПРЕЖНИЙ РАЗМЕР */
+/* ПРАВАЯ КОЛОНКА: Картинка - УВЕЛИЧИВАЕМ */
 .image-column {
     flex: 0 0 auto;
-    width: 120px; /* ПРЕЖНИЙ РАЗМЕР */
+    width: 140px; /* УВЕЛИЧЕНО */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 5px;
 }
 
 .feature-image {
     width: 100%;
     height: auto;
-    max-height: 160px; /* ПРЕЖНИЙ РАЗМЕР */
+    max-height: 220px; /* УВЕЛИЧЕНО - высота трех блоков статистики */
     object-fit: contain;
     border-radius: 6px;
     filter: brightness(1.05) saturate(1.1);
@@ -3833,14 +3832,14 @@
     box-shadow: 0 1px 0 #8B6B3D, 0 2px 8px rgba(198, 161, 110, 0.2);
 }
 
-/* Для ландшафтной ориентации */
+/* Для ландшафтной ориентации - УВЕЛИЧИВАЕМ ЕЩЕ */
 @media (orientation: landscape) {
     .image-column {
-        width: 140px;
+        width: 160px; /* УВЕЛИЧЕНО */
     }
     
     .feature-image {
-        max-height: 180px;
+        max-height: 240px; /* УВЕЛИЧЕНО */
     }
 }
 
@@ -3857,11 +3856,11 @@
     }
     
     .image-column {
-        width: 100px; /* Чуть меньше для мобильных, но не сильно */
+        width: 120px; /* Для мобильных тоже увеличиваем */
     }
     
     .feature-image {
-        max-height: 140px; /* Чуть меньше для мобильных */
+        max-height: 180px; /* Для мобильных тоже увеличиваем */
     }
     
     .stat-section {
@@ -3910,11 +3909,11 @@
     }
     
     .image-column {
-        width: 90px;
+        width: 110px;
     }
     
     .feature-image {
-        max-height: 120px;
+        max-height: 160px;
     }
     
     .stat-section {
