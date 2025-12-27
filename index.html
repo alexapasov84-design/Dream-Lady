@@ -3735,23 +3735,31 @@
     min-width: 0;
 }
 
-/* ПРАВАЯ КОЛОНКА: Картинка - ОДИНАКОВО БОЛЬШАЯ В ВЕРТИКАЛИ И ГОРИЗОНТАЛИ */
+/* ПРАВАЯ КОЛОНКА: Картинка - БЕЗ ОБВОДОК И ТЕНЕЙ */
 .image-column {
     flex: 0 0 auto;
-    width: 170px; /* ОДИНАКОВАЯ ШИРИНА КАК В ГОРИЗОНТАЛИ */
+    width: 170px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0; /* Убираем padding */
+    margin: 0; /* Убираем margin */
 }
 
 .feature-image {
     width: 100%;
     height: auto;
-    max-height: 260px; /* ОДИНАКОВАЯ ВЫСОТА КАК В ГОРИЗОНТАЛИ */
+    max-height: 260px;
     object-fit: contain;
-    border-radius: 8px; /* Немного больше скругление */
+    /* УБИРАЕМ ВСЕ ГРАНИЧНЫЕ ЭФФЕКТЫ */
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
     filter: brightness(1.05) saturate(1.1);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    /* Убираем любые возможные границы */
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 /* СТАТИСТИКА - УМЕНЬШАЕМ БУКВЫ ЕЩЕ */
@@ -3764,12 +3772,12 @@
     border-radius: 8px;
     border: 1px solid rgba(198, 161, 110, 0.25);
     transition: all 0.2s ease;
-    min-height: 50px; /* Еще меньше */
+    min-height: 50px;
 }
 
 .stat-icon {
-    font-size: 15px; /* УМЕНЬШЕНО ЕЩЕ */
-    min-width: 28px; /* УМЕНЬШЕНО */
+    font-size: 15px;
+    min-width: 28px;
     text-align: center;
     color: var(--gold);
     flex-shrink: 0;
@@ -3785,7 +3793,7 @@
 }
 
 .stat-value {
-    font-size: 17px; /* УМЕНЬШЕНО ЕЩЕ */
+    font-size: 17px;
     font-weight: 700;
     color: var(--gold);
     font-family: 'Cormorant', serif;
@@ -3797,7 +3805,7 @@
 }
 
 .stat-label {
-    font-size: 9.5px; /* УМЕНЬШЕНО ЕЩЕ */
+    font-size: 9.5px;
     color: var(--light-gold);
     opacity: 0.9;
     margin-top: 3px;
@@ -3833,18 +3841,18 @@
     box-shadow: 0 1px 0 #8B6B3D, 0 2px 8px rgba(198, 161, 110, 0.2);
 }
 
-/* ДЛЯ ГОРИЗОНТАЛЬНОЙ ОРИЕНТАЦИИ - ТОЛЬКО НЕБОЛЬШИЕ КОРРЕКТИРОВКИ */
+/* ДЛЯ ГОРИЗОНТАЛЬНОЙ ОРИЕНТАЦИИ */
 @media (orientation: landscape) {
     .image-column {
-        width: 180px; /* Чуть больше для ландшафта */
+        width: 180px;
     }
     
     .feature-image {
-        max-height: 270px; /* Чуть больше для ландшафта */
+        max-height: 270px;
     }
     
     .two-column-wrapper {
-        gap: 18px; /* Чуть больше расстояние */
+        gap: 18px;
     }
 }
 
@@ -3861,11 +3869,11 @@
     }
     
     .image-column {
-        width: 150px; /* Немного меньше для мобильных, но все еще большая */
+        width: 150px;
     }
     
     .feature-image {
-        max-height: 240px; /* Немного меньше для мобильных */
+        max-height: 240px;
     }
     
     .stat-section {
@@ -3918,11 +3926,11 @@
     }
     
     .image-column {
-        width: 140px; /* Оставляем достаточно большой */
+        width: 140px;
     }
     
     .feature-image {
-        max-height: 220px; /* Оставляем достаточно большой */
+        max-height: 220px;
     }
     
     .stat-section {
@@ -3951,7 +3959,7 @@
     }
 }
 
-/* Для очень больших экранов (iPad Pro и т.д.) */
+/* Для очень больших экранов */
 @media (min-width: 1024px) {
     .image-column {
         width: 190px;
