@@ -3682,13 +3682,13 @@
     // Добавляем стили для блока прогресса
     const progressStyles = `
         <style>
-/* ОСНОВНЫЕ СТИЛИ ВИДЖЕТА */
+/* ОСНОВНЫЕ СТИЛИ ВИДЖЕТА - УМЕНЬШЕННЫЙ РАЗМЕР */
 .progress-widget-placeholder {
-    background: rgba(198, 161, 110, 0.08);
-    border-radius: 15px;
-    padding: 20px;
-    margin: 15px 20px;
-    border: 2px dashed var(--gold);
+    background: rgba(198, 161, 110, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 20px;
+    border: 1px solid rgba(198, 161, 110, 0.3); /* Тонкая золотая линия */
     position: relative;
     overflow: hidden;
 }
@@ -3696,21 +3696,21 @@
 /* ГРАФИК ПРОГРЕССА - НА ВСЮ ШИРИНУ */
 .graphic-section {
     text-align: center;
-    padding: 0 15px 20px;
-    border-bottom: 1px solid rgba(198, 161, 110, 0.3);
-    margin-bottom: 20px;
+    padding: 0 10px 12px;
+    border-bottom: 1px solid rgba(198, 161, 110, 0.2);
+    margin-bottom: 15px;
     width: 100%;
 }
 
 .graphic-section .placeholder-icon {
-    font-size: 36px;
-    margin-bottom: 8px;
+    font-size: 28px; /* Уменьшено */
+    margin-bottom: 6px;
     opacity: 0.9;
     display: block;
 }
 
 .section-label {
-    font-size: 18px;
+    font-size: 16px; /* Уменьшено */
     color: var(--gold);
     font-weight: 600;
     font-family: 'Cormorant', serif;
@@ -3721,9 +3721,9 @@
 .two-column-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 15px; /* Уменьшено */
     align-items: stretch;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 /* ЛЕВАЯ КОЛОНКА: Текст и статистика */
@@ -3731,47 +3731,49 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px; /* Уменьшено */
     min-width: 0;
 }
 
-/* ПРАВАЯ КОЛОНКА: Картинка */
+/* ПРАВАЯ КОЛОНКА: Картинка - ОСТАВЛЯЕМ ПРЕЖНИЙ РАЗМЕР */
 .image-column {
     flex: 0 0 auto;
-    width: 120px;
+    width: 120px; /* ПРЕЖНИЙ РАЗМЕР */
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 5px;
 }
 
 .feature-image {
     width: 100%;
     height: auto;
-    max-height: 160px;
+    max-height: 160px; /* ПРЕЖНИЙ РАЗМЕР */
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 6px;
+    filter: brightness(1.05) saturate(1.1);
 }
 
-/* СТАТИСТИКА - УМЕНЬШЕННЫЙ РАЗМЕР */
+/* СТАТИСТИКА - ЕЩЕ МЕНЬШЕ */
 .stat-section {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 15px;
-    background: rgba(26, 31, 43, 0.7);
-    border-radius: 10px;
-    border: 2px solid var(--gold);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    min-height: 70px;
+    gap: 10px; /* Уменьшено */
+    padding: 8px 12px; /* Уменьшено */
+    background: rgba(26, 31, 43, 0.6);
+    border-radius: 8px;
+    border: 1px solid rgba(198, 161, 110, 0.25); /* Тонкая золотая линия */
+    transition: all 0.2s ease;
+    min-height: 55px; /* Уменьшено */
 }
 
 .stat-icon {
-    font-size: 22px;
-    min-width: 40px;
+    font-size: 18px; /* Уменьшено */
+    min-width: 32px; /* Уменьшено */
     text-align: center;
     color: var(--gold);
     flex-shrink: 0;
+    opacity: 0.9;
 }
 
 .stat-text {
@@ -3783,52 +3785,52 @@
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 20px; /* Уменьшено */
     font-weight: 700;
     color: var(--gold);
     font-family: 'Cormorant', serif;
     line-height: 1;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 11px; /* Уменьшено */
     color: var(--light-gold);
     opacity: 0.9;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* КНОПКА - НА ВСЮ ШИРИНУ КАК У ЧАТА ГОРОДА */
+/* КНОПКА - УМЕНЬШЕНА */
 .placeholder-btn {
     background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
     color: var(--deep-navy);
     border: none;
-    padding: 16px 20px;
-    border-radius: 10px;
+    padding: 14px 18px; /* Уменьшено */
+    border-radius: 8px;
     font-family: 'Cormorant', serif;
     font-weight: 600;
     width: 100%;
     cursor: pointer;
     margin-top: 5px;
-    font-size: 16px;
-    box-shadow: 0 6px 0 #8B6B3D, 0 8px 20px rgba(198, 161, 110, 0.3);
+    font-size: 15px; /* Уменьшено */
+    box-shadow: 0 4px 0 #8B6B3D, 0 5px 15px rgba(198, 161, 110, 0.2);
     transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     text-align: center;
     display: block;
 }
 
 .placeholder-btn:active {
     transform: translateY(4px);
-    box-shadow: 0 2px 0 #8B6B3D, 0 4px 10px rgba(198, 161, 110, 0.3);
+    box-shadow: 0 1px 0 #8B6B3D, 0 2px 8px rgba(198, 161, 110, 0.2);
 }
 
 /* Для ландшафтной ориентации */
@@ -3844,52 +3846,67 @@
 
 /* Для вертикальной ориентации iPhone */
 @media (max-width: 450px) {
+    .progress-widget-placeholder {
+        padding: 14px;
+        margin: 10px 15px;
+    }
+    
     .two-column-wrapper {
-        gap: 15px;
+        gap: 12px;
+        margin-bottom: 15px;
     }
     
     .image-column {
-        width: 100px;
+        width: 100px; /* Чуть меньше для мобильных, но не сильно */
     }
     
     .feature-image {
-        max-height: 140px;
+        max-height: 140px; /* Чуть меньше для мобильных */
     }
     
     .stat-section {
-        padding: 10px 12px;
-        gap: 10px;
-        min-height: 65px;
+        padding: 7px 10px;
+        gap: 8px;
+        min-height: 50px;
     }
     
     .stat-icon {
-        font-size: 20px;
-        min-width: 35px;
+        font-size: 16px;
+        min-width: 28px;
     }
     
     .stat-value {
-        font-size: 22px;
+        font-size: 18px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
     }
     
     .placeholder-btn {
-        padding: 15px 18px;
-        font-size: 15px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .graphic-section {
+        padding: 0 8px 10px;
+        margin-bottom: 12px;
     }
     
     .graphic-section .placeholder-icon {
-        font-size: 32px;
+        font-size: 24px;
     }
     
     .section-label {
-        font-size: 16px;
+        font-size: 15px;
     }
 }
 
 /* Для очень маленьких экранов */
 @media (max-width: 380px) {
     .progress-widget-placeholder {
-        padding: 18px 15px;
-        margin: 15px;
+        padding: 12px;
+        margin: 10px;
     }
     
     .image-column {
@@ -3901,27 +3918,28 @@
     }
     
     .stat-section {
-        padding: 8px 10px;
-        gap: 8px;
-        min-height: 60px;
+        padding: 6px 8px;
+        gap: 6px;
+        min-height: 45px;
     }
     
     .stat-icon {
-        font-size: 18px;
-        min-width: 30px;
+        font-size: 15px;
+        min-width: 25px;
     }
     
     .stat-value {
-        font-size: 20px;
+        font-size: 17px;
     }
     
     .stat-label {
-        font-size: 11px;
+        font-size: 9.5px;
     }
     
     .placeholder-btn {
-        padding: 14px 16px;
-        font-size: 14px;
+        padding: 11px 14px;
+        font-size: 13px;
+        letter-spacing: 0.5px;
     }
 }
         </style>
