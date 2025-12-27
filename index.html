@@ -3735,10 +3735,10 @@
     min-width: 0;
 }
 
-/* ПРАВАЯ КОЛОНКА: Картинка - УВЕЛИЧИВАЕМ ЕЩЕ БОЛЬШЕ */
+/* ПРАВАЯ КОЛОНКА: Картинка - ОДИНАКОВО БОЛЬШАЯ В ВЕРТИКАЛИ И ГОРИЗОНТАЛИ */
 .image-column {
     flex: 0 0 auto;
-    width: 150px; /* УВЕЛИЧЕНО ЕЩЕ */
+    width: 170px; /* ОДИНАКОВАЯ ШИРИНА КАК В ГОРИЗОНТАЛИ */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3747,10 +3747,11 @@
 .feature-image {
     width: 100%;
     height: auto;
-    max-height: 240px; /* УВЕЛИЧЕНО ЕЩЕ - почти на весь блок */
+    max-height: 260px; /* ОДИНАКОВАЯ ВЫСОТА КАК В ГОРИЗОНТАЛИ */
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 8px; /* Немного больше скругление */
     filter: brightness(1.05) saturate(1.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* СТАТИСТИКА - УМЕНЬШАЕМ БУКВЫ ЕЩЕ */
@@ -3763,12 +3764,12 @@
     border-radius: 8px;
     border: 1px solid rgba(198, 161, 110, 0.25);
     transition: all 0.2s ease;
-    min-height: 52px; /* Чуть меньше */
+    min-height: 50px; /* Еще меньше */
 }
 
 .stat-icon {
-    font-size: 16px; /* УМЕНЬШЕНО ЕЩЕ */
-    min-width: 30px; /* УМЕНЬШЕНО */
+    font-size: 15px; /* УМЕНЬШЕНО ЕЩЕ */
+    min-width: 28px; /* УМЕНЬШЕНО */
     text-align: center;
     color: var(--gold);
     flex-shrink: 0;
@@ -3784,7 +3785,7 @@
 }
 
 .stat-value {
-    font-size: 18px; /* УМЕНЬШЕНО ЕЩЕ */
+    font-size: 17px; /* УМЕНЬШЕНО ЕЩЕ */
     font-weight: 700;
     color: var(--gold);
     font-family: 'Cormorant', serif;
@@ -3796,7 +3797,7 @@
 }
 
 .stat-label {
-    font-size: 10px; /* УМЕНЬШЕНО ЕЩЕ */
+    font-size: 9.5px; /* УМЕНЬШЕНО ЕЩЕ */
     color: var(--light-gold);
     opacity: 0.9;
     margin-top: 3px;
@@ -3832,30 +3833,22 @@
     box-shadow: 0 1px 0 #8B6B3D, 0 2px 8px rgba(198, 161, 110, 0.2);
 }
 
-/* Для ландшафтной ориентации - УВЕЛИЧИВАЕМ КАРТИНКУ ЕЩЕ БОЛЬШЕ */
+/* ДЛЯ ГОРИЗОНТАЛЬНОЙ ОРИЕНТАЦИИ - ТОЛЬКО НЕБОЛЬШИЕ КОРРЕКТИРОВКИ */
 @media (orientation: landscape) {
     .image-column {
-        width: 170px; /* УВЕЛИЧЕНО ЕЩЕ */
+        width: 180px; /* Чуть больше для ландшафта */
     }
     
     .feature-image {
-        max-height: 260px; /* УВЕЛИЧЕНО ЕЩЕ */
+        max-height: 270px; /* Чуть больше для ландшафта */
     }
     
-    .stat-section {
-        min-height: 50px; /* Чуть меньше для ландшафта */
-    }
-    
-    .stat-icon {
-        font-size: 15px; /* Еще меньше для ландшафта */
-    }
-    
-    .stat-value {
-        font-size: 17px; /* Еще меньше для ландшафта */
+    .two-column-wrapper {
+        gap: 18px; /* Чуть больше расстояние */
     }
 }
 
-/* Для вертикальной ориентации iPhone */
+/* Для вертикальной ориентации на маленьких экранах */
 @media (max-width: 450px) {
     .progress-widget-placeholder {
         padding: 14px;
@@ -3868,30 +3861,30 @@
     }
     
     .image-column {
-        width: 130px; /* Для мобильных тоже увеличиваем */
+        width: 150px; /* Немного меньше для мобильных, но все еще большая */
     }
     
     .feature-image {
-        max-height: 200px; /* Для мобильных тоже увеличиваем */
+        max-height: 240px; /* Немного меньше для мобильных */
     }
     
     .stat-section {
         padding: 7px 10px;
         gap: 8px;
-        min-height: 48px; /* Чуть меньше */
+        min-height: 48px;
     }
     
     .stat-icon {
-        font-size: 15px;
-        min-width: 28px;
+        font-size: 14px;
+        min-width: 26px;
     }
     
     .stat-value {
-        font-size: 17px;
+        font-size: 16px;
     }
     
     .stat-label {
-        font-size: 9.5px;
+        font-size: 9px;
     }
     
     .placeholder-btn {
@@ -3920,12 +3913,16 @@
         margin: 10px;
     }
     
+    .two-column-wrapper {
+        gap: 10px;
+    }
+    
     .image-column {
-        width: 120px;
+        width: 140px; /* Оставляем достаточно большой */
     }
     
     .feature-image {
-        max-height: 180px;
+        max-height: 220px; /* Оставляем достаточно большой */
     }
     
     .stat-section {
@@ -3935,16 +3932,16 @@
     }
     
     .stat-icon {
-        font-size: 14px;
-        min-width: 25px;
+        font-size: 13px;
+        min-width: 24px;
     }
     
     .stat-value {
-        font-size: 16px;
+        font-size: 15px;
     }
     
     .stat-label {
-        font-size: 9px;
+        font-size: 8.5px;
     }
     
     .placeholder-btn {
@@ -3957,11 +3954,11 @@
 /* Для очень больших экранов (iPad Pro и т.д.) */
 @media (min-width: 1024px) {
     .image-column {
-        width: 160px;
+        width: 190px;
     }
     
     .feature-image {
-        max-height: 260px;
+        max-height: 280px;
     }
 }
         </style>
