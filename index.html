@@ -1795,63 +1795,59 @@
             </div>
         </div>
         
-<!-- БЛОК ПРОГРЕССА С ДВУМЯ КОЛОНКАМИ -->
+<!-- БЛОК ПРОГРЕССА -->
 <div class="progress-widget-placeholder" id="progressPlaceholder">
-    <div class="placeholder-content">
-        <!-- ОБЩИЙ КОНТЕЙНЕР ДЛЯ ДВУХ КОЛОНОК -->
-        <div class="two-column-wrapper">
-            
-            <!-- ЛЕВАЯ КОЛОНКА: Текст и кнопка -->
-            <div class="text-column">
-                <!-- График -->
-                <div class="graphic-section">
-                    <div class="placeholder-icon">📊</div>
-                    <p class="section-label">График прогресса</p>
+    <!-- ГРАФИК ПРОГРЕССА - НА ВСЮ ШИРИНУ -->
+    <div class="graphic-section">
+        <div class="placeholder-icon">📊</div>
+        <p class="section-label">График прогресса</p>
+    </div>
+    
+    <!-- СТАТИСТИКА В ДВУХ КОЛОНКАХ -->
+    <div class="two-column-wrapper">
+        <!-- ЛЕВАЯ КОЛОНКА: Текст и статистика -->
+        <div class="text-column">
+            <!-- Занятия -->
+            <div class="stat-section">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-text">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Занятий</div>
                 </div>
-
-                <!-- Занятия -->
-                <div class="stat-section">
-                    <div class="stat-icon">🎯</div>
-                    <div class="stat-text">
-                        <div class="stat-value">—</div>
-                        <div class="stat-label">Занятий</div>
-                    </div>
-                </div>
-
-                <!-- Посещения -->
-                <div class="stat-section">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-text">
-                        <div class="stat-value">—</div>
-                        <div class="stat-label">Посещений</div>
-                    </div>
-                </div>
-
-                <!-- Достижения -->
-                <div class="stat-section">
-                    <div class="stat-icon">🏆</div>
-                    <div class="stat-text">
-                        <div class="stat-value">—</div>
-                        <div class="stat-label">Достижений</div>
-                    </div>
-                </div>
-
-                <!-- Кнопка -->
-                <button class="placeholder-btn" onclick="openProgressAuth()">
-                    🔐 Буду следить за результатами
-                </button>
             </div>
-            
-            <!-- ПРАВАЯ КОЛОНКА: Только картинка -->
-            <div class="image-column">
-                <img src="https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/21d3336c-533d-4f6d-8802-8dd0df3d085a.png" 
-                     alt="Dream Lady" 
-                     class="feature-image"
-                     loading="lazy">
+
+            <!-- Посещения -->
+            <div class="stat-section">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-text">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Посещений</div>
+                </div>
             </div>
-            
+
+            <!-- Достижения -->
+            <div class="stat-section">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-text">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Достижений</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ПРАВАЯ КОЛОНКА: Картинка -->
+        <div class="image-column">
+            <img src="https://274418.selcdn.ru/cv08300-33250f0d-0664-43fc-9dbf-9d89738d114e/uploads/655846/21d3336c-533d-4f6d-8802-8dd0df3d085a.png" 
+                 alt="Dream Lady" 
+                 class="feature-image"
+                 loading="lazy">
         </div>
     </div>
+    
+    <!-- КНОПКА - НА ВСЮ ШИРИНУ -->
+    <button class="placeholder-btn" onclick="openProgressAuth()">
+        🔐 Буду следить за результатами
+    </button>
 </div>
                     
      
@@ -3697,28 +3693,52 @@
     overflow: hidden;
 }
 
-/* КОНТЕЙНЕР ДЛЯ ДВУХ КОЛОНОК */
+/* ГРАФИК ПРОГРЕССА - НА ВСЮ ШИРИНУ */
+.graphic-section {
+    text-align: center;
+    padding: 0 15px 20px;
+    border-bottom: 1px solid rgba(198, 161, 110, 0.3);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.graphic-section .placeholder-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    display: block;
+}
+
+.section-label {
+    font-size: 18px;
+    color: var(--gold);
+    font-weight: 600;
+    font-family: 'Cormorant', serif;
+    letter-spacing: 0.5px;
+}
+
+/* КОНТЕЙНЕР ДЛЯ ДВУХ КОЛОНОК (ТОЛЬКО СТАТИСТИКА) */
 .two-column-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 25px;
+    gap: 20px;
     align-items: stretch;
-    justify-content: space-between;
+    margin-bottom: 25px;
 }
 
-/* ЛЕВАЯ КОЛОНКА: Текст */
+/* ЛЕВАЯ КОЛОНКА: Текст и статистика */
 .text-column {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
     min-width: 0;
 }
 
 /* ПРАВАЯ КОЛОНКА: Картинка */
 .image-column {
     flex: 0 0 auto;
-    width: 130px;
+    width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3727,188 +3747,123 @@
 .feature-image {
     width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 160px;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ГРАФИК ПРОГРЕССА - ЦЕНТРИРОВАННЫЙ */
-.graphic-section {
-    text-align: center;
-    padding: 0 15px 15px;
-    border-bottom: 1px solid rgba(198, 161, 110, 0.3);
-    margin-bottom: 10px;
-}
-
-.graphic-section .placeholder-icon {
-    font-size: 40px;
-    margin-bottom: 8px;
-    opacity: 0.9;
-    display: block;
-}
-
-.section-label {
-    font-size: 16px;
-    color: var(--gold);
-    font-weight: 600;
-    font-family: 'Cormorant', serif;
-    letter-spacing: 0.5px;
-}
-
-/* СТАТИСТИКА С ОТСТУПАМИ И ЗОЛОТОЙ ОБВОДКОЙ */
+/* СТАТИСТИКА - УМЕНЬШЕННЫЙ РАЗМЕР */
 .stat-section {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px 18px;
+    gap: 12px;
+    padding: 12px 15px;
     background: rgba(26, 31, 43, 0.7);
-    border-radius: 12px;
+    border-radius: 10px;
     border: 2px solid var(--gold);
-    margin: 0 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
-
-.stat-section:hover {
-    background: rgba(26, 31, 43, 0.9);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    min-height: 70px;
 }
 
 .stat-icon {
-    font-size: 28px;
-    min-width: 45px;
+    font-size: 22px;
+    min-width: 40px;
     text-align: center;
     color: var(--gold);
+    flex-shrink: 0;
 }
 
 .stat-text {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .stat-value {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--gold);
     font-family: 'Cormorant', serif;
     line-height: 1;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .stat-label {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--light-gold);
     opacity: 0.9;
-    margin-top: 6px;
+    margin-top: 4px;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* КНОПКА НА ВСЮ ШИРИНУ КАК У ЧАТА ГОРОДА */
+/* КНОПКА - НА ВСЮ ШИРИНУ КАК У ЧАТА ГОРОДА */
 .placeholder-btn {
     background: linear-gradient(135deg, #C6A16E 0%, #D4AF37 100%);
     color: var(--deep-navy);
     border: none;
-    padding: 18px 25px;
+    padding: 16px 20px;
     border-radius: 10px;
     font-family: 'Cormorant', serif;
     font-weight: 600;
     width: 100%;
     cursor: pointer;
-    margin-top: 20px;
-    font-size: 17px;
-    box-shadow: 0 8px 0 #8B6B3D, 0 10px 25px rgba(198, 161, 110, 0.3);
+    margin-top: 5px;
+    font-size: 16px;
+    box-shadow: 0 6px 0 #8B6B3D, 0 8px 20px rgba(198, 161, 110, 0.3);
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
-    position: relative;
-    z-index: 10;
+    display: block;
 }
 
 .placeholder-btn:active {
     transform: translateY(4px);
-    box-shadow: 0 4px 0 #8B6B3D, 0 5px 15px rgba(198, 161, 110, 0.3);
+    box-shadow: 0 2px 0 #8B6B3D, 0 4px 10px rgba(198, 161, 110, 0.3);
 }
 
-/* Для ландшафтной ориентации увеличиваем картинку */
+/* Для ландшафтной ориентации */
 @media (orientation: landscape) {
     .image-column {
-        width: 150px;
-    }
-    
-    .feature-image {
-        max-height: 220px;
-    }
-}
-
-/* Уменьшаем для вертикальной ориентации iPhone */
-@media (max-width: 450px) {
-    .two-column-wrapper {
-        gap: 20px;
-    }
-    
-    .image-column {
-        width: 120px;
+        width: 140px;
     }
     
     .feature-image {
         max-height: 180px;
     }
-    
-    .stat-section {
-        padding: 14px 16px;
-        gap: 12px;
-        margin: 0 3px;
-    }
-    
-    .stat-icon {
-        font-size: 24px;
-        min-width: 40px;
-    }
-    
-    .stat-value {
-        font-size: 24px;
-    }
-    
-    .placeholder-btn {
-        padding: 16px 22px;
-        font-size: 16px;
-    }
 }
 
-/* Для очень маленьких экранов */
-@media (max-width: 380px) {
-    .progress-widget-placeholder {
-        padding: 18px;
-        margin: 15px;
+/* Для вертикальной ориентации iPhone */
+@media (max-width: 450px) {
+    .two-column-wrapper {
+        gap: 15px;
     }
     
     .image-column {
-        width: 110px;
+        width: 100px;
     }
     
     .feature-image {
-        max-height: 160px;
-    }
-    
-    .graphic-section .placeholder-icon {
-        font-size: 36px;
-    }
-    
-    .section-label {
-        font-size: 15px;
+        max-height: 140px;
     }
     
     .stat-section {
-        padding: 12px 14px;
+        padding: 10px 12px;
         gap: 10px;
+        min-height: 65px;
     }
     
     .stat-icon {
-        font-size: 22px;
+        font-size: 20px;
         min-width: 35px;
     }
     
@@ -3917,8 +3872,56 @@
     }
     
     .placeholder-btn {
-        padding: 15px 20px;
+        padding: 15px 18px;
         font-size: 15px;
+    }
+    
+    .graphic-section .placeholder-icon {
+        font-size: 32px;
+    }
+    
+    .section-label {
+        font-size: 16px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 380px) {
+    .progress-widget-placeholder {
+        padding: 18px 15px;
+        margin: 15px;
+    }
+    
+    .image-column {
+        width: 90px;
+    }
+    
+    .feature-image {
+        max-height: 120px;
+    }
+    
+    .stat-section {
+        padding: 8px 10px;
+        gap: 8px;
+        min-height: 60px;
+    }
+    
+    .stat-icon {
+        font-size: 18px;
+        min-width: 30px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 11px;
+    }
+    
+    .placeholder-btn {
+        padding: 14px 16px;
+        font-size: 14px;
     }
 }
         </style>
